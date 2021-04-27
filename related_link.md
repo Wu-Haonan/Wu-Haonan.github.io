@@ -17,7 +17,7 @@ key: page-Related Link
 
 My CSDN Blog: [CSDN link](https://blog.csdn.net/weixin_42472706/)
 
-My QQ zone: [QQ zone](https://user.qzone.qq.com/944213957/infocenter/)
+My QQ zone: [QQ zone](https://user.qzone.qq.com/944213957/)
 
 My girlfriend Blog:
 
