@@ -15,7 +15,10 @@ titles:
 key: page-Related Link
 ---
 
-My CSDN Blog:[CSDN link] (https://blog.csdn.net/weixin_42472706/)
-My QQ zone: [QQ zone] (https://user.qzone.qq.com/944213957/infocenter/)
+My CSDN Blog: [CSDN link](https://blog.csdn.net/weixin_42472706/)
+
+My QQ zone: [QQ zone](https://user.qzone.qq.com/944213957/infocenter/)
+
 My girlfriend Blog:
-Learn markdown: [learn markdown](https://www.markdowntutorial.com/")
+
+Learn markdown: [learn markdown](https://www.markdowntutorial.com/)
