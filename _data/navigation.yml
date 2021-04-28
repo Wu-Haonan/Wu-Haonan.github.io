@@ -63,7 +63,7 @@ header:
       # @end locale config
     url: /related_link.html
     
-   - titles:
+  - titles:
       # @start locale config
       en      : &EN       Classifications
       en-GB   : *EN
