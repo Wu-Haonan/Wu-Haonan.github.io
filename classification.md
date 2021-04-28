@@ -15,6 +15,8 @@ titles:
 key: page-classifications
 ---
 
-#最优化理论
+# 最优化理论
 
 [math](/2021/04/27/math.html)
+
+# Python与机器学习
