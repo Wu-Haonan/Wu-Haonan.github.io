@@ -175,9 +175,9 @@ docs-zh:
         url:    /docs/en/quick-start
 
 math:
-  -title: 第一章
+  - title:    第一章
    children:
-     -title: 第一节
+     - title: 第一节
 
 layouts:
   - title: Layouts
