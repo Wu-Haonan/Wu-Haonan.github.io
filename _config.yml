@@ -22,7 +22,8 @@ url     :  https://Wu-Haonan.github.io # the base hostname & protocol for your s
 baseurl : # does not include hostname
 title   : Haonan's blog
 subtitle: We must know, we will know.
-description: We must know, we will know. # this means to ignore newlines until "Language & timezone"
+description: > 
+  We must know, we will know. 
 
 
 ## => Language and Timezone
