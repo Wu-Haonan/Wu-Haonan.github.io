@@ -2,12 +2,12 @@
 layout: article
 titles:
   # @start locale config
-  en      : &EN       Related Link
+  en      : &EN       classification
   en-GB   : *EN
   en-US   : *EN
   en-CA   : *EN
   en-AU   : *EN
-  zh-Hans : &ZH_HANS  相关链接
+  zh-Hans : &ZH_HANS  分类
   zh      : *ZH_HANS
   zh-CN   : *ZH_HANS
   zh-SG   : *ZH_HANS
@@ -15,7 +15,7 @@ titles:
 key: page-Related Link
 ---
 
-
+博客分类
 
 ## 最优化理论
 
