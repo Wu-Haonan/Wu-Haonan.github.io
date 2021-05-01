@@ -1,6 +1,8 @@
 ---
 layout: article
 titles: 分类
+aside:
+  toc: true
 ---
 
 博客分类导引
