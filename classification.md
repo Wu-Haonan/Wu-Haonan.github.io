@@ -1,6 +1,6 @@
 ---
 layout: article
-titles: 分类
+title: 分类
 aside:
   toc: true
 ---
