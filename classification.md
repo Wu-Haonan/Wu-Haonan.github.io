@@ -15,4 +15,4 @@ aside:
 
 # 前沿文献分析
 
-[文献分享：Haplotype-resolved de novo assembly using phased assembly graphs with hifiasm](/2021/05/06/hifisam.html)
+[文献分享：Haplotype-resolved de novo assembly using phased assembly graphs with hifiasm](/2021/05/06/hifiasm.html)
