@@ -184,9 +184,9 @@ parallel_algorithm:
   - title:      7.1 无约束优化问题的并行算法
     children:
       - title:  7.1.1 无约束问题的并行变量分配算法
-        url:    /2021/05/11/7_1_1.html
+        url:    /2021/05/26/7_1_1.html
       - title:  7.1.2 同步运算的并行变量转化算法
-        url:    /2021/05/11/7_1_2.html
+        url:    /2021/05/26/7_1_2.html
         
 
 layouts:
