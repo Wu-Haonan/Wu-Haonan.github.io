@@ -186,7 +186,7 @@ parallel_algorithm:
       - title:  7.1.1 无约束问题的并行变量分配算法
         url:    /_posts/parallel-algorithm/2021-05-11-7_1_1.md
       - title:  7.1.2 同步运算的并行变量转化算法
-        url:    /_posts/parallel-algorithm/2021-05-11-7_1_1.md
+        url:    /_posts/2021-05-06-hifiasm.md
         
 
 layouts:
