@@ -180,6 +180,15 @@ math:
       - title:  第一节
         url:    
 
+parallel_algorithm:
+  - title:      7.1 无约束优化问题的并行算法
+    children:
+      - title:  7.1.1 无约束问题的并行变量分配算法
+        url:    /_posts/parallel-algorithm/7-1-1.md
+      - title:  7.1.2 同步运算的并行变量转化算法
+        url:    /_posts/parallel-algorithm/7-1-2.md
+        
+
 layouts:
   - title: Layouts
     children:
