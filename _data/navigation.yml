@@ -182,6 +182,7 @@ math:
 
 parallel_algorithm:
   - title:      7.1 无约束优化问题的并行算法
+  - url:        /2021/05/26/parallel_algorithm.html
     children:
       - title:  7.1.1 无约束问题的并行变量分配算法
         url:    /2021/05/26/7_1_1.html
