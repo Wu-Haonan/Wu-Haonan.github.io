@@ -1,7 +1,6 @@
 ---
 layout: article
-title: 文献分享：De Novo Repeat Classification and
-Fragment Assembly
+title: 文献分享：De Novo Repeat Classification and Fragment Assembly
 tags: papers
 
 article_header:
