@@ -1,7 +1,6 @@
 ---
 layout: article
-title: 文献分享：De Novo Repeat Classification and
-Fragment Assembly
+title: 文献分享：De Novo Repeat Classification and Fragment Assembly
 tags: papers
 
 article_header:
@@ -17,7 +16,7 @@ article_header:
 # Introduction
 我们先来介绍一下repeat的结构，可能我们认为repeat不就是基因组上重复出现的片段嘛，这有什么结构呢？其实不然，在这篇文章中，repeat其实代表了一个区域，这个区域由许多sub-repeats构成，也就是呈现所谓的镶嵌结构。我们来看一个真实的例子，下面的图片是人类Y染色体上repeat区域的一个示意图
 
-![repeat of Chromosome Y](post_image/Fragmentgluer/repeat_of_Y.PNG)
+![repeat of Chromosome Y](/post_image/Fragmentgluer/repeat_of_Y.PNG)
 
 __Fig.1 Mosaic repeat of human Chromosome Y[^1].__
 
