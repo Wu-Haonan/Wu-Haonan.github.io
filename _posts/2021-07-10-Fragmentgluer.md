@@ -15,16 +15,30 @@ article_header:
 <!--more-->
 
 # Introduction
-我们先来介绍一下repeat的结构，可能我们认为repeat不就是基因组上重复出现的片段嘛，这有什么结构呢？其实不然，在这篇文章中，repeat其实代表了一个区域，这个区域由许多sub-repeats构成，也就是呈现所谓的镶嵌结构。我们来看一个真实的例子，下面的图片是人类Y染色体上repeat区域的一个示意图，虚线表示没有重复的区域，彩色的表示重复区域，同一种颜色表示一种sub-repeat，可以看到图中的三个repeat区域是不同的sub-repeat排列组合而成。
+我们先来介绍一下repeat的结构，可能我们认为repeat不就是基因组上重复出现的片段嘛，这有什么结构呢？其实不然，在这篇文章中，repeat其实代表了一个区域，这个区域由许多sub-repeats构成，也就是呈现所谓的镶嵌结构。我们来看一个真实的例子，Fig.1是人类Y染色体上repeat区域的一个示意图，虚线表示没有重复的区域，彩色的表示重复区域，同一种颜色表示一种sub-repeat，可以看到图中的三个repeat区域是不同的sub-repeat排列组合而成。
 
 ![repeat of Chromosome Y](/post_image/Fragmentgluer/repeat_of_Y.PNG)
 
 __Fig.1 Mosaic repeat of human Chromosome Y[^1].__
 
-那么为什么会形成这样的结构呢，这个是一个想象的基因组进化的过程图，因为每次repeat片段的转移，都是因为染色体结构变异，然而结构变异恰好每次都一样的概率是很低的，所以会出现sub-repeat的结构。
+那么为什么会形成这样的结构呢，Fig.2是一个想象的基因组进化的过程图，因为每次repeat片段的转移，都是因为染色体结构变异，然而结构变异恰好每次都一样的概率是很低的，所以会出现sub-repeat的结构。
 
 ![Repeats’ evolution](/post_image/Fragmentgluer/repeat_evolution.png)
 __Fig.2 Repeats’ evolution[^1].__
+
+所以我们的任务来了，所谓的repeat classification problem或者repeat representation问题指的就是将上面这些sub-repeat的边界界定出来，严格来讲，我们最重要构造出来所谓的repeat graph，如图Fig.3
+
+![repeat_graph](/post_image/Fragmentgluer/repeat_graph.png)
+__Fig.3 Repeat graph[^1].__
+
+# Methods
+## ${A}$-Bruijn Graphs
+首先我们引入Genomic dot-plot的概念，我们将基因组自身进行local alignment，在比对上的坐标位置绘制一个点，我们可以得到所谓的dot-plot，如图Fig.4
+
+![repeat_graph](/post_image/Fragmentgluer/repeat_graph.png)
+__Fig.4 Genomic dot-plot of an imaginary sequence[^1].__
+
+令${S}$是一个长度为${n}$的基因组序列，同时${A=(a_{ij}}$是一个${0-1}$的二元${n\times n}$的“similarity matrix”表示${S}$中的区域之间显著的local pairwise alignment的集合${\mathscr{A}}$
 
 
 
