@@ -23,12 +23,14 @@ __Fig.1 Mosaic repeat of human Chromosome Y[^1].__
 
 那么为什么会形成这样的结构呢，Fig.2是一个想象的基因组进化的过程图，因为每次repeat片段的转移，都是因为染色体结构变异，然而结构变异恰好每次都一样的概率是很低的，所以会出现sub-repeat的结构.
 
-![Repeats’ evolution](/post_image/Fragmentgluer/repeat_evolution.png)
+
+![Repeats’ evolution](/post_image/Fragmentgluer/repeat_evolution.png){:height="50%" width="50%"}
+
 __Fig.2 Repeats’ evolution[^1].__
 
 所以我们的任务来了，所谓的repeat classification problem或者repeat representation问题指的就是将上面这些sub-repeat的边界界定出来，严格来讲，我们最重要构造出来所谓的repeat graph，如图Fig.3
 
-![repeat_graph](/post_image/Fragmentgluer/repeat_graph.png)
+![repeat_graph](/post_image/Fragmentgluer/repeat_graph.png){:height="30%" width="30%"}
 
 __Fig.3 Repeat graph[^1].__
 
@@ -36,7 +38,7 @@ __Fig.3 Repeat graph[^1].__
 ## ${A}$-Bruijn Graphs
 首先我们引入Genomic dot-plot的概念，我们将基因组自身进行local alignment，在比对上的坐标位置绘制一个点，我们可以得到所谓的dot-plot，如图Fig.4
 
-![dot-plot](/post_image/Fragmentgluer/dot_plot.png)
+![dot-plot](/post_image/Fragmentgluer/dot_plot.png){:height="70%" width="70%"}
 
 __Fig.4 Genomic dot-plot of an imaginary sequence[^1].__
 
@@ -46,7 +48,7 @@ __Fig.4 Genomic dot-plot of an imaginary sequence[^1].__
 
 下面我们来定义多重图（multigraph）${A}$-Bruijn graph ${G(V,E)}$，其中${V}$中的每个顶点就是${A}$-graph的连通分支，连接${v_i,v_(i+1)}$。（换言之，在${A}$-Bruijn graph中，按照基因组本来的顺序连接这些顶点，即${A}$-graph的连通分支），其中${v_1}$称为source，${v_n}$称为sink. 换个角度，可以认为我们将从${1,\cdots n}$的欧拉路按照比对的关系，收缩为一个点。
 
-![A_Bruijn_graphs](/post_image/Fragmentgluer/sample_of_A_Bruijn_graphs.png)
+![A_Bruijn_graphs](/post_image/Fragmentgluer/sample_of_A_Bruijn_graphs.png){:height="50%" width="50%"}
 
 __Fig.5 Eaxmple of ${A}$-Bruijn graph.__
 
