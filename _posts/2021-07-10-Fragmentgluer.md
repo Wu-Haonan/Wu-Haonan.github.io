@@ -73,12 +73,9 @@ ${A}$-Bruijn graph我们也可以将多重边视为权重。我们给定一个�
 
 <p align="center">
     <img src="/post_image/Fragmentgluer/inconsisitent.png">
-    <br />    <small> Fig.6 consistent pairwise alignments and inconsistent
-pairwise alignments[^1]. </small>
 </p>
 
-__Fig.6 consistent pairwise alignments and inconsistent
-pairwise alignments[^1].__
+<center> __Fig.6 consistent pairwise alignments and inconsistent pairwise alignments[^1].__ </center>
 
 
 # Reference
