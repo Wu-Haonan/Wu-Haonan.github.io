@@ -35,7 +35,7 @@ __Fig.3 Repeat graph[^1].__
 ## ${A}$-Bruijn Graphs
 首先我们引入Genomic dot-plot的概念，我们将基因组自身进行local alignment，在比对上的坐标位置绘制一个点，我们可以得到所谓的dot-plot，如图Fig.4
 
-![repeat_graph](/post_image/Fragmentgluer/repeat_graph.png)
+![dot-plot](/post_image/Fragmentgluer/dot_plot.png)
 __Fig.4 Genomic dot-plot of an imaginary sequence[^1].__
 
 令${S}$是一个长度为${n}$的基因组序列，同时${A=(a_{ij})}$是一个${0-1}$的二元${n\times n}$的“similarity matrix”表示${S}$中的区域之间显著的local pairwise alignment的集合${\mathscr{A}}$.矩阵${A}$中，如果位置${i}$和位置${j}$比对上，则${a_{ij}=1}$，否则为${0}$（插入缺失不记录在${A}$中）.
