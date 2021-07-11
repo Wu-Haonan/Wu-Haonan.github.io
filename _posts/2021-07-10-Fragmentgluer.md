@@ -17,6 +17,9 @@ article_header:
 # Introduction
 我们先来介绍一下repeat的结构，可能我们认为repeat不就是基因组上重复出现的片段嘛，这有什么结构呢？其实不然，在这篇文章中，repeat其实代表了一个区域，这个区域由许多sub-repeats构成，也就是呈现所谓的镶嵌结构.我们来看一个真实的例子，Fig.1是人类Y染色体上repeat区域的一个示意图，虚线表示没有重复的区域，彩色的表示重复区域，同一种颜色表示一种sub-repeat，可以看到图中的三个repeat区域是不同的sub-repeat排列组合而成.
 
+<p align="center">
+    <img src="/post_image/Fragmentgluer/repeat_of_Y.PNG#pic_center" width="60%">
+</p>
 
 ![repeat of Chromosome Y](/post_image/Fragmentgluer/repeat_of_Y.PNG#pic_center)
 
