@@ -29,6 +29,7 @@ __Fig.2 Repeats’ evolution[^1].__
 所以我们的任务来了，所谓的repeat classification problem或者repeat representation问题指的就是将上面这些sub-repeat的边界界定出来，严格来讲，我们最重要构造出来所谓的repeat graph，如图Fig.3
 
 ![repeat_graph](/post_image/Fragmentgluer/repeat_graph.png)
+
 __Fig.3 Repeat graph[^1].__
 
 # Methods
@@ -36,6 +37,7 @@ __Fig.3 Repeat graph[^1].__
 首先我们引入Genomic dot-plot的概念，我们将基因组自身进行local alignment，在比对上的坐标位置绘制一个点，我们可以得到所谓的dot-plot，如图Fig.4
 
 ![dot-plot](/post_image/Fragmentgluer/dot_plot.png)
+
 __Fig.4 Genomic dot-plot of an imaginary sequence[^1].__
 
 令${S}$是一个长度为${n}$的基因组序列，同时${A=(a_{ij})}$是一个${0-1}$的二元${n\times n}$的“similarity matrix”表示${S}$中的区域之间显著的local pairwise alignment的集合${\mathscr{A}}$.矩阵${A}$中，如果位置${i}$和位置${j}$比对上，则${a_{ij}=1}$，否则为${0}$（插入缺失不记录在${A}$中）.
@@ -45,6 +47,7 @@ __Fig.4 Genomic dot-plot of an imaginary sequence[^1].__
 下面我们来定义多重图（multigraph）${A}$-Bruijn graph ${G(V,E)}$，其中${V}$中的每个顶点就是${A}$-graph的连通分支，连接${v_i,v_(i+1)}$。（换言之，在${A}$-Bruijn graph中，按照基因组本来的顺序连接这些顶点，即${A}$-graph的连通分支），其中${v_1}$称为source，${v_n}$称为sink. 换个角度，可以认为我们将从${1,\cdots n}$的欧拉路按照比对的关系，收缩为一个点。
 
 ![A_Bruijn_graphs](/post_image/Fragmentgluer/sample_of_A_Bruijn_graphs.png)
+
 __Fig.5 Eaxmple of ${A}$-Bruijn graph.__
 
 ## Cleaning Up Whirls and Bulges
@@ -54,8 +57,10 @@ ${A}$-Bruijn graph我们也可以将多重边视为权重。我们给定一个�
 下面我们讨论一下二者的成因，Whirls是由于“inconsistent alignments”造成的，那么什么是inconsistent alignments呢？我们可以通过Fig.6来理解一下，由于比对的问题，我们将${--at}$比对到了${acat}$上，而这就导致了这三个序列的第一个${a}$比对错位的状态。（个人理解：理论上，在${A}$-graph的每个联通分支内部应该是一个完全子图），所以因为不一致的比对，我们将第二个${a}$也收缩进了一个${a}$的联通分支，所以出现了循环的Whirls的结构。在Fig.6B中为${a\rightarrow c \rightarrow a}$。当然，Whirls另一个成因是因为短串联重复序列（short tandem repeats），比如${\textbf{ATTCGATTCGATTCG}}$，这里${\textbf{ATTCG}}$重复了三次，在这篇文章，作者假设短串联重复序列在比对集合${\mathscr{A}}$中不存在。
 
 ![inconsistent alignments](/post_image/Fragmentgluer/inconsisitent.png)
+
 __Fig.6 consistent pairwise alignments and inconsistent
 pairwise alignments[^1].__
+
 # Reference
 
 [^1]:图片来源[De Novo Repeat Classification and Fragment Assembly](https://genome.cshlp.org/content/14/9/1786.long)
