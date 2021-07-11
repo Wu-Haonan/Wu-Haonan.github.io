@@ -55,11 +55,12 @@ __Fig.4 Genomic dot-plot of an imaginary sequence[^1].__
 
 下面我们来定义多重图（multigraph）${A}$-Bruijn graph ${G(V,E)}$，其中${V}$中的每个顶点就是${A}$-graph的连通分支，连接${v_i,v_(i+1)}$。（换言之，在${A}$-Bruijn graph中，按照基因组本来的顺序连接这些顶点，即${A}$-graph的连通分支），其中${v_1}$称为source，${v_n}$称为sink. 换个角度，可以认为我们将从${1,\cdots n}$的欧拉路按照比对的关系，收缩为一个点。
 
-<center>
+<p align="center">
+
 ![A_Bruijn_graphs](/post_image/Fragmentgluer/sample_of_A_Bruijn_graphs.png){:height="50%" width="50%"}
 
 __Fig.5 Eaxmple of ${A}$-Bruijn graph.__
-</center>
+</p>
 
 ## Cleaning Up Whirls and Bulges
 
