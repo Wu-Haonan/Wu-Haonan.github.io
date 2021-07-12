@@ -67,16 +67,53 @@ __Fig.5 Eaxmple of ${A}$-Bruijn graph.__
 
 ## Cleaning Up Whirls and Bulges
 
-${A}$-Bruijn graph我们也可以将多重边视为权重。我们给定一个阈值${girth}$，那么所有长度短于${girth}$的圈视为short cycle。那么圈分为两类，①Whirls指的是全中所有边方向相同的短圈；②Bugles表示圈中存在反向边的短圈。
+### What and Why
+${A}$-Bruijn graph我们也可以将多重边视为权重。我们给定一个阈值${girth}$，那么所有长度短于${girth}$的圈视为short cycle。那么圈分为两类，①Whirls指的是全中所有边方向相同的短圈；②Bugles表示圈中存在反向边的短圈，如图Fig.6所示
 
-下面我们讨论一下二者的成因，Whirls是由于“inconsistent alignments”造成的，那么什么是inconsistent alignments呢？我们可以通过Fig.6来理解一下，由于比对的问题，我们将${--at}$比对到了${acat}$上，而这就导致了这三个序列的第一个${a}$比对错位的状态。（个人理解：理论上，在${A}$-graph的每个联通分支内部应该是一个完全子图），所以因为不一致的比对，我们将第二个${a}$也收缩进了一个${a}$的联通分支，所以出现了循环的Whirls的结构。在Fig.6B中为${a\rightarrow c \rightarrow a}$。当然，Whirls另一个成因是因为短串联重复序列（short tandem repeats），比如${\textbf{ATTCGATTCGATTCG}}$，这里${\textbf{ATTCG}}$重复了三次，在这篇文章，作者假设短串联重复序列在比对集合${\mathscr{A}}$中不存在。
+<p align="center">
+    <img src="/post_image/Fragmentgluer/Whirls_and_Bulges.png">
+</p>
+
+__Fig.6 Whirls and Bulges[^1].__
+
+下面我们讨论一下二者的成因，Whirls是由于“inconsistent alignments”造成的，那么什么是inconsistent alignments呢？我们可以通过Fig.6来理解一下，由于比对的问题，我们将${--at}$比对到了${acat}$上，而这就导致了这三个序列的第一个${a}$比对错位的状态。（个人理解：理论上，在${A}$-graph的每个联通分支内部应该是一个完全子图），所以因为不一致的比对，我们将第二个${a}$也收缩进了一个${a}$的联通分支，所以出现了循环的Whirls的结构。在Fig.6B中为${a\rightarrow c \rightarrow a}$。当然，Whirls另一个成因是因为短串联重复序列（short tandem repeats），比如${\textbf{ATTCGATTCGATTCG}}$，这里${\textbf{ATTCG}}$重复了三次，在这篇文章，作者假设短串联重复序列在比对集合${\mathscr{A}}$中不存在。而Bugles是因为alignment中的gap导致的，比如${ac-t}$和${acat}$的比对，产生了两条path，形成了Bugle，分别为${c \rightarrow t}$以及${c \rightarrow a \rightarrow t}$.
 
 <p align="center">
     <img src="/post_image/Fragmentgluer/inconsisitent.png">
 </p>
 
-<center> __Fig.6 consistent pairwise alignments and inconsistent pairwise alignments[^1].__ </center>
+__Fig.7 Consistent pairwise alignments and inconsistent pairwise alignments[^1].__
 
+### Cleaning Whirls
+
+对于${A}$-Bruijn graph中的顶点${v}$，令${P(v)}$表示其对应的${A}$-graph中的联通分支的顶点集合（基因组位置集合）。我们定义顶点${v}$是<b>“composite”</b>，如果${P(v)}$包含两个距离在${girth}$之内的基因组位点。这些位点就是潜在的“inconsistent alignments”所在的位点. 这部分的处理思想呢，就是将composite的顶点分成两个点。
+
+算法采用迭代的方式进行，每次寻找${A}$-Bruijn graph中，连接composite和noncomposite顶点的所有边中权重最大的称为“split edge”，设边的权重（重边数）为${m}$，${v}$是这条边邻接的composite的顶点，那么这条边的权重为${m}$对应着${P(v)}$中${m}$个位点和后继位点的连边，我们将${P(v)}$中这${m}$个点的集合记为${M}$，（注意到${m<|P(v)|}$，设split edge邻接的noncomposite顶点为${n}$，因为如果${m=|P(v)|}$，那么意味着${P(v)}$后继位都包含在${P(n)}$中，那么${n}$是一个composite顶点，矛盾！）
+
+所以我们可以将顶点${v}$分成两个顶点，分别为${P(v) \setminus M}$和${M}$收缩为的顶点. 然后将矩阵${A}$的相应元素的值进行更改，即${a_{ij}=0,\forall i\in M ,j\in P(v) \setminus M}$. 因为顶点${n}$是noncomposite顶点，所以拆分出来的${M}$对应的顶点一定是noncomposite. 这样每次我们至少产生了一个noncomposite顶点. 算法迭代进行，直到全部顶点变为composite顶点.（个人理解之所以每次选择边权重最大的，应该是可以减少迭代的次数，因为如此，我们每次尽可能多的拿走了${P(v)}$中的点），Fig.8是一个示意图
+
+<p align="center">
+    <img src="/post_image/Fragmentgluer/clean_whirls.png" width="60%">
+</p>
+__Fig.8 Processing of cleaning whirls.__
+
+### Cleaning Bugles
+
+Bugles往往在真实的情况下呈现网络的结构，如Fig.6所示，同时我们认为边的权重越大，说明这个边在repeat中越保守，所以我们想破除Bugles，同时保留权重大的边（换言之，因为repeat中间有gap才出现Bugles，两种走法，我们要进行统一，所以我们选择权重大的，也就是支持最多的走法为代表）. 所以这里引入Maximum Subgraph with Large Girth (MSLG) Problem，MSLG问题想去寻找一个不包含Short Cycle（长度小于${girth}$）的最大权子图，如果${girth=\infty}$，这就是一个最大支撑树的问题，但是对于${girth \ne \infty}$，这个问题非常复杂，所以我们选择一个近似算法。
+
+首先寻找最大支撑树${T}$，然后将剩余边按照权重从大到小排序，以次加入${T}$中，如果产生short cycle则抛弃，否则保留。
+
+### Erosion
+
+再破除Bugles后，其实我们只是不再存在短圈，但是原本的Bugles还会剩余树状的末端，所以我们迭代的去除图中的叶子，也就是${degree=1}$的点（除了sink和source点外），直到图中只有sink和source点是度为${ 1 }$的点. 上述步骤的示意图见Fig.9
+
+<p align="center">
+    <img src="/post_image/Fragmentgluer/cleaning_and_erosion.png">
+</p>
+
+__Fig.9 Cleaning up Whirls and Bulges and Erosion[^1].__
+
+## Zigzag path and Consensus Sequence of Sub-repeats
 
 # Reference
 
