@@ -113,7 +113,7 @@ Bugles往往在真实的情况下呈现网络的结构，如Fig.6所示，同时
 
 __Fig.9 Cleaning up Whirls and Bulges and Erosion[^1].__
 
-## Zigzag path and Consensus Sequence of Sub-repeats
+## Zigzag path and Consensus <br/> Sequence of Sub-repeats
 
 # Reference
 
