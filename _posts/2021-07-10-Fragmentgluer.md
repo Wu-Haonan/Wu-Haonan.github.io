@@ -88,7 +88,7 @@ __Fig.7 Consistent pairwise alignments and inconsistent pairwise alignments[^1].
 
 对于${A}$-Bruijn graph中的顶点${v}$，令${P(v)}$表示其对应的${A}$-graph中的联通分支的顶点集合（基因组位置集合）。我们定义顶点${v}$是<b>“composite”</b>，如果${P(v)}$包含两个距离在${girth}$之内的基因组位点。这些位点就是潜在的“inconsistent alignments”所在的位点. 这部分的处理思想呢，就是将composite的顶点分成两个点。
 
-算法采用迭代的方式进行，每次寻找${A}$-Bruijn graph中，连接composite和noncomposite顶点的所有边中权重最大的称为“split edge”，设边的权重（重边数）为${m}$，${v}$是这条边邻接的composite的顶点，那么这条边的权重为${m}$对应着${P(v)}$中${m}$个位点和后继位点的连边，我们将${P(v)}$中这${m}$个点的集合记为${M}$，（注意到${m<|P(v)|}$，设split edge邻接的noncomposite顶点为${n}$，因为如果${m=|P(v)|}$，那么意味着${P(v)}$后继位都包含在${P(n)}$中，那么${n}$是一个composite顶点，矛盾！）
+算法采用迭代的方式进行，每次寻找${A}$-Bruijn graph中，连接composite和noncomposite顶点的所有边中权重最大的称为“split edge”，设边的权重（重边数）为${m}$，${v}$是这条边邻接的composite的顶点，那么这条边的权重为${m}$对应着${P(v)}$中${m}$个位点和后继位点的连边，我们将${P(v)}$中这${m}$个点的集合记为${M}$，（注意到${m<\|P(v)\|}$，设split edge邻接的noncomposite顶点为${n}$，因为如果${m=|P(v)|}$，那么意味着${P(v)}$后继位都包含在${P(n)}$中，那么${n}$是一个composite顶点，矛盾！）
 
 所以我们可以将顶点${v}$分成两个顶点，分别为${P(v) \setminus M}$和${M}$收缩为的顶点. 然后将矩阵${A}$的相应元素的值进行更改，即${a_{ij}=0,\forall i\in M ,j\in P(v) \setminus M}$. 因为顶点${n}$是noncomposite顶点，所以拆分出来的${M}$对应的顶点一定是noncomposite. 这样每次我们至少产生了一个noncomposite顶点. 算法迭代进行，直到全部顶点变为composite顶点.（个人理解之所以每次选择边权重最大的，应该是可以减少迭代的次数，因为如此，我们每次尽可能多的拿走了${P(v)}$中的点），Fig.8是一个示意图
 
@@ -117,7 +117,13 @@ __Fig.9 Cleaning up Whirls and Bulges and Erosion[^1].__
 
 经过Erosion之后，我们的图已经相当简单了，下面我们来得到consensus序列，其实很简单，每个顶点${v}$对应了相应的位置集合${P(v)}$，然后选择一个频率最高的碱基作为代表。
 
-但是，在Fig.9中，我们发现，有一些path包含了foward和reverse边，这种就称为zigzag path，我们现在要将zigzag path拉直，从起点${s}$开始，到终点${t}$结束，每个内点${v}$，都会被我们计算从${s}$到${v}$之间正向边和反向边的差值，即${index(v)}$. 以Fig.8D为例，${a=s}$，其余点的${index}$值以次为，${\mathop{b}\limits_{1},\mathop{c}\limits_{2},\mathop{d}\limits_{3},\mathop{e}\limits_{4},\mathop{f}\limits_{5},\mathop{g}\limits_{4},\mathop{h}\limits_{3},\mathop{i}\limits_{4},\mathop{j}\limits_{5}}$
+但是，在Fig.9中，我们发现，有一些path包含了foward和reverse边，这种就称为zigzag path，我们现在要将zigzag path拉直，从起点${s}$开始，到终点${t}$结束，每个内点${v}$，都会被我们计算从${s}$到${v}$之间正向边和反向边的差值，即${index(v)}$. 以Fig.8D为例，${a=s}$，其余点的${index}$值以次为，${\mathop{1}\limits_{b},\mathop{2}\limits_{c},\mathop{3}\limits_{d},\mathop{4}\limits_{e},\mathop{5}\limits_{f},\mathop{4}\limits_{g},\mathop{3}\limits_{h},\mathop{4}\limits_{i},\mathop{5}\limits_{j}}$，然后将相同${index}$的顶点合并，并将相应的${P(v)}$也合并. Fig.6的合并结果见图Fig.10
+
+<p align="center">
+    <img src="/post_image/Fragmentgluer/zigzag.png" width="60%">
+</p>
+
+__Fig.10 Zigzag path straightening[^1].__
 
 # Reference
 
