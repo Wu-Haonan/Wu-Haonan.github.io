@@ -113,7 +113,11 @@ Bugles往往在真实的情况下呈现网络的结构，如Fig.6所示，同时
 
 __Fig.9 Cleaning up Whirls and Bulges and Erosion[^1].__
 
-<h2> Zigzag path and Consensus <br/> Sequence of Sub-repeats </h2>
+## Zigzag path and Consensus Sequence of Sub-repeats
+
+经过Erosion之后，我们的图已经相当简单了，下面我们来得到consensus序列，其实很简单，每个顶点${v}$对应了相应的位置集合${P(v)}$，然后选择一个频率最高的碱基作为代表。
+
+但是，在Fig.9中，我们发现，有一些path包含了foward和reverse边，这种就称为zigzag path，我们现在要将zigzag path拉直，从起点${s}$开始，到终点${t}$结束，每个内点${v}$，都会被我们计算从${s}$到${v}$之间正向边和反向边的差值，即${index(v)}$. 以Fig.8D为例，${a=s}$，其余点的${index}$值以次为，${\mathop{b}\limits_{1},\mathop{c}\limits_{2},\mathop{d}\limits_{3},\mathop{e}\limits_{4},\mathop{f}\limits_{5},\mathop{g}\limits_{4},\mathop{h}\limits_{3},\mathop{i}\limits_{4},\mathop{j}\limits_{5}}$
 
 # Reference
 
