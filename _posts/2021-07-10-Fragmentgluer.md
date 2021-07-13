@@ -88,7 +88,7 @@ __Fig.7 Consistent pairwise alignments and inconsistent pairwise alignments[^1].
 
 对于${A}$-Bruijn graph中的顶点${v}$，令${P(v)}$表示其对应的${A}$-graph中的联通分支的顶点集合（基因组位置集合）。我们定义顶点${v}$是<b>“composite”</b>，如果${P(v)}$包含两个距离在${girth}$之内的基因组位点。这些位点就是潜在的“inconsistent alignments”所在的位点. 这部分的处理思想呢，就是将composite的顶点分成两个点。
 
-算法采用迭代的方式进行，每次寻找${A}$-Bruijn graph中，连接composite和noncomposite顶点的所有边中权重最大的称为“split edge”，设边的权重（重边数）为${m}$，${v}$是这条边邻接的composite的顶点，那么这条边的权重为${m}$对应着${P(v)}$中${m}$个位点和后继位点的连边，我们将${P(v)}$中这${m}$个点的集合记为${M}$，（注意到${m<\lvert P(v)\rvert}$，设split edge邻接的noncomposite顶点为${n}$，因为如果${m=|P(v)|}$，那么意味着${P(v)}$后继位都包含在${P(n)}$中，那么${n}$是一个composite顶点，矛盾！）
+算法采用迭代的方式进行，每次寻找${A}$-Bruijn graph中，连接composite和noncomposite顶点的所有边中权重最大的称为“split edge”，设边的权重（重边数）为${m}$，${v}$是这条边邻接的composite的顶点，那么这条边的权重为${m}$对应着${P(v)}$中${m}$个位点和后继位点的连边，我们将${P(v)}$中这${m}$个点的集合记为${M}$，（注意到${m<\lvert P(v)\rvert}$，设split edge邻接的noncomposite顶点为${n}$，因为如果${m=\lvert P(v)\rvert}$，那么意味着${P(v)}$后继位都包含在${P(n)}$中，那么${n}$是一个composite顶点，矛盾！）
 
 所以我们可以将顶点${v}$分成两个顶点，分别为${P(v) \setminus M}$和${M}$收缩为的顶点. 然后将矩阵${A}$的相应元素的值进行更改，即${a_{ij}=0,\forall i\in M ,j\in P(v) \setminus M}$. 因为顶点${n}$是noncomposite顶点，所以拆分出来的${M}$对应的顶点一定是noncomposite. 这样每次我们至少产生了一个noncomposite顶点. 算法迭代进行，直到全部顶点变为composite顶点.（个人理解之所以每次选择边权重最大的，应该是可以减少迭代的次数，因为如此，我们每次尽可能多的拿走了${P(v)}$中的点），Fig.8是一个示意图
 
