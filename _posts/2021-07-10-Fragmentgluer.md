@@ -56,7 +56,7 @@ __Fig.4 Genomic dot-plot of an imaginary sequence[^1].__
 
 我们可以将矩阵${A}$视为一个邻接矩阵，这个邻接矩阵对应了一个图，我们称为${A}$-graph，这个图有${n}$个顶点，顶点${i}$和顶点${j}$存在边，当且仅当${a_{ij}=1}$.令${V}$是${A}$-graph的连通分支集合，${v_i\in V}$表示包含顶点${i}$的连通分支（容易想象，每个连通分支中的点就是相互比对上的顶点）.
 
-下面我们来定义多重图（multigraph）${A}$-Bruijn graph ${G(V,E)}$，其中${V}$中的每个顶点就是${A}$-graph的连通分支，连接${v_i,v_{(i+1)}}$。（换言之，在${A}$-Bruijn graph中，按照基因组本来的顺序连接这些顶点，即${A}$-graph的连通分支），其中${v_1}$称为source，${v_n}$称为sink. 换个角度，可以认为我们将从${1,\cdots n}$的欧拉路按照比对的关系，收缩为一个点。
+下面我们来定义多重图（multigraph）${A}$-Bruijn graph ${G(V,E)}$，其中${V}$中的每个顶点就是${A}$-graph的连通分支，连接${v_i,v_{(i+1)}}$.（换言之，在${A}$-Bruijn graph中，按照基因组本来的顺序连接这些顶点，即${A}$-graph的连通分支），其中${v_1}$称为source，${v_n}$称为sink. 换个角度，可以认为我们将从${1,\cdots n}$的欧拉路按照比对的关系，收缩为一个点。
 
 <p align="center">
     <img src="/post_image/Fragmentgluer/sample_of_A_Bruijn_graphs.png" width="50%">
@@ -93,7 +93,7 @@ __Fig.7 Consistent pairwise alignments and inconsistent pairwise alignments[^1].
 所以我们可以将顶点${v}$分成两个顶点，分别为${P(v) \setminus M}$和${M}$收缩为的顶点. 然后将矩阵${A}$的相应元素的值进行更改，即${a_{ij}=0,\forall i\in M ,j\in P(v) \setminus M}$. 因为顶点${n}$是noncomposite顶点，所以拆分出来的${M}$对应的顶点一定是noncomposite. 这样每次我们至少产生了一个noncomposite顶点. 算法迭代进行，直到全部顶点变为composite顶点.（个人理解之所以每次选择边权重最大的，应该是可以减少迭代的次数，因为如此，我们每次尽可能多的拿走了${P(v)}$中的点），Fig.8是一个示意图
 
 <p align="center">
-    <img src="/post_image/Fragmentgluer/clean_whirls.png" width="60%">
+    <img src="/post_image/Fragmentgluer/clean_whirls.png" width="45%">
 </p>
 __Fig.8 Processing of cleaning whirls.__
 
@@ -108,7 +108,7 @@ Bugles往往在真实的情况下呈现网络的结构，如Fig.6所示，同时
 再破除Bugles后，其实我们只是不再存在短圈，但是原本的Bugles还会剩余树状的末端，所以我们迭代的去除图中的叶子，也就是${degree=1}$的点（除了sink和source点外），直到图中只有sink和source点是度为${ 1 }$的点. 上述步骤的示意图见Fig.9
 
 <p align="center">
-    <img src="/post_image/Fragmentgluer/cleaning_and_erosion.png">
+    <img src="/post_image/Fragmentgluer/cleaning_and_erosion.png" width="60%">
 </p>
 
 __Fig.9 Cleaning up Whirls and Bulges and Erosion[^1].__
@@ -124,6 +124,72 @@ __Fig.9 Cleaning up Whirls and Bulges and Erosion[^1].__
 </p>
 
 __Fig.10 Zigzag path straightening[^1].__
+
+## Threading the Genomic Sequence Through the Graph
+
+因为前面的处理操作删除了很多顶点，所以${A}$-Bruijn graph的Eulerian path被打断了，我们现在的目标是的将片段连起来.
+
+我们现在将${A}$-Bruijn graph ${G}$中的每个顶点${v}$都对应了基因组的位置${P(v)}$，我们将${P(v)}$中的位置用顶点${v}$进行编号，由于我们缺失了一些顶点，所以并不是所有的基因序列被我们编号. 将及基因组位置的顶点编号按照顺序排序，不妨设为${v_1,\cdots ,v_k}$，然后我们寻找${v_i}$和${v_{i+1}(1\leq i <k)}$之间的最长（顶点数目最多）的最短（权重最小）路，那么这些路合并起来，我们就可以认为将“删减”后的基因组走了一遍，这个过程称为“threading”. 这个过程结束后，我们得到了基因序列${S}$的consensus序列，也就是说，这个序列中所有的sub-repeats都被替换为了consensus序列，进一步我们可以将simple path合并为一条边，这样的图就被称为“<b>repeat graph</b>”在threading的过程中，可以根据边被${S}$的consensus序列穿过的次数来定义重数multiplicity，大于1的就是sub-repeat. 由此我们得到了repeat classification问题的结果，我们厘定了这些sub-repeat之间的连接关系. Fig.11展示了Fig.5的例子得到的最终结果
+
+<p align="center">
+    <img src="/post_image/Fragmentgluer/resulting_graph.png" width="60%">
+</p>
+
+__Fig.11 The resulting graph of sample.png.__
+
+## Constructing ${A}$-Bruijn Graph Without the Similarity Matrix
+
+这一部分是从repeat classification问题到Genome Assembly问题的关键. 
+
+在通常的情况下，我们是不知道基因组的全部序列的，那么我们是否还能解决repeat classification问题呢？我们很容易想到测序技术可以提供帮助. 设substrings集合${S_1,\cdots, S_t}$是基因组序列${S}$的一个“covering set”，也就是${S}$的每对连续的位置，都可以在${S_1,\cdots, S_t}$中的某个元素${S_i}$找到. 如果我们让${S_1,\cdots, S_t}$相互进行序列比对，那么实际上我们可以得到${S}$与自身进行local alignment得到的Similarity Matrix ${A}$的一个子矩阵（Fig.12），因为${S_1,\cdots, S_t}$覆盖${S}$，所以理论上我们可以推理出未知的矩阵${A}$. 
+
+<p align="center">
+    <img src="/post_image/Fragmentgluer/snapshot_of_A.png" width="60%">
+</p>
+
+__Fig.12 The snapshot of Similarity Matrix ${A}$.__
+
+现在的我们不知道${S_1,\cdots S_t}$在${S}$中的位置，但是我们可以证明，${S_1,\cdots S_t}$任意连接（序列的直接连接，而非通过overlap的组装）得到的序列${S'}$，及其相应的Similarity Matrix ${A'}$，所生成的${A'}$-Bruijn graph和${S}$生成的${A'}$-Bruijn graph是完全一致的. 道理也很简单，对于node ${i}$在substrings中的任何复制，都最后被捏在一起了，因为${S_1,\cdots S_t}$的覆盖，${S}$的所有边，都被${S'}$保存了至少一次. Fig.13展示了Fig.5的例子，如果通过测序read如何得到${A}$-Bruijn graph
+
+<p align="center">
+    <img src="/post_image/Fragmentgluer/Constructing_ABruijn_Graph_Without_the_Similarity_Matrix.png" width="60%">
+</p>
+
+__Fig.13 Constructing ${A}$-Bruijn Graph Without the Similarity Matrix.__
+
+## Fragment Assembly
+
+所以我们通过上面的方法，可以通过测序read得到repeat graph.具体步骤如下
+
+0a.从${{S_1,\cdots ,S_t}}$中鉴别和移除嵌合体read（两个不相邻的基因片段，连在一起）.
+
+0b.任意连接read序列及其反向序列连接成一个序列，然后reads之间两两进行序列比对，得到Similarity Matrix${A}$.
+
+&nbsp;1.构建矩阵${A}$的${A}$-Bruijn graph.
+
+&nbsp;2.去除Whirls.（Mentioned before）
+
+&nbsp;3.去除Bugles.（Mentioned before）
+
+&nbsp;4.Erosion步骤，迭代${girth}$次去除叶子.
+
+4a.为最长的path恢复步骤4去除的顶点. PS：因为现在我们并不知道souce和sink点是哪一个，因此我们选择迭代去除${girth}$次图中的叶子，并在4a步恢复，试图保护souce和sink点.
+
+&nbsp;5.延展zigzag path.（Mentioned before）
+
+&nbsp;6.按照read的序列顺序来thread graph，将read穿过顶点的次数定义为这个顶点的coverage（覆盖度），一个simple path的覆盖度指的是顶点覆盖度的平均值.
+
+&nbsp;7.将simple path收缩为一条边，置于边的mutiplicity，这里调用了Pavzner之前做的一个称为Eulerian Copy Number的算法来计算的.
+
+&nbsp;8.将repeat graph中的非重复边删去，就称为“Tangles”其刻画了sub-repeats的连接关系.
+
+&nbsp;9.步骤6得到的结果，进一步利用mate-pairs的信息来解开部分repeats.（个人理解，具体的内容，这篇文章说详细内容在这篇Pevzner, P. and Tang, H. 2001. Fragment assembly with double-barreled data. <i>Bioinformatics</i> 17: S225–S233.）
+
+10.Simple path输出为contig，再进一步用Euler Scaffolding algorithm组装为scaffold.
+
+# trailer
+
+这篇博客，我们考古了04年的FragmentGluer，主要是向大家介绍repeat graph的思想，尤其是Constructing ${A}$-Bruijn Graph Without the Similarity Matrix这个部分，在充分理解了之后，希望大家移步[文献分享：Assembly of long, error-prone reads using repeat graphs Assembly](https://wu-haonan.github.io/2021/07/14/Flye.html)，这篇博客我们将介绍Pavel A. Pevzner的Flye算法.
 
 # Reference
 
