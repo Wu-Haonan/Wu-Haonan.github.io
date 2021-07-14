@@ -187,7 +187,7 @@ __Fig.13 Constructing ${A}$-Bruijn Graph Without the Similarity Matrix.__
 
 10.Simple path输出为contig，再进一步用Euler Scaffolding algorithm组装为scaffold.
 
-# trailer
+# Trailer
 
 这篇博客，我们考古了04年的FragmentGluer，主要是向大家介绍repeat graph的思想，尤其是Constructing ${A}$-Bruijn Graph Without the Similarity Matrix这个部分，在充分理解了之后，希望大家移步[文献分享：Assembly of long, error-prone reads using repeat graphs Assembly](https://wu-haonan.github.io/2021/07/14/Flye.html)，这篇博客我们将介绍Pavel A. Pevzner的Flye算法.
 
