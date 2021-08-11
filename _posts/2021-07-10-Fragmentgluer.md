@@ -161,7 +161,7 @@ __Fig.13 Constructing ${A}$-Bruijn Graph Without the Similarity Matrix.__
 
 所以我们通过上面的方法，可以通过测序read得到repeat graph.具体步骤如下
 
-0a.从${{S_1,\cdots ,S_t}}$中鉴别和移除嵌合体read（两个不相邻的基因片段，连在一起）.
+0a.从${\{S_1,\cdots ,S_t\}}$中鉴别和移除嵌合体read（两个不相邻的基因片段，连在一起）.
 
 0b.任意连接read序列及其反向序列连接成一个序列，然后reads之间两两进行序列比对，得到Similarity Matrix${A}$.
 
