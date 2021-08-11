@@ -135,7 +135,7 @@ __Fig.10 Zigzag path straightening[^1].__
     <img src="/post_image/Fragmentgluer/resulting_graph.png" width="60%">
 </p>
 
-__Fig.11 The resulting graph of sample.png.__
+__Fig.11 The resulting graph of sample.__
 
 ## Constructing ${A}$-Bruijn Graph Without the Similarity Matrix
 
