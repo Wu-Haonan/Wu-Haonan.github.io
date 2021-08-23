@@ -1,9 +1,9 @@
 ---
 layout: article
-title: Python Chapter3
+title: matplotlib
 tags: Python
 ---
-
+利用matplotlib.pyplot，将图片转化成数组，然后再把数组转化为图片
 <!--more-->
 
 # matplotlib.pyplot
