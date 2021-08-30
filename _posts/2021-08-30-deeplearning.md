@@ -26,7 +26,8 @@ tags: Python
 $ cd~
 $ mkdir tmp # 已经有可以省略
 $ export TMPDIR=$HOME/tmp
-$ pip3 install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio===0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
+$ pip3 install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio===0.9.0 
+-f https://download.pytorch.org/whl/torch_stable.html
 {% endhighlight %}
 
 # 网络模型的搭建
@@ -85,6 +86,26 @@ nn.Sequential(nn.Linear(256,2),nn.Sigmoid())
 这个函数是为了将一些连续的操作集成在一起.
 
 # 模型训练
+
+## 数据加载和batch
+
+因为我们训练的时候，需要将数据对应起来，feature和标签，甚至有feature由好几个部分组成，我们需要统一的处理batch，所以我们可以用到torch.utils.data.TensorDataset()这个函数，这个操作可以理解为打包，只要他们的样本数目一致，就可以打包，后面就可以统一处理.
+
+{% highlight python linenos %}
+train_feature_label = torch.utils.data.TensorDataset(train_feature_1, train_feature_2, train_label)
+{% endhighlight %}
+
+在深度学习中，我们通常将数据分成batch，每次训练的时候以batch为一个单位，迭代一个batch的数据更新一次参数，主要是因为数据量大而节省开销. 那么分成epoch的方法如下
+
+{% highlight python linenos %}
+sampler = WeightedRandomSampler(weights=list(0.85 if i == 1 else 0.1 for i in train_label),
+                                    num_samples=len(train_label), replacement=True)
+train_loader = torch.utils.data.DataLoader(dataset=train_feature_label, batch_size=32
+                                              , sampler=sampler)
+{% endhighlight %}
+
+## epoch训练
+首先选择合适的损失函数，以及优化方法，如随机梯度下降，或者
 
 # 总结
 
