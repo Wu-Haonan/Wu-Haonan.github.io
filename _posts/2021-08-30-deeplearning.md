@@ -135,11 +135,35 @@ for epoch in range(30): # 30轮训练
         optimizer.step()
 {% endhighlight %}
 
-这就完成了一次模型的参数训练
-
-
-
-
-# 总结
+这就完成了一次模型的参数训练，类似的，每次每次模型参数迭代后，可以进行一次测试集的测试，也记录下loss值，这里不再详细介绍，会训练，自然会test处理.
 
 # 在GPU上运行
+
+GPU上运行，需要使用cuda，为了防止没有cuda而不能运行程序，这里事先检测一下cuda的存在性.
+
+{% highlight python linenos %}
+DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") # cuda:0是为了防止有多个GPU，因为张量运算需要在同一个GPU才能运行.
+{% endhighlight %}
+
+然后，将操作放在GPU上有两种方法
+
+{% highlight python linenos %}
+# No.1
+XXX.cuda()
+# No.2
+XXX.to(DEVICE) #前面定义的DEVICE
+{% endhighlight %}
+
+举例如下，注意进行GPU运算的所有张量都要事先传入GPU，必须在同一设备下，一定切记！
+
+{% highlight python linenos %}
+model = MyConvNet().to(DEVICE)
+for epoch in range(30):
+    for step, (D, G, L) in enumerate(train_loader):
+        D, G, L = D.to(device), G.to(device),L.to(device)
+        ······
+{% endhighlight %}
+
+在我自己的服务上，训练的时候，直接提交到GPU的队列下，然后注意事先module load cuda/11.1（或者别的版本）.
+
+最后，祝大家调参顺利 /(ㄒoㄒ)/~~
