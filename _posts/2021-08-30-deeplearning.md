@@ -51,6 +51,7 @@ class MyConvNet(nn.Module):
         out = self.conv1(x)
         out = F.relu(out) #激活函数
         out = self.conv2(out)
+        out = F.max_pool2d(out, 2, 2) #池化层
         out = F.relu(out)
         out = torch.reshape(out,(shape[0],1,21)) #将张量形状改变
         out = self.fc1(out)
@@ -66,16 +67,22 @@ model = MyConvNet() #申请一个网络的实例
 
 着重看一下下面代码中的几个函数
 
+1. nn.Conv2d()
+
 {% highlight python linenos %}
-nn.Conv2d(in_channels=1, out_channels=1, kernel_size=(3, 3) ,padding=0) # 分别表示卷积层的进入通道数目，输出通道数目，以及卷积核的尺寸，padding是为了给图片补值来保证卷积扫描后图片尺寸不变
+nn.Conv2d(in_channels=1, out_channels=1, kernel_size=(3, 3) ,padding=0) 
+# 分别表示卷积层的进入通道数目，输出通道数目，以及卷积核的尺寸，padding是为了给图片补值来保证卷积扫描后图片尺寸不变
 {% endhighlight %}
 
 所谓的通道数目，在实际意义上，可以代表比如彩色图片RGB三个值，就是三个通道. 然后后面的通道数目，可以理解为用不同的卷积核来提取特征.
+
+2. nn.Sequential()
 
 {% highlight python linenos %}
 nn.Sequential(nn.Linear(256,2),nn.Sigmoid())
 {% endhighlight %}
 
+这个函数是为了将一些连续的操作集成在一起.
 
 # 模型训练
 
