@@ -33,7 +33,7 @@ $ pip3 install torch==1.9.0+cu111 torchvision==0.10.0+cu111 torchaudio===0.9.0 -
 
 搭建网络，其实就是创建一个你所定义网络的类，这个类继承自 nn.Module，所以事先import torch.nn
 
-{% highlight linenos %}
+{% highlight python linenos %}
 import torch
 import torch.nn as nn
 
@@ -66,13 +66,13 @@ model = MyConvNet() #申请一个网络的实例
 
 着重看一下下面代码中的几个函数
 
-{% highlight linenos %}
+{% highlight python linenos %}
 nn.Conv2d(in_channels=1, out_channels=1, kernel_size=(3, 3) ,padding=0) # 分别表示卷积层的进入通道数目，输出通道数目，以及卷积核的尺寸，padding是为了给图片补值来保证卷积扫描后图片尺寸不变
 {% endhighlight %}
 
 所谓的通道数目，在实际意义上，可以代表比如彩色图片RGB三个值，就是三个通道. 然后后面的通道数目，可以理解为用不同的卷积核来提取特征.
 
-{% highlight linenos %}
+{% highlight python linenos %}
 nn.Sequential(nn.Linear(256,2),nn.Sigmoid())
 {% endhighlight %}
 
