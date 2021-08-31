@@ -70,7 +70,7 @@ model = MyConvNet() #申请一个网络的实例
 
 着重看一下下面代码中的几个函数
 
-1. nn.Conv2d()
+1.nn.Conv2d()
 
 {% highlight python linenos %}
 nn.Conv2d(in_channels=1, out_channels=1, kernel_size=(3, 3) ,padding=0) 
@@ -79,7 +79,7 @@ nn.Conv2d(in_channels=1, out_channels=1, kernel_size=(3, 3) ,padding=0)
 
 所谓的通道数目，在实际意义上，可以代表比如彩色图片RGB三个值，就是三个通道. 然后后面的通道数目，可以理解为用不同的卷积核来提取特征.
 
-2. nn.Sequential()
+2.nn.Sequential()
 
 {% highlight python linenos %}
 nn.Sequential(nn.Linear(256,2),nn.Sigmoid())
@@ -142,7 +142,8 @@ for epoch in range(30): # 30轮训练
 GPU上运行，需要使用cuda，为了防止没有cuda而不能运行程序，这里事先检测一下cuda的存在性.
 
 {% highlight python linenos %}
-DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") # cuda:0是为了防止有多个GPU，因为张量运算需要在同一个GPU才能运行.
+DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") 
+# cuda:0是为了防止有多个GPU，因为张量运算需要在同一个GPU才能运行.
 {% endhighlight %}
 
 然后，将操作放在GPU上有两种方法
