@@ -189,6 +189,13 @@ parallel_algorithm:
       - title:  7.1.2 同步运算的并行变量转化算法
         url:    /2021/05/26/7_1_2.html
         
+Deep_learning:
+  - title:      深度学习
+    children:
+      - title:  pytorch
+        url:    
+      - title:  pyG
+        url:    
 
 layouts:
   - title: Layouts
