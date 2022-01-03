@@ -194,7 +194,7 @@ Deep_learning:
     children:
       - title:  Why and  What
         url:    /2022/01/10/Why_and_what.html
-      - title:  How (Content)
+      - title:  How/Content
         url:    /2022/01/10/How.html
   - title:      Pytorch与深度学习初步
    children:
@@ -213,10 +213,8 @@ Deep_learning:
       - title:  Let's try
         url:    /2022/01/10/pyG_try.html
       - title:  自编码网络
-        url:    /2022/01/10/AE_theory.html
-      - title:  VGAE实践
         url:    /2022/01/10/VGAE_code.html
-                
+
 layouts:
   - title: Layouts
     children:
