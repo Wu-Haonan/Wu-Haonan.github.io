@@ -197,7 +197,7 @@ Deep_learning:
       - title:  How/Content
         url:    /2022/01/10/How.html
   - title:      Pytorch与深度学习初步
-   children:
+    children:
       - title:  MLP与CNN简介
         url:    /2022/01/10/MLP_CNN_theory.html
       - title:  MLP与CNN实践
@@ -205,7 +205,7 @@ Deep_learning:
       - title:  Let's try
         url:    /2022/01/10/pytorch_try.html
   - title:      PyG与图神经网络
-   children:
+    children:
       - title:  GCN简介
         url:    /2022/01/10/GCN_theory.html
       - title:  GCN实践
