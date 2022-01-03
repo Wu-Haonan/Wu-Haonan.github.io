@@ -190,13 +190,34 @@ parallel_algorithm:
         url:    /2021/05/26/7_1_2.html
         
 Deep_learning:
-  - title:      深度学习
+  - title:      Foreword
     children:
-      - title:  pytorch
+      - title:  Why and  What
         url:    
-      - title:  pyG
+      - title:  How (Content)
         url:    
-
+  - title:      Pytorch与深度学习初步
+   children:
+      - title:  MLP与CNN简介
+        url:    
+      - title:  MLP与CNN实践
+        url:    
+      - title:  Let's try
+        url: 
+  - title:      PyG与图神经网络
+   children:
+      - title:  GCN简介
+        url:    
+      - title:  GCN实践
+        url:    
+      - title:  Let's try
+        url: 
+      - title:  自编码网络
+        url:    
+      - title:  VGAE实践
+        url: 
+        
+        
 layouts:
   - title: Layouts
     children:
