@@ -17,7 +17,7 @@ Pytorch的安装比较简单，我们可以看到下图的选择栏目，根据�
 
 可以在python shell里检查一下
 
-{% highlight Python shell linenos %}
+{% highlight Python-Shell linenos %}
 >>> import torch
 >>> torch.__version__
 '1.9.0+cpu'
