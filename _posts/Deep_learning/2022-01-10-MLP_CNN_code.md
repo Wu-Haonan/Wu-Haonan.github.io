@@ -12,12 +12,12 @@ sidebar:
 Pytorch的安装比较简单，我们可以看到下图的选择栏目，根据你的需要，下面会自动生成合适的命令，把命令copy到command line里，就可以完成安装。
 
 <p align="center">
-    <img src="/post_image/Deep_learning/Pytorch_install.PNG" width="60%">
+    <img src="/post_image/Deep_learning/Pytorch_install.PNG" width="80%">
 </p>
 
 可以在python shell里检查一下
 
-{% highlight Python-Shell linenos %}
+{% highlight Python linenos %}
 >>> import torch
 >>> torch.__version__
 '1.9.0+cpu'
@@ -89,9 +89,7 @@ array([[0.1, 1.2],
 
 因为很多Pytorch的函数输入的尺寸要求不同，所以我们往往需要给tensor数据整形，比如你的数据是${ (B,L,W) }$，如果想要输入卷积层，就需要添加一个channel的维度，变成${ (B,1,L,W) }$，或者有时候我们想把矩阵转化成一个向量，扔进全连接层都需要整形。我们下面介绍几个整形的函数
 
-#### view()
-
-#### reshape()
+#### view()/reshape()
 
 #### squeeze()
 
