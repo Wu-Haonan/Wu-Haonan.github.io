@@ -85,15 +85,66 @@ array([[0.1, 1.2],
        [4.9, 5.2]], dtype=float32)
 {% endhighlight %}
 
-### 3.修改Shape
+### 3.reshaping
 
 因为很多Pytorch的函数输入的尺寸要求不同，所以我们往往需要给tensor数据整形，比如你的数据是${ (B,L,W) }$，如果想要输入卷积层，就需要添加一个channel的维度，变成${ (B,1,L,W) }$，或者有时候我们想把矩阵转化成一个向量，扔进全连接层都需要整形。我们下面介绍几个整形的函数
 
 #### view()/reshape()
 
+这两个函数差别不大，把你想整形成的维度输入放在括号里面就可以了
+
+{% highlight python linenos %}
+>>> X = torch.tensor([[1,2,3,4],[5,6,7,8],[1,2,5,6]])
+>>> X.view(1,12)
+tensor([[1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 5, 6]])
+>>> X = torch.tensor([[1,2,3,4],[5,6,7,8],[1,2,5,6]])
+>>> X.view(3,1,4)
+tensor([[[1, 2, 3, 4]],
+
+        [[5, 6, 7, 8]],
+
+        [[1, 2, 5, 6]]])
+>>> X.reshape(1,3,4)
+tensor([[[1, 2, 3, 4],
+         [5, 6, 7, 8],
+         [1, 2, 5, 6]]])
+>>> X.reshape(2,6)
+tensor([[1, 2, 3, 4, 5, 6],
+        [7, 8, 1, 2, 5, 6]])
+{% endhighlight %}
+
 #### squeeze()
 
+比如我们在处理数据的时候，很有可能会出现有些维度是${ 1 }$，比如图片数据的Channel维度，我们想把这些空维度给压缩掉，就可以简单的使用squeeze()
+
+{% highlight python linenos %}
+>>> a = torch.tensor([[[1, 2, 3, 4]],
+...
+...         [[5, 6, 7, 8]],
+...
+...         [[1, 2, 5, 6]]])
+>>> a.shape
+torch.Size([3, 1, 4])
+>>> a.squeeze()
+tensor([[1, 2, 3, 4],
+        [5, 6, 7, 8],
+        [1, 2, 5, 6]])
+>>> a = a.squeeze()
+>>> a.shape
+torch.Size([3, 4])
+{% endhighlight %}
+
 #### flatten()
+
+flatten()比较容易理解，就是将张量直接拉平。
+
+{% highlight python linenos %}
+>>> a = torch.tensor([[[1, 2, 3, 4],
+...          [5, 6, 7, 8],
+...          [1, 2, 5, 6]]])
+>>> a.flatten()
+tensor([1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 5, 6])
+{% endhighlight %}
 
 ## 数据切分、加载
 
@@ -112,9 +163,6 @@ array([[0.1, 1.2],
 ## valid epoch
 
 ## run on GPU
-
-{% highlight python linenos %}
-{% endhighlight %}
 
 
 {% highlight python linenos %}
