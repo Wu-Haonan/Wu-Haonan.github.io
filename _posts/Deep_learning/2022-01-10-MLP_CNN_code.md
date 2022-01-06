@@ -296,16 +296,164 @@ class CNN(nn.Module):
 
 # 网络训练
 
+下面我们来到了另一个重要的模块，就是网络训练我们分成几个部分来介绍。首先，可以用前面数据处理的几个函数，先完成数据的准备工作。然后，大概写个框架，我们需要那些函数核变量。
+
+{% highlight python linenos %}
+import torch
+import torch.nn as nn
+import torch.utils.data
+from torch.utils.data.sampler import SubsetRandomSampler
+import torch.optim as optim
+import torch.nn.functional as F
+
+model = Net()
+
+def train_epoch():
+    return
+
+def valid_epoch():
+    return
+
+def train(model,feature_label):
+    samples_num = len(feature_label)
+    split_num = int(0.9 * samples_num)
+    data_index = np.arange(samples_num)
+    np.random.shuffle(data_index)
+    train_index = data_index[:split_num]
+    valid_index = data_index[split_num:]
+    train_sampler = SubsetRandomSampler(train_index)
+    valid_sampler = SubsetRandomSampler(valid_index)
+    train_loader = torch.utils.data.DataLoader(dataset=feature_label, 
+                                               batch_size=BATCH, sampler=train_sampler)
+    valid_loader = torch.utils.data.DataLoader(dataset=feature_label, 
+                                               batch_size=BATCH, sampler=valid_sampler)
+{% endhighlight %}
+
 ## 初始准备
+
+我们初始化的准备，就是三项：1.模型参数初始化；2.优化器的设定；3.损失函数设置；
+其实很简单的两行代码就可以解决，关于参数初始化这里写的就是最简单是随机初始化，其实还有很多初始化的方式，比如均匀分布、正态分布等等，这里不再赘述，可以去官网寻找，采用合适的方式即可。优化器此处用的是Adam，损失函数是二项交叉熵，也都可以替换，采用合适的即可。
+
+{% highlight python linenos %}
+import torch.optim as optim
+import torch.nn.functional as F
+
+optimizer = optim.Adam(model.parameters(), lr=0.001)
+loss_fun = F.binary_cross_entropy
+{% endhighlight %}
+
+然后我们开始进入每个epoch的训练，先写个大致的框架
+
+{% highlight python linenos %}
+EPOCH = 30
+
+for epoch in range(EPOCH):
+    loss_t = train_epoch(model, train_loader, optimizer, loss_fun)
+    loss_v = valid_epoch(model, valid_loader, loss_fun)
+{% endhighlight %}
 
 ## train epoch
 
+下面我们具体写一下训练一个epoch的代码，model.train()是含义是将模型调整成训练状态，另一个状态是model.eval()，在训练状态下，比如dropout这类随机的情况是随机发生的，但是eval模式先，这种随机状态就被固定。
+
+首先将变量变成可求梯度的状态，然后我们将梯度归零，进行前向传播，进一步计算损失函数，最后计算梯度，优化器优化参数。
+
+最后很简单，我们给验证集每个样本的损失计算一个平均值。
+
+{% highlight python linenos %}
+def train_epoch(model,train_loader, optimizer, loss_fun):
+    model.train()
+    loss = 0
+    num = 0
+    for step, (feature, label) in enumerate(train_loader):
+        feature = torch.autograd.Variable(feature.float())
+        label = torch.autograd.Variable(label.float())
+
+        optimizer.zero_grad()
+        output = model(feature)
+        train_loss = loss_fun(output, label).to(DEVICE)
+        train_loss.backward()
+        optimizer.step()
+        loss = loss + train_loss.item()
+        num = num + len(label)
+    epoch_loss = loss / num
+    return epoch_loss
+{% endhighlight %}
+
 ## valid epoch
+
+训练epoch已经说明了，验证epoch就很简单了。with torch.no_grad()的作用是下面的代码都不会进行梯度计算，所以可以节省一些GPU资源，加速代码。
+
+{% highlight python linenos %}
+def valid_epoch(model, valid_loader, loss_fun):
+    model.eval()
+    loss = 0
+    num = 0
+    with torch.no_grad():
+        for step, (feature, label) in enumerate(valid_loader):
+            feature = torch.autograd.Variable(feature.float())
+            label = torch.autograd.Variable(label.float())
+
+            pred = model(feature)
+            valid_loss = loss_fun(pred, label)
+            loss = loss + valid_loss.item()
+            num = num + len(label)
+    epoch_loss = loss / num
+    return epoch_loss
+{% endhighlight %}
+
+## 模型保存与加载
+
+当我们需要最终确定进行保存的时候，我们可以用下面两种方式保存模型和加载模型。
+
+1.保存整个模型
+
+{% highlight python linenos %}
+torch.save(model,"./model/Net.pkl")
+model = torch.load("./model/Net.pkl")
+{% endhighlight %}
+
+2.只保存模型的参数
+
+{% highlight python linenos %}
+torch.save(model.state_dict(),"./model/Net.pkl") # 存成.dat文件也可以
+model = Net() # 创建一个实例
+model.load_state_dict(torch.load('./model/Net.pkl')) # 模型的参数被赋值
+{% endhighlight %}
 
 ## run on GPU
 
+GPU上运行，需要使用cuda，为了防止没有cuda而不能运行程序，这里事先检测一下cuda的存在性.
+
+{% highlight python linenos %}
+DEVICE = torch.device("cuda:0" if torch.cuda.is_available() else "cpu") # cuda:0是为了防止有多个GPU，因为张量运算需要在同一个GPU才能运行.
+{% endhighlight %}
+
+然后，将操作放在GPU上有两种方法
+
+{% highlight python linenos %}
+XXX.cuda() # No.1
+XXX.to(DEVICE) #前面定义的DEVICE
+{% endhighlight %}
+
+举例如下，注意进行GPU运算的所有张量都要事先传入GPU，必须在同一设备下，一定切记！
+
+{% highlight python linenos %}
+model = MyConvNet().to(DEVICE)
+for epoch in range(30):
+    for step, (feature, label) in enumerate(train_loader):
+        feature, label = feature.to(device), label.to(device)
+{% endhighlight %}
+
+最后，需要注意的就是，计算的结果如果再进一步计算的话，需要注意，可能需要再切换回CPU，使用XXX.cpu()即可。
 
 
+
+
+
+
+{% highlight python linenos %}
+{% endhighlight %}
 
 {% highlight python linenos %}
 {% endhighlight %}
