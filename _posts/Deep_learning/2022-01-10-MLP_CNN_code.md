@@ -7,6 +7,8 @@ sidebar:
   nav: Deep_learning
 ---
 
+本节课我们介绍MLP和CNN的代码实现，我们从Pytorch的安装开始说起。<!--more-->
+
 # Pytorch的安装
 
 Pytorch的安装比较简单，我们可以看到下图的选择栏目，根据你的需要，下面会自动生成合适的命令，把命令copy到command line里，就可以完成安装。
