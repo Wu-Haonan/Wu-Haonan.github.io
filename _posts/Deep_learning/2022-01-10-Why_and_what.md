@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Why and what
+tags: Deep learning
 aside:
   toc: true
 sidebar:
