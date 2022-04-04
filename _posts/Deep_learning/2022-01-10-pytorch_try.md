@@ -1,6 +1,7 @@
 ---
 layout: article
 title: Let's try
+tags: Deep learning
 aside:
   toc: true
 sidebar:
