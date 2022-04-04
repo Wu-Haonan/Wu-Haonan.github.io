@@ -210,8 +210,6 @@ Deep_learning:
         url:    /2022/01/10/GCN_theory.html
       - title:  GCN实践
         url:    /2022/01/10/GCN_code.html
-      - title:  Let's try
-        url:    /2022/01/10/pyG_try.html
       - title:  自编码网络
         url:    /2022/01/10/AE_theory.html
       - title:  VGAE实践
