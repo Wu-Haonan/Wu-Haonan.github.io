@@ -7,7 +7,7 @@ sidebar:
   nav: Deep_learning
 ---
 
-下面我们一起做一个MLP练习，数据和代码我放在了[仓库](https://github.com/Wu-Haonan/Deep_learning_short_course/tree/main/Drug_Toxicity)中。
+下面我们一起做一个MLP练习，数据和代码我放在了[仓库](https://github.com/Wu-Haonan/Deep_learning_short_course/tree/main/Drug_Toxicity)中。<!--more-->
 
 在文件夹./Drug_Toxicity/下面，./Drug_Toxicity/Data_file/文件夹中存放了药物的特征（训练集文件train_feature.pkl，测试集文件test_feature.pkl）和相应的hERG(心脏安全性评价的二分类标签)（文件hERG.pkl）[^1]
 
