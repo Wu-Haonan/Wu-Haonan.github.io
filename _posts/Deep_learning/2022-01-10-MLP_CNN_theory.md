@@ -1,7 +1,7 @@
 ---
 layout: article
 title: MLP与CNN简介
-tags: Deep learning
+tags: Deep-learning
 aside:
   toc: true
 sidebar:
