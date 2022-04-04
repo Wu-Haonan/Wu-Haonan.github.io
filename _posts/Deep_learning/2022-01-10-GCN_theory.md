@@ -1,7 +1,7 @@
 ---
 layout: article
 title: GCN简介
-tags: Deep learning
+tags: Deep-learning
 aside:
   toc: true
 sidebar:
