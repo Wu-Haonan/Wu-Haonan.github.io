@@ -46,7 +46,7 @@ hifiasm还允许用户仅使用HiFi read，而不使用任何其他信息。在�
 
 我们给出两种overlap的定义，<i>cis</i> read  overlaps和<i>trans</i> read overlaps. 其中<i>cis</i> read  overlaps指的是read ${ A,B }$ 被推断为同源的单倍型. 其实这里的 <i>cis</i> 和<i>trans</i>就是之前[博客](https://wu-haonan.github.io/2021/05/06/hifiasm.html)中提到的consistent overlap和inconsistent overlap，hifiasm仅使用<i>cis</i> overlap来组装.
 
-令${ U_st }$来表示杂合关系的unitigs ${ s,t }$之间的<i>trans</i> read overlap的数目. 这可以用来衡量两个unitigs的相似度. （在测序深度一定的前提下，杂合区段的unitigs之间<i>trans</i> overlap越少，二者越相似）. 对于每个杂合unitigs ${ t }$，变量$ \delta_t \in \{ 1,-1 \} $
+令${ U_st }$来表示杂合关系的unitigs ${ s,t }$之间的<i>trans</i> read overlap的数目. 这可以用来衡量两个unitigs的相似度. （在测序深度一定的前提下，杂合区段的unitigs之间<i>trans</i> overlap越少，二者越相似）. 对于每个杂合unitigs ${ t }$，变量${ \delta_t \in \\{ 1,-1 \\} }$
 
 # Reference
 
