@@ -40,7 +40,9 @@ hifiasm还允许用户仅使用HiFi read，而不使用任何其他信息。在�
 
 我们先介绍一下，如果没有Hi-C数据，hifiasm是怎么仅使用HiFi read工作的.这里给出本文对于Dual assembly的定义.
 
-<q>Dual assembly is a pair of non-redundant primary assemblies with each assembly representing a complete homologous haplotype.</q>
+>
+*Dual assembly is a pair of non-redundant primary assemblies with each assembly representing a complete homologous haplotype.*
+>
 
 我们给出两种overlap的定义，<i>cis</i> read  overlaps和<i>trans</i> read overlaps. 其中
 
