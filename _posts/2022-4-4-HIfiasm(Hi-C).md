@@ -10,7 +10,7 @@ article_header:
 ---
 
 我们之前以及讨论过Hifiasm这个算法，这是Heng Li发表在Nature Methods上的一篇关于单倍型重构的文章。其实，如果仅仅使用测序数据，我们很难实现telomere-to-telomere的单倍型组装，因为测序长度的限制，所以往往我们需要依靠额外的数据来进行phasing，比如hifiasm就采用了trio数据，即样本父母的二代测序信息。而这篇文章中，采用了Hi-C数据来作为额外的信息，这也是hifiasm(Hi-C)名字的来源。当然了，使用了Hi-C数据，就不再需要trio数据，也就是标题中的所提到的不需要父母数据。
-<！--more-->
+<!--more-->
 
 # Backgroud
 
@@ -54,6 +54,30 @@ $$</center>
 
 这里，${ \vec{\delta} }$代表所有杂合unitigs的分型情况.也就是说，我们要最小化后面的式子${ \sum_{s,t} \delta_s \delta_t U_{st} }$，那也就是我们希望同一个phase中的unitigs之间的${ U_{st} }$尽量小.这里稍微需要大家思考一下，其实虽然${ U_{st} }$代表了inconsistent overlap的数目，但是其实如果有overlap就证明了序列之间有相似度，所以我们当然需要每个phase内部不怎么相似（每个单倍体内部相似序更少），而phase之间杂合区段是相似的. 而且这里我们再回头看前面的假设，hifiasm假设一个单倍型上的repeat之间的序列差异大于二倍体上杂合子的差异，所以，所以即使对于同一phase中的相似序列repeat，我们希望差异更大（${ U_{st} }$越小）的repeat在同一phase内，而杂合区段（${ U_{st} }$更大）的序列放在两个phase中. 所以如果视${ U_{st} }$是权重的话，我们对unitigs的划分就是在寻找最大割. hifiasm使用的优化方法也比较暴力，在最后会提到.
 
+## Map Hi-C reads
+
+对于大部分的31-mers，在图中至少有两个copy，那些唯一的31-mers很可能就是杂合基因所在的位置. hifiasm标记所有的unique 31-mers在图中的位置. 然后检查Hi-C read pair是否包含两个或者多个不重叠的31-mers，并且丢弃掉Hi-C read中对于提供phasing信息无用的序列. 对于匹配到同源区段的unitigs，也不考虑.
+
+这么做有两个好处，
+
+
+
+
+## Max-Cut求近似解
+
+对于上出两个优化目标(1)(2)文章用下面方法求解
+
+1. 对于每个unitig ${ t }$，${ \delta_t }$任取${ 1}$或${ -1 }$.
+
+2.任选unitig ${ t }$，如果能提升目标函数，则反转${ \delta_t }$.
+
+3.重复步骤2，直到目标函数不再优化，则达到局部最优解. 如果局部最大值好于历史最大值，则将其设为历史最大值.
+
+4.然后将历史最优解随机反转一部分unitigs（或者反转随机某个unitigs的所有邻居）.  转到步骤2，重新求解局部最优解.
+
+5.重复10000次步骤2-4，返回历史最优解.
+
+对于步骤3，hifiasm会事先探测assembly graph中的‘bubble’区域，将其中的unitigs记录下来，分为两组，我们知道这两组unitigs sets一定来自于两个phase，如果反转到这其中某个unitigs，会将里面的unitigs一起进行操作. 为了防止错误，hifiasm在最后一轮，不使用这个策略.
 
 # Reference
 
