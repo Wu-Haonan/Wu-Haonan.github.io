@@ -58,10 +58,35 @@ $$</center>
 
 对于大部分的31-mers，在图中至少有两个copy，那些唯一的31-mers很可能就是杂合基因所在的位置. hifiasm标记所有的unique 31-mers在图中的位置. 然后检查Hi-C read pair是否包含两个或者多个不重叠的31-mers，并且丢弃掉Hi-C read中对于提供phasing信息无用的序列. 对于匹配到同源区段的unitigs，也不考虑.
 
-这么做有两个好处，
+这么做有两个好处，一个是节省了比对的时间，一个是能够尽量的避免错误，相当于我们选取一些非常可信的片段来作为补充信息.
 
+然后根据Hi-C数据的mapping情况，我们可以得到这样两种信息.
 
+1. Hi-C read直接map到杂合子区域的unitigs ${ t }$上，我们称为<i>cis</i> mapping. 这说名这个Hi-C read和unitigs ${ t }$在同一相位.
 
+2. Hi-C read所mapping的位置，存在一个HiFi read，而且这个HiFi read正好和unitigs ${ t' }$存在<i>trans</i> overlap，那么我们就可以推断，Hi-C read与${ t' }$是<i>trans</i> mapping的关系. 那么Hi-C read与${ t' }$的相位是相反关系.
+
+>
+*
+If there are massive Hi-C cis mappings bridging two heterozygous unitigs <b>s</b> and <b>t</b>, it is likely that s and t originate from the same haplotype. By contrast, large numbers of Hi-C trans mappings bridging <b>s</b> and <b>t</b> indicate that they should be assigned to different haplotypes.
+*
+>
+
+## Model Hi-C phase
+
+对于一个Hi-C read pair ${ r }$，令${ x_{rt}=1}$表示${ r }$ <i>cis</i> mapping unitig ${ t }$，${ x_{rt} = -1 }$表示 <i>trans</i> mapping unitigs ${ t }$， 其他情况，记${ x_{rt}=0 }$. 同样的，我们还用${ \delta_t }$表示unitig ${ t }$的相位.
+
+对于Hi-C数据，有可能会桥接在两个单倍型上，这就是一种错误. 假设Hi-C read pair ${ r }$，桥接了unitigs ${ s,t }$，那么我们设其发生上述错误的概率是${ \epsilon_r }$. 因为${ r }$已经mapping到了unitigs ${ s,t }$上，所以${ x_rt,x_rs }$只能取${ 1,-1 }$. 由此
+
+<center>$$
+\begin{equation}
+P(x_{rs},x_{rt}|\delta_s,\delta_t)=
+\begin{cases}
+(1-\epsilon_r)/2 & \text{if } x_{rt}x_{rt}\delta_s\delta_t=1\\
+\epsilon_r/2 & \text{if } x_{rt}x_{rt}\delta_s\delta_t=-1\\
+\end{cases}
+\end{equation}
+$$</center>
 
 ## Max-Cut求近似解
 
