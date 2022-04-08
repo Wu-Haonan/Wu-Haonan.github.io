@@ -20,7 +20,6 @@ hifiasm(Hi-C)与之前发布的hifiasm(trio)所用的assembly graph是相同的�
 
 <p align="center">
     <img src="/post_image/hifiasm/overview.PNG" width="100%">
-    <br />    <small> tittle </small>
 </p>
 
 __Fig.1 Overview of hifiasm(trio)[^1].__
@@ -161,12 +160,19 @@ $$</center>
 
 1. HG002
 
-这个图是以trio phasing为groud truth来绘图的，每个点是一个contig，我们统计一下每个contig包含多少父源的31-mer和母源的31-mer，画了这样的图.
+这个图是以trio phasing为groud truth来绘图的，每个点是一个contig，我们统计一下每个contig包含多少父源的31-mer和母源的31-mer，画了这样的图. 下面的图是将所有hifiasm(Hi-C)得到的contigs比对到参考基因组上，灰色区域是着丝粒.
 
 <p align="center">
     <img src="/post_image/hifiasm(Hi-C)/Phasing_accuracy_of_HG002_assemblies.PNG" width="80%">
-    <br />    <small> tittle </small>
 </p>
+
+__Fig.2 Phasing accuracy of HG002_assemblies.__
+
+<p align="center">
+    <img src="/post_image/hifiasm(Hi-C)/HG002_align.PNG" width="80%">
+</p>
+
+__Fig.3 Chromosome-level phasing results for HG002 aligned to the reference .__
 
 # Reference
 
