@@ -54,6 +54,25 @@ $$</center>
 
 这里，${ \vec{\delta} }$代表所有杂合unitigs的分型情况.也就是说，我们要最小化后面的式子${ \sum_{s,t} \delta_s \delta_t U_{st} }$，那也就是我们希望同一个phase中的unitigs之间的${ U_{st} }$尽量小.这里稍微需要大家思考一下，其实虽然${ U_{st} }$代表了inconsistent overlap的数目，但是其实如果有overlap就证明了序列之间有相似度，所以我们当然需要每个phase内部不怎么相似（每个单倍体内部相似序更少），而phase之间杂合区段是相似的. 而且这里我们再回头看前面的假设，hifiasm假设一个单倍型上的repeat之间的序列差异大于二倍体上杂合子的差异，所以，所以即使对于同一phase中的相似序列repeat，我们希望差异更大（${ U_{st} }$越小）的repeat在同一phase内，而杂合区段（${ U_{st} }$更大）的序列放在两个phase中. 所以如果视${ U_{st} }$是权重的话，我们对unitigs的划分就是在寻找最大割. hifiasm使用的优化方法也比较暴力，在最后会提到.
 
+## Max-Cut求近似解
+
+这个部分本来应该最后再讲解，但是因为后面那个优化使用的时候，有点复杂，所以我们先讲解一下这个求解方法.
+
+对于两个优化目标(1)(8)文章用下面方法求解
+
+
+1. 对于每个unitig ${ t }$，${ \delta_t }$任取${ 1}$或${ -1 }$.
+
+2.任选unitig ${ t }$，如果能提升目标函数，则反转${ \delta_t }$.
+
+3.重复步骤2，直到目标函数不再优化，则达到局部最优解. 如果局部最大值好于历史最大值，则将其设为历史最大值.
+
+4.然后将历史最优解随机反转一部分unitigs（或者反转随机某个unitigs的所有邻居）.  转到步骤2，重新求解局部最优解.
+
+5.重复10000次步骤2-4，返回历史最优解.
+
+对于步骤3，hifiasm会事先探测assembly graph中的‘bubble’区域，将其中的unitigs记录下来，分为两组，我们知道这两组unitigs sets一定来自于两个phase，如果反转到这其中某个unitigs，会将里面的unitigs一起进行操作. 为了防止错误，hifiasm在最后一轮，不使用这个策略.
+
 ## Map Hi-C reads
 
 对于大部分的31-mers，在图中至少有两个copy，那些唯一的31-mers很可能就是杂合基因所在的位置. hifiasm标记所有的unique 31-mers在图中的位置. 然后检查Hi-C read pair是否包含两个或者多个不重叠的31-mers，并且丢弃掉Hi-C read中对于提供phasing信息无用的序列. 对于匹配到同源区段的unitigs，也不考虑.
@@ -88,21 +107,64 @@ P(x_{rs},x_{rt}|\delta_s,\delta_t)=
 \end{equation}
 $$</center>
 
-## Max-Cut求近似解
+我们分析一下这个公式，首先这是一种枚举的写法，也就是说不代表${ x_{rt}x_{rt}\delta_s\delta_t=1 }$所有情况概率的和为${ (1-\epsilon_r)/2 }$，而是一种写法，满足这个条件的等于这个概率（我个人觉得这个写法歧义很大，不是一种很好的写法）. 所以我们其实可以写成下面的样子
 
-对于上出两个优化目标(1)(2)文章用下面方法求解
+<center>$$
+\begin{equation}
+P(x_{rs},x_{rt}|\delta_s,\delta_t)=
+\begin{cases}
+(1-\epsilon_r)/2 & \text{if } x_{rt}x_{rt} =1,\delta_s\delta_t=1\\
+(1-\epsilon_r)/2 & \text{if } x_{rt}x_{rt} =-1,\delta_s\delta_t=-1\\
+\epsilon_r/2 & \text{if } x_{rt}x_{rt}=1,\delta_s\delta_t=-1\\
+\epsilon_r/2 & \text{if } x_{rt}x_{rt}=-1,\delta_s\delta_t=1\\
+\end{cases}
+\end{equation}
+$$</center>
 
-1. 对于每个unitig ${ t }$，${ \delta_t }$任取${ 1}$或${ -1 }$.
+分成这么四种情况，其中上面两种，属于Hi-C read正确桥接的情况，加起来的概率应该是${ (1-\epsilon_r) }$，而两种概率等可能，所以分别是${ (1-\epsilon_r)/2 }$，同理下面两种情况也是类似的. 当然了，也可以这么理解，比如第一种情况，${ s,t }$同相的概率是${ 1/2 }$，然后又被正确的测出来了，概率是${ (1-\epsilon_r) }$. 
 
-2.任选unitig ${ t }$，如果能提升目标函数，则反转${ \delta_t }$.
+对于公式(2)，我们可以等价的写成
 
-3.重复步骤2，直到目标函数不再优化，则达到局部最优解. 如果局部最大值好于历史最大值，则将其设为历史最大值.
+<center>$$
+P(x_{rs},x_{rt}|\delta_s,\delta_t)= \frac{1}{2} \sqrt{\epsilon_r(1-\epsilon_r)} \cdot \left(\frac{1-\epsilon_r}{\epsilon_r}\right)^{\frac{1}{2} x_{rt}x_{rt}\delta_s\delta_t}
+$$</center>
 
-4.然后将历史最优解随机反转一部分unitigs（或者反转随机某个unitigs的所有邻居）.  转到步骤2，重新求解局部最优解.
+所以我们可以写出所有unitigs的似然估计
 
-5.重复10000次步骤2-4，返回历史最优解.
+<center>$$
+\begin{align}
+\log{\mathcal{L}(\vec{\delta})} &= \sum_r \sum_{s,t} \log{P(x_{rs},x_{rt}|\delta_s,\delta_t)} \\
+&= \sum_r \sum_{s,t} \log{\frac{1}{2}} + \frac{1}{2}\log{\epsilon_r(1-\epsilon_r)}+\frac{1}{2}x_{rt}x_{rt}\delta_s\delta_t \log{\frac{1-\epsilon_r}{\epsilon_r}}\\
+&= C+\frac{1}{2} \sum_{s,t}\delta_s\delta_t \sum_r x_{rt}x_{rt} \log{\frac{1-\epsilon_r}{\epsilon_r}} \\ 
+\end{align}
+$$</center>
 
-对于步骤3，hifiasm会事先探测assembly graph中的‘bubble’区域，将其中的unitigs记录下来，分为两组，我们知道这两组unitigs sets一定来自于两个phase，如果反转到这其中某个unitigs，会将里面的unitigs一起进行操作. 为了防止错误，hifiasm在最后一轮，不使用这个策略.
+这里面${ C }$是一个与${ \vec{\delta} }$无关的变量. 我们可以设${ w_r = \log{\frac{1-\epsilon_r}{\epsilon_r}} }$，那么设
+
+<center>$$
+W_{st} = \sum_{r\in {r|x_{rs}x_{rt}=1}} w_r
+$$</center>
+
+<center>$$
+\overline{W}_{st} = \sum_{r\in {r|x_{rs}x_{rt}=-1}} w_r
+$$</center>
+
+因此我们的优化目标如下
+
+<center>$$
+\log{\mathcal{L}(\vec{\delta})} = C+\frac{1}{2} \sum_{s,t}\delta_s\delta_t (W_st - \overline{W}_{st})
+$$</center>
+
+这里有一个问题，${ \epsilon_r }$怎么求呢，hifiasm是这样做的，其认为发生这种错误的概率取决于两个mapping postion的距离，即${ \epsilon_r = \epsilon(d_r) }$，所以我们要去估计这个值. 这里假设每个unitigs是很准确的，都是haplotigs，也就是同源的. 在上面介绍的每轮优化中，根据上一轮优化确定的相位，我们将距离大约是${ d }$的Hi-C mapping聚集，统计里面错误的比例，来作为估计${ \hat{\epsilon}(d) }$. 在第一轮的时候，我们先将Hi-C read的错误率设为${ 0 }$.
+
+# Result
+
+1. HG002
+
+<p align="center">
+    <img src="hifiasm(Hi-C)/Phasing accuracy of HG002 assemblies.PNG" width="80%">
+    <br />    <small> tittle </small>
+</p>
 
 # Reference
 
