@@ -151,7 +151,7 @@ $$</center>
 因此我们的优化目标如下
 
 <center>$$
-\log{\mathcal{L}(\vec{\delta})} = C+\frac{1}{2} \sum_{s,t}\delta_s\delta_t (W_st - \overline{W}_{st})
+\log{\mathcal{L}(\vec{\delta})} = C+\frac{1}{2} \sum_{s,t}\delta_s\delta_t (W_{st} - \overline{W}_{st})
 $$</center>
 
 这里有一个问题，${ \epsilon_r }$怎么求呢，hifiasm是这样做的，其认为发生这种错误的概率取决于两个mapping postion的距离，即${ \epsilon_r = \epsilon(d_r) }$，所以我们要去估计这个值. 这里假设每个unitigs是很准确的，都是haplotigs，也就是同源的. 在上面介绍的每轮优化中，根据上一轮优化确定的相位，我们将距离大约是${ d }$的Hi-C mapping聚集，统计里面错误的比例，来作为估计${ \hat{\epsilon}(d) }$. 在第一轮的时候，我们先将Hi-C read的错误率设为${ 0 }$.
