@@ -20,7 +20,7 @@ Broadly, there are two ways to complete the goal of detecting transcriptome whil
 The first class of methods is image-based, including _in situ hybridization_ (ISH) and <i>in situ sequencing</i> (ISS). 
 
 <p align="center">
-    <img src="/post_image/Spatial_tran/History_of_ST.PNG" width="60%">
+    <img src="/post_image/Spatial_tran/History_of_ST.PNG" width="100%">
 </p>
 
 __Fig.1 Timeline of Spatial Transcriptome Technologies.[^2]__
