@@ -17,13 +17,42 @@ Why do we need ST? Single-cell RNA-seq can provide a perspective on the gene exp
 
 Broadly, there are two ways to complete the goal of detecting transcriptome while preserving location information. Actually, the development of Spatial Transcriptome technologies has lasted for decades, and there are many technologies to pursue this aim. If you are interested, move to [this review](https://www.nature.com/articles/s41592-022-01409-2) or [this blog](https://pachterlab.github.io/LP_2021/index.html) to learn more details about the history of ST.
 
-The first class of methods is image-based, including _in situ hybridization_ (ISH) and <i>in situ sequencing</i> (ISS). 
-
 <p align="center">
     <img src="/post_image/Spatial_tran/History_of_ST.PNG" width="100%">
 </p>
 
 __Fig.1 Timeline of Spatial Transcriptome Technologies.[^2]__
+
+
+The first class of methods is image-based, including _in situ hybridization_ (ISH) and <i>in situ sequencing</i> (ISS). ISH methods use gene-specific fluorophore-labeled probes to detect the number of target mRNAs that we have known their sequence, which means we can only identify a few already-known mRNAs in tissue. In terms of ISS, we use fluorophore-labeled bases to amplify transcripts in situ and obtain their sequences. This technology seems perfect for obtaining sequences and positions at the same time. But actually, the read in FISSEQ (a kind of technology of ISS) is around 5-30nt, and only 200 mRNA reads were captured per cell. Compared to it, 40,000 mRNA reads were detected in scRNA-seq.
+
+<p align="center">
+    <img src="/post_image/Spatial_tran/ST_tech.PNG" width="100%">
+</p>
+
+__Fig.2 Classes of Spatial Transcriptome Technologies.[^1]__
+
+In fact, most popular and current Spatial Transcriptome Technologies belong to sequence-based class.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 [^1]: [An introduction to spatial transcriptomics for biomedical research.](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-022-01075-1) 
 [^2]: [Museum of spatial transcriptomics](https://www.nature.com/articles/s41592-022-01409-2)
