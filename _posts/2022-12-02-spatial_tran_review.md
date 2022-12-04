@@ -6,7 +6,7 @@ tags: papers
 article_header:
   type: cover
   image: 
-    src: /post_image/Spatial_tran/cover.png width="60%"
+    src: "/post_image/Spatial_tran/cover.png" width="60%"
 ---
 
 The spatial transcriptome is a novel and cutting-edge field and can identify single-celler transcriptome and corresponding locations. This paper reviews the current statistical and machine-learning methods in Spatial transcriptome. And it's also my first paper read in this field. First, let us introduce the wet-lab technologies in this area to show what spatial transcriptome is.
