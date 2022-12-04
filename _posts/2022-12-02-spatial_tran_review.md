@@ -2,14 +2,18 @@
 layout: article
 title: Statistical and machine learning methods for spatially resolved transcriptomics data analysis
 tags: papers
+mode: immersive
 
 article_header:
-  type: overlay
+  theme: dark
+  type: cover
   image: 
     src: /post_image/Spatial_tran/cover.png
 ---
 
 The spatial transcriptome is a novel and cutting-edge field and can identify single-celler transcriptome and corresponding locations. This paper reviews the current statistical and machine-learning methods in Spatial transcriptome. And it's also my first paper read in this field. First, let us introduce the wet-lab technologies in this area to show what spatial transcriptome is.
+<!--more-->
+
 
 # Intro to Spatial Transcriptome Technologies
 
@@ -38,10 +42,10 @@ Tissue was mounted over an array, such that released mRNA was captured locally b
 
 
 <p align="center">
-    <img src="/post_image/Spatial_tran/array_based.PNG" width="100%">
+    <img src="/post_image/Spatial_tran/array_based.png" width="100%">
 </p>
 
-__Fig.2 Array-based Technologies.[^3]__
+__Fig.3 Array-based Technologies.[^3]__
 
 
 
