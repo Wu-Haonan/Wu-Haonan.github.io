@@ -3,6 +3,7 @@ layout: article
 title: Statistical and machine learning methods for spatially resolved transcriptomics data analysis
 tags: papers
 mode: immersive
+lightbox: ture
 
 article_header:
   theme: dark
