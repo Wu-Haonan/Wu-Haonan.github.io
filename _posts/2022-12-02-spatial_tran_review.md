@@ -64,7 +64,7 @@ __Fig.4 Sspatial transcriptomics data analysis workflow.[^4]__
 
 The spatial expression pattern (also called <b>S</b>patially <b>V</b>ariable <b>G</b>enes, SVGs) of a given gene can be detected using statistical or machine learning methods. For statistical methods, they identify whether the gene expression corresponds to their location. Specifically, they test whether the gene expression is independent of their distance.
 
-Another class is machine-learning, we take SpaGCN as an example.
+Another class is machine-learning, we take SpaGCN[^5] as an example.
 
 <p align="center">
     <img src="/post_image/Spatial_tran/SpaGCN.PNG" width="100%">
