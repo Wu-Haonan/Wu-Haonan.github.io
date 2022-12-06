@@ -22,7 +22,7 @@ Why do we need ST? Single-cell RNA-seq can provide a perspective on the gene exp
 Broadly, there are two ways to complete the goal of detecting transcriptome while preserving location information. Actually, the development of Spatial Transcriptome technologies has lasted for decades, and there are many technologies to pursue this aim. If you are interested, move to [this review](https://www.nature.com/articles/s41592-022-01409-2) or [this blog](https://pachterlab.github.io/LP_2021/index.html) to learn more details about the history of ST.
 
 <p align="center">
-    <img src="/post_image/Spatial_tran/History_of_ST.PNG" width="100%">
+    <img src="/post_image/Spatial_tran/History_of_ST.PNG" width="50%">
 </p>
 
 __Fig.1 Timeline of Spatial Transcriptome Technologies.[^2]__
@@ -31,7 +31,7 @@ __Fig.1 Timeline of Spatial Transcriptome Technologies.[^2]__
 The first class of methods is <b>image-based</b>, including _in situ hybridization_ (<b>ISH</b>) and <i>in situ sequencing</i> (<b>ISS</b>). ISH methods use gene-specific fluorophore-labeled probes to detect the number of target mRNAs that we have known their sequence, which means we can only identify a few already-known mRNAs in tissue. In terms of ISS, we use fluorophore-labeled bases to amplify transcripts in situ and obtain their sequences. This technology seems perfect for obtaining sequences and positions at the same time. But actually, the read in FISSEQ (a kind of technology of ISS) is around 5-30nt, and only 200 mRNA reads were captured per cell. Compared to it, 40,000 mRNA reads were detected in scRNA-seq.
 
 <p align="center">
-    <img src="/post_image/Spatial_tran/ST_tech.PNG" width="100%">
+    <img src="/post_image/Spatial_tran/ST_tech.PNG" width="50%">
 </p>
 
 __Fig.2 Classes of Spatial Transcriptome Technologies.[^1]__
@@ -44,7 +44,7 @@ In summary, spatial transcriptomics retains spatial information, but majority of
 
 
 <p align="center">
-    <img src="/post_image/Spatial_tran/array_based.png" width="50%">
+    <img src="/post_image/Spatial_tran/array_based.png" width="25%">
 </p>
 
 __Fig.3 Array-based Technologies.[^3]__
@@ -54,7 +54,7 @@ __Fig.3 Array-based Technologies.[^3]__
 In this part, I will follow the sections in the paper, showing the computational task in the process of Spatial Transcriptome data analysis.
 
 <p align="center">
-    <img src="/post_image/Spatial_tran/Fig1.PNG" width="100%">
+    <img src="/post_image/Spatial_tran/Fig1.PNG" width="50%">
 </p>
 
 __Fig.4 Sspatial transcriptomics data analysis workflow.[^4]__
@@ -64,13 +64,16 @@ __Fig.4 Sspatial transcriptomics data analysis workflow.[^4]__
 
 The spatial expression pattern (also called <b>S</b>patially <b>V</b>ariable <b>G</b>enes, SVGs) of a given gene can be detected using statistical or machine learning methods. For statistical methods, they identify whether the gene expression corresponds to their location. Specifically, they test whether the gene expression is independent of their distance.
 
-Another class is machine-learning, we take SpaGCN[^5] as an example.
+Another class is machine learning, and we take SpaGCN[^5] as an example. First, the SpaGCN constructs a graph for Spatial Transcriptome data, in which the node is locations/cells, and the edge weight is based on physical distance and histological information (which is an image and can be waived). Next, SpaGCN employs a layer of GCN to aggregate the information (gene expression vector) for each vertex via the graph. Then it utilizes an unsupervised clustering algorithm (Louvain algorithm) to identify Spatial domains. Finally, it can detect SVGs through DE analysis with target and other domain.
 
 <p align="center">
-    <img src="/post_image/Spatial_tran/SpaGCN.PNG" width="100%">
+    <img src="/post_image/Spatial_tran/SpaGCN.PNG" width="50%">
 </p>
 
 __Fig.5 SpaGCN workflow.[^5]__
+
+## Spatial clustering
+
 
 
 [^1]: [An introduction to spatial transcriptomics for biomedical research.](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-022-01075-1) 
