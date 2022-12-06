@@ -40,23 +40,41 @@ In fact, the most popular and current Spatial Transcriptome Technologies belong 
 
 Tissue was mounted over an array, such that released mRNA was captured locally by spatially-barcoded probes, converted to cDNA, and then sequenced[^1]. Actually, in human body, the diameter of cell is around 5-200 ${ \mu m }$. A disadvantage of these methods is that capture areas do not follow the complex contours of cellular morphology. Hence, cells often straddle multiple capture areas, contributing mRNA to more than one pixel. Even when capture areas are smaller than a single cell (as in HDST), they still lack single-cell resolution, since they capture mRNA merely from a single-cell-sized area. Besides, their spatial resolution and mRNA recovery rates are lower than ISH and ISS-methods. Finally, by relying on a fixed array, transcripts from different cells can be captured at the same spot, meaning that sophisticated analyses are needed to determine what cell types were present at each spot. The process of identifying and quantifying the relative contribution from each cell type in a capture spot is known as <b>deconvolution</b>[^1].
 
+In summary, spatial transcriptomics retains spatial information, but majority of the data is neither transcriptome-wide (e.g., Slide-seqV2 recovers ~ 30–50% as much transcriptomic information per capture bead as droplet-based single-cell transcriptomics from 10X Genomics[^1]) in breadth nor at cellular resolution in depth. Indeed, by leveraging both expression profiles from scRNA-seq data and spatial patterns from spatial transcriptomics data, we can transfer knowledge between the two types of data, which benefits the analysis of both data types. It has been shown that the integration of scRNA-seq and spatial transcriptomics data could improve model performance in different research areas[^4].
+
 
 <p align="center">
-    <img src="/post_image/Spatial_tran/array_based.png" width="100%">
+    <img src="/post_image/Spatial_tran/array_based.png" width="50%">
 </p>
 
 __Fig.3 Array-based Technologies.[^3]__
 
+# Overview of Spatial Transcriptome Workflow.
+
+In this part, I will follow the sections in the paper, showing the computational task in the process of Spatial Transcriptome data analysis.
+
+<p align="center">
+    <img src="/post_image/Spatial_tran/Fig1.PNG" width="100%">
+</p>
+
+__Fig.4 Sspatial transcriptomics data analysis workflow.[^4]__
 
 
+## Profiling of localized gene expression pattern
 
+The spatial expression pattern (also called <b>S</b>patially <b>V</b>ariable <b>G</b>enes, SVGs) of a given gene can be detected using statistical or machine learning methods. For statistical methods, they identify whether the gene expression corresponds to their location. Specifically, they test whether the gene expression is independent of their distance.
 
+Another class is machine-learning, we take SpaGCN as an example.
 
+<p align="center">
+    <img src="/post_image/Spatial_tran/SpaGCN.PNG" width="100%">
+</p>
 
-
-
+__Fig.5 SpaGCN workflow.[^5]__
 
 
 [^1]: [An introduction to spatial transcriptomics for biomedical research.](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-022-01075-1) 
 [^2]: [Museum of spatial transcriptomics](https://www.nature.com/articles/s41592-022-01409-2)
 [^3]: [Blog: Museum of spatial transcriptomics](https://pachterlab.github.io/LP_2021/index.html)
+[^4]: [Statistical and machine learning methods for spatially resolved transcriptomics data analysis](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-022-02653-7)
+[^5]: [SpaGCN: Integrating gene expression, spatial location and histology to identify spatial domains and spatially variable genes by graph convolutional network](https://www.nature.com/articles/s41592-021-01255-8)
