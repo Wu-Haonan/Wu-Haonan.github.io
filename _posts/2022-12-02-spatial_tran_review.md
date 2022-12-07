@@ -69,7 +69,14 @@ The spatial expression pattern (also called <b>S</b>patially <b>V</b>ariable <b>
 T = trace(E \Sigma)
 $$</center>
 
-We can treat it more intuitively. The matrix ${ E = \left[ \begin{matrix}  g_1 \\ \vdots \\ g_n \end{matrix} \right]}$ and ${ \Sigma = \left[ \begin{matrix}  s_1 & \cdots & s_n \end{matrix} \right]}$. So ${ T = \sum_i^n g_i s_i}$. Actually, ${ g_i,s_i }$ represent the Correlation between location ${ i }$ and other locations in expression level and distance, respectively. Therefore, the ${ g_i s_i }$ can represent the Correlation between the Correlation of expression level and distance. If the given gene is independent to Spatial cordianates, the ${ T }$ will be very small.
+We can treat it more intuitively. The matrix 
+<center>$$
+{ E = \left[ \begin{matrix}  g_1 \\ \vdots \\ g_n \end{matrix} \right]} \quad and \quad { \Sigma = \left[ \begin{matrix}  s_1 & \cdots & s_n \end{matrix} \right]}. 
+$$</center>
+
+
+
+So ${ T = \sum_i^n g_i s_i}$. Actually, ${ g_i,s_i }$ represent the Correlation between location ${ i }$ and other locations in expression level and distance, respectively. Therefore, the ${ g_i s_i }$ can represent the Correlation between the Correlation of expression level and distance. If the given gene is independent to Spatial cordianates, the ${ T }$ will be very small.
 
 
 Another class is machine learning, and we take SpaGCN[^6] as an example. First, the SpaGCN constructs a graph for Spatial Transcriptome data, in which the node is locations/cells, and the edge weight is based on physical distance and histological information (which is an image and can be waived). Next, SpaGCN employs a layer of GCN to aggregate the information (gene expression vector) for each vertex via the graph. Then it utilizes an unsupervised clustering algorithm (Louvain algorithm) to identify Spatial domains. Finally, it can detect SVGs through DE analysis with target and other domain.
