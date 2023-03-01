@@ -190,6 +190,40 @@ parallel_algorithm:
         url:    /2021/05/26/7_1_2.html
         
 Deep_learning:
+  - title:      Introduction to Vectors
+    children:
+      - title:  Why and  What
+        url:    /2022/01/10/Why_and_what.html
+      - title:  How/Content
+        url:    /2022/01/10/How.html
+  - title:      Pytorch与深度学习初步
+    children:
+      - title:  MLP与CNN简介
+        url:    /2022/01/10/MLP_CNN_theory.html
+      - title:  MLP与CNN实践
+        url:    /2022/01/10/MLP_CNN_code.html
+      - title:  Let's try
+        url:    /2022/01/10/pytorch_try.html
+  - title:      PyG与图神经网络
+    children:
+      - title:  GCN简介
+        url:    /2022/01/10/GCN_theory.html
+      - title:  GCN实践
+        url:    /2022/01/10/GCN_code.html
+      - title:  自编码网络
+        url:    /2022/01/10/AE_theory.html
+      - title:  VGAE实践
+        url:    /2022/01/10/VGAE_code.html
+
+Introduction_to_Algorithms:
+  - title:      Lecture 1
+    children:
+      - title:  Analysis of Algorithms, Insertion Sort, Megre Sort
+        url:    /2023/02/25/AL_Lec_1.html
+      - title:  Exercises in Lecture 1
+        url:    /2023/03/01/AL_Lec_1_ex.html
+
+Linear_Algebra:
   - title:      Foreword
     children:
       - title:  Why and  What
