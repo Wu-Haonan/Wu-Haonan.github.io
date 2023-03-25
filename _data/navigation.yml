@@ -216,13 +216,13 @@ Deep_learning:
         url:    /2022/01/10/VGAE_code.html
 
 Introduction_to_Algorithms:
-  - title:      Lecture #1
+  - title:      Lecture 1
     children:
       - title:  Analysis of Algorithms, Insertion Sort, Megre Sort
         url:    /2023/02/25/AL_Lec_1.html
       - title:  Exercises in Lecture 1
         url:    /2023/03/01/AL_Lec_1_ex.html
-  - title:      Lecture #2
+  - title:      Lecture 2
     children:
       - title:  Asymptotic Notation, Recurrences, Substitution, Master Method
         url:    /2023/03/05/AL_Lec_2.html
@@ -230,7 +230,7 @@ Introduction_to_Algorithms:
         url:    /2023/03/05/AL_Lec_2_ex.html
 
 Linear_Algebra:
-  - title:      Lecture #1
+  - title:      Lecture 1
     children:
       - title:  The Geometry of Linear Equations
         url:    /2023/02/25/LA_Lec_1.html
