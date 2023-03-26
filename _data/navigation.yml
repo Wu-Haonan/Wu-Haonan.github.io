@@ -239,6 +239,15 @@ Linear_Algebra:
       - title:  Problem Set 1
         url:    /2023/03/27/LA_Lec_1_ex.html
 
+Cherno_Cpp:
+  - title:      Learning C++ with Cherno
+    children:
+      - title:  How C++ Works
+        url:    /2023/03/26/how_cpp_works.html
+      - title:  How C++ Compiler Works
+        url:    /2023/03/26/how_complier_works.html
+      - title:  How C++ Linker Works
+        url:    /2023/03/27/how_linker_works.html
 
 layouts:
   - title: Layouts
