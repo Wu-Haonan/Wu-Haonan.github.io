@@ -230,12 +230,10 @@ Introduction_to_Algorithms:
         url:    /2023/03/05/AL_Lec_2_ex.html
 
 Linear_Algebra:
-  - title:      Lecture 1
-    children:
-      - title:  The Geometry of Linear Equations
-        url:    /2023/02/25/LA_Lec_1.html
-      - title:  Exercises in Lecture 1
-        url:    /2023/03/27/LA_Lec_1_ex.html
+  - title:  Lec 1:The Geometry of Linear Equations
+    url:    /2023/02/25/LA_Lec_1.html
+  - title:  Problem set 1
+    url:    /2023/03/27/LA_Lec_1_ex.html
 
 
 layouts:
