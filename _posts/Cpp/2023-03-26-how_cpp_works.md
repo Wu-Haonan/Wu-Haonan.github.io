@@ -177,3 +177,5 @@ Congratulations! We compile the code successfully! BUT!! WHY??
 How compiler know there is a 'Log' funtion? The "Declaration" told him.
 
 How compiler run the right code? The answer is the Linker! After we compile the two C++ file, the Linker will find the definition of 'Log' and wire it up to the main.cpp. If it can not find the definition, we will get a linking error!
+
+In the end, we will find two obj files (Log.obj and main.cpp in "Debug" folder) and one exe in that folder!
