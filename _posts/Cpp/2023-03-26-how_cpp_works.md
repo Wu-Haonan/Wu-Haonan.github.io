@@ -85,7 +85,7 @@ We can hit "ctrl + F7" to compile these C++ files. OR customize a button called 
     <br />    <small> tittle </small>
 </p>
 
-## Multiple C++ file
+## Multiple C++ files
 
 We will see what happen when we have multiple C++ file. Here we will give a simple example. In the following code, we use "Log" function to replace the "cout" funtion, in another words, "Log" function wrap the "cout" funtion. 
 
