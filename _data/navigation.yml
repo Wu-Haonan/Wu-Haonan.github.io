@@ -63,19 +63,19 @@ header:
       # @end locale config
     url: /related_link.html
     
-  - titles:
-      # @start locale config
-      en      : &EN       Category
-      en-GB   : *EN
-      en-US   : *EN
-      en-CA   : *EN
-      en-AU   : *EN
-      zh-Hans : &ZH_HANS  分类
-      zh      : *ZH_HANS
-      zh-CN   : *ZH_HANS
-      zh-SG   : *ZH_HANS
-      # @end locale config
-    url: /Category.html
+#  - titles:
+#      # @start locale config
+#      en      : &EN       Category
+#      en-GB   : *EN
+#      en-US   : *EN
+#      en-CA   : *EN
+#      en-AU   : *EN
+#      zh-Hans : &ZH_HANS  分类
+#      zh      : *ZH_HANS
+#      zh-CN   : *ZH_HANS
+#      zh-SG   : *ZH_HANS
+#      # @end locale config
+#    url: /Category.html
    
 
 
@@ -224,9 +224,15 @@ Introduction_to_Algorithms:
         url:    /2023/03/01/AL_Lec_1_ex.html
   - title:      Lecture 2
     children:
-      - title:  Asymptotic Notation, Recurrences, Substitution, Master Method
+      - title:  Asymptotic Notation; Recurrences; Substitution, Master Method
         url:    /2023/03/05/AL_Lec_2.html
       - title:  Exercises in Lecture 2
+        url:    /2023/03/05/AL_Lec_2_ex.html
+  - title:      Lecture 3
+    children:
+      - title:  Divide-and-Conquer:Strassen, Fibonacci, Polynomial Multiplication
+        url:    /2023/03/05/AL_Lec_2.html
+      - title:  Exercises in Lecture 3
         url:    /2023/03/05/AL_Lec_2_ex.html
 
 Linear_Algebra:
