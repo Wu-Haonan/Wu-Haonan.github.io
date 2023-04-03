@@ -231,9 +231,9 @@ Introduction_to_Algorithms:
   - title:      Lecture 3
     children:
       - title:  Divide-and-Conquer:Strassen, Fibonacci, Polynomial Multiplication
-        url:    /2023/03/05/AL_Lec_2.html
+        url:    /2023/04/03/AL_Lec_3.html
       - title:  Exercises in Lecture 3
-        url:    /2023/03/05/AL_Lec_2_ex.html
+        url:    /2023/04/04/AL_Lec_3_ex.html
 
 Linear_Algebra:
   - title:      Linear Algebra
