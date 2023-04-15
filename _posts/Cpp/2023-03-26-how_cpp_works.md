@@ -50,9 +50,9 @@ Actually, the return types of main is "int". However, we don't return a integer.
 
 ## cout & get()
 
-We can treat the operator "\<<" as a funtion. Here, what we do is pushing this "Hello World" string into this <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'>cout</font></span>, which will print the string to the console. Then we're pushing this "<font face="Monaco" color=green>endl</font>" (end line), which tell the console to advance to the next line.
+We can treat the operator "\<<" as a funtion. Here, what we do is pushing this "Hello World" string into this <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> cout </font></span>, which will print the string to the console. Then we're pushing this <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> endl </font></span> (end line), which tell the console to advance to the next line.
 
-The function "<font face="Monaco" color=green>cin.get()</font>" is just wait until we press ENTER before advancing to next code (here is nothing).
+The function <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> cin.get() </font></span> is just wait until we press ENTER before advancing to next code (here is nothing).
 
 # Compilation
 
@@ -87,7 +87,7 @@ We can hit "ctrl + F7" to compile these C++ files. OR customize a button called 
 
 ## Multiple C++ files
 
-We will see what happen when we have multiple C++ file. Here we will give a simple example. In the following code, we use "<font face="Monaco" color=green>Log</font>" function to replace the "cout" funtion, in another words, "<font face="Monaco" color=green>Log</font>" function wrap the "cout" funtion. 
+We will see what happen when we have multiple C++ file. Here we will give a simple example. In the following code, we use <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> Log </font></span> function to replace the "cout" funtion, in another words, <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> Log </font></span> function wrap the "cout" funtion. 
 
 {% highlight C++ linenos %}
 #include <iostream>
@@ -104,7 +104,7 @@ int main()
 }
 {% endhighlight %}
 
-The "<font face="Monaco" color=green>Log</font>" funtion take a string (called message) and print the string to the console. Here we can simply treat the "<font face="Monaco" color=green>const char*</font>" as a kind of type that can hold a string of text. Then we want to move the "<font face="Monaco" color=green>Log</font>" funtion to a new C++ file (called Log.cpp). 
+The <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> Log </font></span> funtion take a string (called message) and print the string to the console. Here we can simply treat the <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> const char* </font></span> as a kind of type that can hold a string of text. Then we want to move the <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> Log </font></span> funtion to a new C++ file (called Log.cpp). 
 
 So the Log.cpp file like this
 
@@ -134,7 +134,7 @@ int main()
 }
 {% endhighlight %}
 
-Actually, we will get a lot of errors after we compile it, because we don't write "declaration" in Log.cpp to declarate "<font face="Monaco" color=green>cout</font>" funtion.
+Actually, we will get a lot of errors after we compile it, because we don't write "declaration" in Log.cpp to declarate <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> cout </font></span> funtion.
 
 If we copy the "\#include <iostream>" into Log.cpp file we will also get error "Log is not found". Why?? That's because compiler will compile each C++ file separately. So, when compiling the main.cpp file, the compiler didn't recognize what's 'Log' is?
 
