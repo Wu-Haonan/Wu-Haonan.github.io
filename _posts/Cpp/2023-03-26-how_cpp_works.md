@@ -36,7 +36,7 @@ int main()
 
 ## Preprocessor Statement
 
-<font face="Monaco" color=red>#include \<iostream\></font> called <b>Preprocessor Statement</b>. And the first thing the compiler does for the source file is preprocessing all the "Preporcessor statements" before compilation. 
+"\#include \<iostream\>" called <b>Preprocessor Statement</b>. And the first thing the compiler does for the source file is preprocessing all the "Preporcessor statements" before compilation. 
 
 <b>What "include" do</b> is find a file called "iostream" and take all of the contents of that file and just paste it into current file. And these file we include are typically called "header files".
 
@@ -50,13 +50,13 @@ Actually, the return types of main is "int". However, we don't return a integer.
 
 ## cout & get()
 
-We can treat the operator "<<" as a funtion. Here, what we do is pushing this "Hello World" string into this "cout", which will print the string to the console. Then we're pushing this "endl" (end line), which tell the console to advance to the next line.
+We can treat the operator "\<<" as a funtion. Here, what we do is pushing this "Hello World" string into this <font face="Monaco" color=red>cout</font>, which will print the string to the console. Then we're pushing this "endl" (end line), which tell the console to advance to the next line.
 
 The function "cin.get()" is just wait until we press ENTER before advancing to next code (here is nothing).
 
 # Compilation
 
-Again, the computer will just copy all the contents from the header files (mentioned in preprocessor statement) and paste it in current file. Once the preprocessor statement have been evaluated, our file gets compiled. Our compiler will transform all of this C++ code into machine code.
+Again, the computer will just pcopy all the contents from the header files (mentioned in preprocessor statement) and paste it in current file. Once the preprocessor statement have been evaluated, our file gets compiled. Our compiler will transform all of this C++ code into machine code.
 
 ## Configuration
 
