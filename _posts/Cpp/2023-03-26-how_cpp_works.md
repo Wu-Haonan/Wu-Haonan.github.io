@@ -50,7 +50,7 @@ Actually, the return types of main is "int". However, we don't return a integer.
 
 ## cout & get()
 
-We can treat the operator "\<<" as a funtion. Here, what we do is pushing this "Hello World" string into this <span style="background-color: #0d0d0d"><font face="Monaco" color=#87CEFA>cout</font></span>, which will print the string to the console. Then we're pushing this "<font face="Monaco" color=green>endl</font>" (end line), which tell the console to advance to the next line.
+We can treat the operator "\<<" as a funtion. Here, what we do is pushing this "Hello World" string into this <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'>cout</font></span>, which will print the string to the console. Then we're pushing this "<font face="Monaco" color=green>endl</font>" (end line), which tell the console to advance to the next line.
 
 The function "<font face="Monaco" color=green>cin.get()</font>" is just wait until we press ENTER before advancing to next code (here is nothing).
 
