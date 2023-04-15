@@ -104,7 +104,9 @@ int main()
 }
 {% endhighlight %}
 
-The <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; Log &thinsp;</font></span> funtion take a string (called message) and print the string to the console. Here we can simply treat the <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; const char* &thinsp;</font></span> as a kind of type that can hold a string of text. Then we want to move the <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; Log &thinsp;</font></span> funtion to a new C++ file (called Log.cpp). 
+The <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; Log &thinsp;</font></span> funtion take a string (called message) and print the string to the console. 
+
+Here we can simply treat the <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; const char* &thinsp;</font></span> as a kind of type that can hold a string of text. Then we want to move the <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; Log &thinsp;</font></span> funtion to a new C++ file (called Log.cpp). 
 
 So the Log.cpp file like this
 
@@ -134,7 +136,7 @@ int main()
 }
 {% endhighlight %}
 
-Actually, we will get a lot of errors after we compile it, because we don't write "declaration" in Log.cpp to declarate <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; cout &thinsp;</font></span> funtion.
+Actually, we will get a lot of errors after we compile it, that is because we don't write "declaration" in Log.cpp to declarate <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; cout &thinsp;</font></span> funtion.
 
 If we copy the "\#include <iostream>" into Log.cpp file we will also get error "Log is not found". Why?? That's because compiler will compile each C++ file separately. So, when compiling the main.cpp file, the compiler didn't recognize what's 'Log' is?
 
