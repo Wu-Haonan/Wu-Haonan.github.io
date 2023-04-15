@@ -12,7 +12,7 @@ I will follow the video of Cherno to learn C++. The notes of the video will be o
 
 This blog is going to introduce how C++ works. How C++ process a source file (a text file) to an executable binary file. The workflow of writting a C++ program is: 
 
-series C++ source files --Compiler--> binary file
+<b>series C++ source files</b> <i>--Compiler--></i> <b>binary file</b>
 
 Let's check it on Visual Studio (VS).
 
@@ -36,7 +36,7 @@ int main()
 
 ## Preprocessor Statement
 
-"\#include \<iostream\>" called <b>Preprocessor Statement</b>. And the first thing the compiler does for the source file is preprocessing all the "Preporcessor statements" before compilation. 
+<front face=Monaco color=red>\#include \<iostream\></front> called <b>Preprocessor Statement</b>. And the first thing the compiler does for the source file is preprocessing all the "Preporcessor statements" before compilation. 
 
 <b>What "include" do</b> is find a file called "iostream" and take all of the contents of that file and just paste it into current file. And these file we include are typically called "header files".
 
@@ -56,7 +56,7 @@ The function "cin.get()" is just wait until we press ENTER before advancing to n
 
 # Compilation
 
-Again, the computer will just pcopy all the contents from the header files (mentioned in preprocessor statement) and paste it in current file. Once the preprocessor statement have been evaluated, our file gets compiled. Our compiler will transform all of this C++ code into machine code.
+Again, the computer will just copy all the contents from the header files (mentioned in preprocessor statement) and paste it in current file. Once the preprocessor statement have been evaluated, our file gets compiled. Our compiler will transform all of this C++ code into machine code.
 
 ## Configuration
 
