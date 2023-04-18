@@ -119,7 +119,7 @@ INTEGER Multiply(int a, int b)
 Here we can change our property and get the preprocessing file. Like the following figure,
 
 <p align="center">
-    <img src="/post_image/cpp/Preprocess_to_file.png" width="70%">
+    <img src="/post_image/cpp/Preprocess_to_file.png" width="60%">
 </p>
 
 And open the "Math.i" in our folder, we will find all the "INTGER"s are replaced with "int".
@@ -195,7 +195,7 @@ So, let's convert it to a more readable form. We can also hit "Property" here an
 And, then you will find "Math.asm" file in our "Debug" folder. Which is basically a readable result if what the object file contains. Let's check the critical part of this file.
 
 <p align="center">
-    <img src="/post_image/cpp/Asm_multiply.png" width="70%">
+    <img src="/post_image/cpp/Asm_multiply.png" width="60%">
 </p>
 
 [-> 1]. Move variable <b>a</b> to "eax"
@@ -225,3 +225,62 @@ After we compile it, "Math.asm" will also change as below, which only need two s
 
 # Optimization
 
+We will find, there are a lot of code in our asm file. That's because we don't use optimization in debug mode. Here we can temporarily change our "property" as follow to use optimization during compilation.
+
+First, we set "Maximum Optimization (Favor Speed) (/O2)" in "Optimization" under "Debug" configuration shown as below
+
+<p align="center">
+    <img src="/post_image/cpp/optimization_max_speed.png" width="60%">
+</p>
+
+If we just compile it now, we will have error, so we have to change another place. We need to set "Default" in "Basic Runtime Checks" at "Code Generation" item.
+
+<p align="center">
+    <img src="/post_image/cpp/Basic_Runtime_Checks.png" width="60%">
+</p>
+
+Then if we compile it, we will find the "Math.asm" file is quite simple than before.
+
+Here we will take another different example, here the funtion don't take any input and just return 5*2. 
+
+{% highlight C++ linenos %}
+//Math.cpp
+
+int Multiply()
+{
+	return 5 * 2;
+}
+{% endhighlight %}
+
+Let's compile it and check the "Math.asm" file. It just moves 10 to our "eax" <b>register</b>, which store our return value. So, the opimization just simplified our "5*2" as "10".
+
+<p align="center">
+    <img src="/post_image/cpp/return_10.PNG" width="70%">
+</p>
+
+Let's take another example, we add "Log" funtion here.
+
+{% highlight C++ linenos %}
+//Math.cpp
+
+const char* Log(const char* message) 
+{
+	return message;
+}
+
+int Multiply(int a, int b)
+{
+	Log("Multiply");
+	return a * b;
+}
+{% endhighlight %}
+
+After compilation, we find the <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; Log &thinsp;</font></span> function is just move "message" to eax register.
+
+And move to <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; Multiply &thinsp;</font></span> funtion, we find what it do, is just to <b>call</b> <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; Log &thinsp;</font></span> function before multiplication.
+
+<p align="center">
+    <img src="/post_image/cpp/Log_Multiply.png" width="60%">
+</p>
+
+Here, we notice the "Log" function in asm file is decorated with a string of complex charcters and signs. That is actually the <b>function signature</b>, which is used to uniquely define our funtion, we will talk more about it in the following blog about "Linking".
