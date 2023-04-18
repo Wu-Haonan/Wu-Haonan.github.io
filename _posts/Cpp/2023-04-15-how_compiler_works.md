@@ -73,9 +73,9 @@ During the pre-processing stage, the compiler will basically go through all of o
 
 ## \#include
 
-First, we take a look at one of the most common preprocessor statement -- <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; # include &thinsp;</font></span>.
+First, we take a look at one of the most common preprocessor statement -- <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; #include &thinsp;</font></span>.
 
-<span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; # include &thinsp;</font></span> is exactly really simple, the preprocessor will just open the file that we include, <b>read</b> all its contents and <b>paste</b> it into the file where we wrote <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; # include &thinsp;</font></span>.
+<span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; #include &thinsp;</font></span> is exactly really simple, the preprocessor will just open the file that we include, <b>read</b> all its contents and <b>paste</b> it into the file where we wrote <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; #include &thinsp;</font></span>.
 
 To prove that, we can take an example. 
 
@@ -86,7 +86,7 @@ We add a header file called "EndBrace.h" in our project, and only type a "\}" in
 }
 {% endhighlight %}
 
-And, then go back to our Math.cpp file, and replace the closing curly bracket with <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; # include "EndBrace.h" &thinsp;</font></span>. 
+And, then go back to our Math.cpp file, and replace the closing curly bracket with <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; #include "EndBrace.h" &thinsp;</font></span>. 
 
 {% highlight C++ linenos %}
 //Math.cpp
@@ -98,11 +98,11 @@ int Multiply(int a, int b)
 #include "EndBrace.h"
 {% endhighlight %}
 
-We use "Ctrl+F7" to compile it, and it compile successfully. So, what <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; # include &thinsp;</font></span> does is just to copy and paste all the contents in our specified file.
+We use "Ctrl+F7" to compile it, and it compile successfully. So, what <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; #include &thinsp;</font></span> does is just to copy and paste all the contents in our specified file.
 
 ## \#define
 
-We can try another example, use <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; # define &thinsp;</font></span> to replace "INTGER" with "int". Actually, what <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; # define &thinsp;</font></span> does it just read all the code in our file and replace all the first "word" with following "word".
+We can try another example, use <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; #define &thinsp;</font></span> to replace "INTGER" with "int". Actually, what <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; #define &thinsp;</font></span> does it just read all the code in our file and replace all the first "word" with following "word".
 
 {% highlight C++ linenos %}
 //Math.cpp
@@ -119,11 +119,65 @@ INTEGER Multiply(int a, int b)
 Here we can change our property and get the preprocessing file. Like the following figure,
 
 <p align="center">
-    <img src="/post_image/cpp/Preprocess_to_file.png" width="80%">
+    <img src="/post_image/cpp/Preprocess_to_file.png" width="70%">
 </p>
 
 And open the "Math.i" in our folder, we will find all the "INTGER"s are replaced with "int".
 
 <p align="center">
     <img src="/post_image/cpp/Math_i.png" width="80%">
+</p>
+
+# \#if
+
+The preprocessor <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; #If &thinsp;</font></span> can let us exclude or include code based on a give condition. If we write <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; #If 1 &thinsp;</font></span>, that means the condition is always true. 
+
+{% highlight C++ linenos %}
+//Math.cpp
+
+#if 1
+
+int Multiply(int a, int b)
+{
+	int result = a * b;
+	return result;
+}
+
+#endif
+{% endhighlight %}
+
+After compilation, we can check our preprocessor file, which looks excatly like the result without <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; #If 1 &thinsp;</font></span> statement.
+
+If we turn off here with <span style="background-color: #0d0d0d"><font face="Monaco" color='#87CEFA'> &thinsp; #If 0 &thinsp;</font></span>
+
+{% highlight C++ linenos %}
+//Math.cpp
+
+#if 0
+
+int Multiply(int a, int b)
+{
+	int result = a * b;
+	return result;
+}
+
+#endif
+{% endhighlight %}
+
+The preprocessor file "Math.i" is like this, and our code was disabled.
+
+<p align="center">
+    <img src="/post_image/cpp/Math_i_hash_if.PNG" width="70%">
+</p>
+
+Ok, that's all about preprocessor, if intersted, you can check the preprocessor file after adding "\#include \<iostream\>". You will find the preprocessor file will become so large, that's because, "\<iostream\>" has a lot of content and also include other files.
+
+# Obj file 
+
+Now, let's change back the setting of "property". And compile our cpp file again, we will get "Math.obj" in the folder. Let's check what's inside in our obj file. But <b>unfortunately</b>, it's a binary file, and we can not understand it directly.
+
+So, let's convert it to a more readable form. We can also hit "Property" here and set the "Assembler Output" to "Assembly-Only Listing (/FA)"
+
+<p align="center">
+    <img src="/post_image/cpp/Assembler_Output.png" width="70%">
 </p>
