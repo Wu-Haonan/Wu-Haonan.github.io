@@ -176,8 +176,52 @@ Ok, that's all about preprocessor, if intersted, you can check the preprocessor 
 
 Now, let's change back the setting of "property". And compile our cpp file again, we will get "Math.obj" in the folder. Let's check what's inside in our obj file. But <b>unfortunately</b>, it's a binary file, and we can not understand it directly.
 
+{% highlight C++ linenos %}
+//Math.cpp
+
+int Multiply(int a, int b)
+{
+	int result = a * b;
+	return result;
+}
+{% endhighlight %}
+
 So, let's convert it to a more readable form. We can also hit "Property" here and set the "Assembler Output" to "Assembly-Only Listing (/FA)"
 
 <p align="center">
     <img src="/post_image/cpp/Assembler_Output.png" width="70%">
 </p>
+
+And, then you will find "Math.asm" file in our "Debug" folder. Which is basically a readable result if what the object file contains. Let's check the critical part of this file.
+
+<p align="center">
+    <img src="/post_image/cpp/Asm_multiply.png" width="70%">
+</p>
+
+[-> 1]. Move variable <b>a</b> to "eax"
+
+[-> 2]. Let "eax" multiply variable <b>b</b>. 
+
+[-> 3]. Then move "eax" to variable <b>result</b>
+
+[-> 4]. Move <b>result</b> back to "eax" to return it.
+
+We find Step 3 and 4 actully are redundant. This is also a example why we need optimization during compilation. If we change our code as
+
+{% highlight C++ linenos %}
+//Math.cpp
+
+int Multiply(int a, int b)
+{
+	return a * b;
+}
+{% endhighlight %}
+
+After we compile it, "Math.asm" will also change as below, which only need two steps.
+
+<p align="center">
+    <img src="/post_image/cpp/Aem_multiply_optim.png" width="70%">
+</p>
+
+# Optimization
+
