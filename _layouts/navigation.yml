@@ -190,7 +190,7 @@ parallel_algorithm:
         url:    /2021/05/26/7_1_2.html
         
 Deep_learning:
-  - title:      Introduction to Vectors
+  - title:      Introduction
     children:
       - title:  Why and  What
         url:    /2022/01/10/Why_and_what.html
@@ -238,8 +238,6 @@ Introduction_to_Algorithms:
     children:
       - title:  Quicksort, Randomized Algorithms
         url:    /2023/05/11/AL_Lec_4.html
-      - title:  Exercises in Lecture 4
-        url:    /2023/05/13/AL_Lec_4_ex.html
 
 Linear_Algebra:
   - title:      Linear Algebra
