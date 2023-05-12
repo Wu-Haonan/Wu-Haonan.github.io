@@ -62,23 +62,7 @@ header:
       zh-SG   : *ZH_HANS
       # @end locale config
     url: /related_link.html
-    
-#  - titles:
-#      # @start locale config
-#      en      : &EN       Category
-#      en-GB   : *EN
-#      en-US   : *EN
-#      en-CA   : *EN
-#      en-AU   : *EN
-#      zh-Hans : &ZH_HANS  分类
-#      zh      : *ZH_HANS
-#      zh-CN   : *ZH_HANS
-#      zh-SG   : *ZH_HANS
-#      # @end locale config
-#    url: /Category.html
    
-
-
 docs-en:
   - title:      Start
     children:
@@ -190,7 +174,7 @@ parallel_algorithm:
         url:    /2021/05/26/7_1_2.html
         
 Deep_learning:
-  - title:      Introduction to Vectors
+  - title:      Introduction
     children:
       - title:  Why and  What
         url:    /2022/01/10/Why_and_what.html
@@ -234,6 +218,10 @@ Introduction_to_Algorithms:
         url:    /2023/04/03/AL_Lec_3.html
       - title:  Exercises in Lecture 3
         url:    /2023/04/04/AL_Lec_3_ex.html
+  - title:      Lecture 4
+    children:
+      - title:  Quicksort, Randomized Algorithms
+        url:    /2023/05/11/AL_Lec_4.html
 
 Linear_Algebra:
   - title:      Linear Algebra
