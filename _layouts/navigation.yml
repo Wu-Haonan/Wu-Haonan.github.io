@@ -1,0 +1,293 @@
+header:
+  - titles:
+      # @start locale config
+      en      : &EN       Archive
+      en-GB   : *EN
+      en-US   : *EN
+      en-CA   : *EN
+      en-AU   : *EN
+      zh-Hans : &ZH_HANS  归档
+      zh      : *ZH_HANS
+      zh-CN   : *ZH_HANS
+      zh-SG   : *ZH_HANS
+      zh-Hant : &ZH_HANT  歸檔
+      zh-TW   : *ZH_HANT
+      zh-HK   : *ZH_HANT
+      ko      : &KO       아카이브
+      ko-KR   : *KO
+      fr      : &FR       Archives
+      fr-BE   : *FR
+      fr-CA   : *FR
+      fr-CH   : *FR
+      fr-FR   : *FR
+      fr-LU   : *FR
+      # @end locale config
+    url: /archive.html
+
+  - titles:
+      # @start locale config
+      en      : &EN       About me
+      en-GB   : *EN
+      en-US   : *EN
+      en-CA   : *EN
+      en-AU   : *EN
+      zh-Hans : &ZH_HANS  关于
+      zh      : *ZH_HANS
+      zh-CN   : *ZH_HANS
+      zh-SG   : *ZH_HANS
+      zh-Hant : &ZH_HANT  關於
+      zh-TW   : *ZH_HANT
+      zh-HK   : *ZH_HANT
+      ko      : &KO       소개
+      ko-KR   : *KO
+      fr      : &FR       À propos
+      fr-BE   : *FR
+      fr-CA   : *FR
+      fr-CH   : *FR
+      fr-FR   : *FR
+      fr-LU   : *FR
+      # @end locale config
+    url: /about.html
+    
+  - titles:
+      # @start locale config
+      en      : &EN       Related Link
+      en-GB   : *EN
+      en-US   : *EN
+      en-CA   : *EN
+      en-AU   : *EN
+      zh-Hans : &ZH_HANS  相关链接
+      zh      : *ZH_HANS
+      zh-CN   : *ZH_HANS
+      zh-SG   : *ZH_HANS
+      # @end locale config
+    url: /related_link.html
+    
+#  - titles:
+#      # @start locale config
+#      en      : &EN       Category
+#      en-GB   : *EN
+#      en-US   : *EN
+#      en-CA   : *EN
+#      en-AU   : *EN
+#      zh-Hans : &ZH_HANS  分类
+#      zh      : *ZH_HANS
+#      zh-CN   : *ZH_HANS
+#      zh-SG   : *ZH_HANS
+#      # @end locale config
+#    url: /Category.html
+   
+
+
+docs-en:
+  - title:      Start
+    children:
+      - title:  Quick Start
+        url:    /docs/en/quick-start
+      - title:  Structure
+        url:    /docs/en/structure
+      - title:  Update from 1.x to 2.x
+        url:    /docs/en/update-from-1-to-2
+  - title:      Customization
+    children:
+      - title:  Configuration
+        url:    /docs/en/configuration
+      - title:  Navigation
+        url:    /docs/en/navigation
+      - title:  Layouts
+        url:    /docs/en/layouts
+      - title:  Logo and Favicon
+        url:    /docs/en/logo-and-favicon
+      - title:  Authors
+        url:    /docs/en/authors
+      - title:  Internationalization
+        url:    /docs/en/i18n
+  - title:      Content
+    children:
+      - title:  Writing Posts
+        url:    /docs/en/writing-posts
+      - title:  Additional Styles
+        url:    /docs/en/additional-styles
+      - title:  Extensions
+        url:    /docs/en/extensions
+      - title:  Markdown Enhancements
+        url:    /docs/en/markdown-enhancements
+  - title:      Extra
+    children:
+      - title:  Spacing
+        url:    /docs/en/spacing
+      - title:  Grid
+        url:    /docs/en/grid
+      - title:  Icons
+        url:    /docs/en/icons
+      - title:  Image
+        url:    /docs/en/image
+      - title:  Button
+        url:    /docs/en/button
+      - title:  Item
+        url:    /docs/en/item
+      - title:  Card
+        url:    /docs/en/card
+      - title:  Hero
+        url:    /docs/en/hero
+      - title:  Swiper
+        url:    /docs/en/swiper
+  - title:      Languages
+    children:
+      - title:  中文
+        url:    /docs/zh/quick-start
+
+
+docs-zh:
+  - title:      开始
+    children:
+      - title:  快速开始
+        url:    /docs/zh/quick-start
+      - title:  从 1.x 升级到 2.x
+        url:    /docs/zh/update-from-1-to-2
+  - title:      定制
+    children:
+      - title:  配置
+        url:    /docs/zh/configuration
+      - title:  导航栏
+        url:    /docs/zh/navigation
+      - title:  布局
+        url:    /docs/zh/layouts
+      - title:  Logo 和 Favicon
+        url:    /docs/zh/logo-and-favicon
+      - title:  作者
+        url:    /docs/zh/authors
+      - title:  国际化
+        url:    /docs/zh/i18n
+  - title:      内容
+    children:
+      - title:  撰写博客
+        url:    /docs/zh/writing-posts
+      - title:  附加样式
+        url:    /docs/zh/additional-styles
+      - title:  扩展
+        url:    /docs/zh/extensions
+      - title:  Markdown 增强
+        url:    /docs/zh/markdown-enhancements
+  - title:      其他语言
+    children:
+      - title:  English
+        url:    /docs/en/quick-start
+
+math:
+  - title:      第一章
+    children:
+      - title:  第一节
+        url:    
+
+parallel_algorithm:
+  - title:      7.1 无约束优化问题的并行算法
+    url:        /2021/05/26/parallel_algorithm.html
+    children:
+      - title:  7.1.1 无约束问题的并行变量分配算法
+        url:    /2021/05/26/7_1_1.html
+      - title:  7.1.2 同步运算的并行变量转化算法
+        url:    /2021/05/26/7_1_2.html
+        
+Deep_learning:
+  - title:      Introduction to Vectors
+    children:
+      - title:  Why and  What
+        url:    /2022/01/10/Why_and_what.html
+      - title:  How/Content
+        url:    /2022/01/10/How.html
+  - title:      Pytorch与深度学习初步
+    children:
+      - title:  MLP与CNN简介
+        url:    /2022/01/10/MLP_CNN_theory.html
+      - title:  MLP与CNN实践
+        url:    /2022/01/10/MLP_CNN_code.html
+      - title:  Let's try
+        url:    /2022/01/10/pytorch_try.html
+  - title:      PyG与图神经网络
+    children:
+      - title:  GCN简介
+        url:    /2022/01/10/GCN_theory.html
+      - title:  GCN实践
+        url:    /2022/01/10/GCN_code.html
+      - title:  自编码网络
+        url:    /2022/01/10/AE_theory.html
+      - title:  VGAE实践
+        url:    /2022/01/10/VGAE_code.html
+
+Introduction_to_Algorithms:
+  - title:      Lecture 1
+    children:
+      - title:  Analysis of Algorithms, Insertion Sort, Megre Sort
+        url:    /2023/02/25/AL_Lec_1.html
+      - title:  Exercises in Lecture 1
+        url:    /2023/03/01/AL_Lec_1_ex.html
+  - title:      Lecture 2
+    children:
+      - title:  Asymptotic Notation; Recurrences; Substitution, Master Method
+        url:    /2023/03/05/AL_Lec_2.html
+      - title:  Exercises in Lecture 2
+        url:    /2023/03/06/AL_Lec_2_ex.html
+  - title:      Lecture 3
+    children:
+      - title:  Divide-and-Conquer:Strassen, Fibonacci, Polynomial Multiplication
+        url:    /2023/04/03/AL_Lec_3.html
+      - title:  Exercises in Lecture 3
+        url:    /2023/04/04/AL_Lec_3_ex.html
+  - title:      Lecture 4
+    children:
+      - title:  Quicksort, Randomized Algorithms
+        url:    /2023/05/12/AL_Lec_4.html
+      - title:  Exercises in Lecture 4
+        url:    /2023/04/04/AL_Lec_3_ex.html
+
+Linear_Algebra:
+  - title:      Linear Algebra
+    children:
+      - title:  Lec 1:The Geometry of Linear Equations
+        url:    /2023/02/25/LA_Lec_1.html
+      - title:  Lec 2:Elimination with Matrices
+        url:    /2023/03/26/LA_Lec_2.html
+      - title:  Problem Set 1
+        url:    /2023/03/27/LA_Lec_1_ex.html
+
+Cherno_Cpp:
+  - title:      Learning C++ with Cherno
+    children:
+      - title:  How C++ Works
+        url:    /2023/03/26/how_cpp_works.html
+      - title:  How C++ Compiler Works
+        url:    /2023/04/15/how_compiler_works.html
+      - title:  How C++ Linker Works
+        url:    /2023/03/27/how_linker_works.html
+
+layouts:
+  - title: Layouts
+    children:
+      - title:  Single
+        url:    /page/single.html
+      - title:  Aside
+        url:    /page/aside.html
+      - title:  Sidebar
+        url:    /page/sidebar.html
+
+      - title:  Sidebar (Aside)
+        url:    /page/sidebar-aside.html
+      - title:  Article Header Overlay Background Fill
+        url:    /page/article-header-overlay-background-fill.html
+      - title:  Article Header Overlay Background Image
+        url:    /page/article-header-overlay-background-image.html
+
+      - title:  Article Header Image
+        url:    /page/article-header-cover-image.html
+      - title:  Article Header Overlay Background Image (Customized Header Background)
+        url:    /page/article-header-overlay-background-image-header-background.html
+      - title:  Article Header Image (Customized Header Background)
+        url:    /page/article-header-cover-image-header-background.html
+
+      - title:  Article Header Overlay Background Fill (Immersive + Translucent Header)
+        url:    /page/article-header-overlay-background-fill-immersive-translucent-header.html
+      - title:  Article Header Overlay Background Image (Immersive + Translucent Header)
+        url:    /page/article-header-overlay-background-image-immersive-translucent-header.html
+      - title:  Article Header Image (Immersive + Translucent Header)
+        url:    /page/article-header-cover-image-immersive-translucent-header.html
