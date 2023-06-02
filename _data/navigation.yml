@@ -222,6 +222,8 @@ Introduction_to_Algorithms:
     children:
       - title:  Quicksort, Randomized Algorithms
         url:    /2023/05/11/AL_Lec_4.html
+      - title:  Exercises in Lecture 4
+        url:    /2023/06/02/AL_Lec_4_ex.html
 
 Linear_Algebra:
   - title:      Linear Algebra
