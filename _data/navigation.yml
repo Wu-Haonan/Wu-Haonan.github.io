@@ -48,7 +48,7 @@ header:
       fr-LU   : *FR
       # @end locale config
     url: /about.html
-    
+
   - titles:
       # @start locale config
       en      : &EN       Related Link
@@ -62,7 +62,7 @@ header:
       zh-SG   : *ZH_HANS
       # @end locale config
     url: /related_link.html
-   
+
 docs-en:
   - title:      Start
     children:
@@ -162,7 +162,7 @@ math:
   - title:      第一章
     children:
       - title:  第一节
-        url:    
+        url:
 
 parallel_algorithm:
   - title:      7.1 无约束优化问题的并行算法
@@ -172,7 +172,7 @@ parallel_algorithm:
         url:    /2021/05/26/7_1_1.html
       - title:  7.1.2 同步运算的并行变量转化算法
         url:    /2021/05/26/7_1_2.html
-        
+
 Deep_learning:
   - title:      Introduction
     children:
@@ -224,6 +224,12 @@ Introduction_to_Algorithms:
         url:    /2023/05/11/AL_Lec_4.html
       - title:  Exercises in Lecture 4
         url:    /2023/06/02/AL_Lec_4_ex.html
+
+Introduction_to_Computer_Systems:
+  - title:      Lecture 1
+    children:
+      - title:  Course Overview
+        url:    /2023/06/08/ICS_Lec_1.html
 
 Linear_Algebra:
   - title:      Linear Algebra
