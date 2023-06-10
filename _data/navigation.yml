@@ -226,10 +226,13 @@ Introduction_to_Algorithms:
         url:    /2023/06/02/AL_Lec_4_ex.html
 
 Introduction_to_Computer_Systems:
-  - title:      Lecture 1
+  - title:      Introduction to Computer Systems (CS:APP)
     children:
       - title:  Course Overview
         url:    /2023/06/08/ICS_Lec_1.html
+      - title:  Bits, Bytes, & Integers I
+        url:    /2023/06/09/ICS_Lec_2.html
+
 
 Linear_Algebra:
   - title:      Linear Algebra
