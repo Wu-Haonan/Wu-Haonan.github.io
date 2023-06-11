@@ -4,7 +4,7 @@ ul.toc {
   color: $text-color;
   list-style-type: none;
   & > li {
-    margin: map-get($spacers, 1) / 2 0;
+    margin: map-get($spacers, 10) / 2 0;
     a {
       display: inline-block;
       margin: map-get($spacers, 1) / 4 0;
