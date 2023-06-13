@@ -3,7 +3,7 @@
     margin: map-get($spacers, 4) 0;
   }
   .pagination__menu {
-    max-width: 3000px;
+    max-width: 120%;
     @include overflow(auto);
   }
   .pagination__omit {
