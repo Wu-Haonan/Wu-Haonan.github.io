@@ -75,7 +75,7 @@ html,
 .page__sidebar {
   z-index: map-get($z-indexes, sidebar);
   display: block;
-  width: 80%;
+  width: 100%;
   max-width: map-get($layout, sidebar-width);
   height: 100%;
   background-color: $background-color;
