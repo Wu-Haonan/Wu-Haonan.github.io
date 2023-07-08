@@ -224,6 +224,12 @@ Introduction_to_Algorithms:
         url:    /2023/05/11/AL_Lec_4.html
       - title:  Exercises in Lecture 4
         url:    /2023/06/02/AL_Lec_4_ex.html
+  - title:      Lecture 5
+    children:
+      - title:  Linear-time Sorting:Lower Bounds, Counting Sort, Radix Sort
+        url:    /2023/07/08/AL_Lec_5.html
+      - title:  Exercises in Lecture 5
+        url:    /2023/07/09/AL_Lec_5_ex.html
 
 Introduction_to_Computer_Systems:
   - title:      Introduction to Computer Systems (CS:APP)
