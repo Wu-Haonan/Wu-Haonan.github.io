@@ -250,6 +250,18 @@ Linear_Algebra:
       - title:  Problem Set 1
         url:    /2023/03/27/LA_Lec_1_ex.html
 
+Algorithm_Design_and_Analysis:
+  - title:      Algorithm Design and Analysis
+    children:
+        - title:  Lec 1:XXX
+          url:    /2023/08/21/ADA_Lec_1.html
+
+Linear_Programming:
+  - title:      Linear Programming
+    children:
+        - title:  Lec 1:XXX
+          url:    /2023/08/21/LP_Lec_1.html
+
 Cherno_Cpp:
   - title:      Learning C++ with Cherno
     children:
