@@ -255,15 +255,16 @@ Algorithm_Design_and_Analysis:
     children:
       - title:  Lec 1 Dynamic Programming:Weighted Work Scheduling
         url:    /2023/08/21/ADA_Lec_1.html
-    children:
       - title:  Lec 2 Dynamic Programming:Knapsack Problem, Fibonacci number
         url:    /2023/08/23/ADA_Lec_2.html
 
 Linear_Programming:
   - title:        Linear Programming
     children:
-      - title:  Lec 1:XXX
+      - title:  Lec 1:Introuction to Linear Programming
         url:    /2023/08/21/LP_Lec_1.html
+      - title:  Lec 2:General form, Standard form
+        url:    /2023/08/23/LP_Lec_2.html
 
 Cherno_Cpp:
   - title:      Learning C++ with Cherno
