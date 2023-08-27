@@ -257,6 +257,8 @@ Algorithm_Design_and_Analysis:
         url:    /2023/08/21/ADA_Lec_1.html
       - title:  Lec 2 Dynamic Programming:Knapsack Problem, Fibonacci number
         url:    /2023/08/23/ADA_Lec_2.html
+      - title:  Lec 3 Dynamic Programming:RNA Secondary Problem
+        url:    /2023/08/28/ADA_Lec_3.html
 
 Linear_Programming:
   - title:        Linear Programming
@@ -265,6 +267,9 @@ Linear_Programming:
         url:    /2023/08/21/LP_Lec_1.html
       - title:  Lec 2:General form, Standard form
         url:    /2023/08/23/LP_Lec_2.html
+      - title:  Lec 3:Piecewise linear convex objective funvctions
+        url:    /2023/08/25/LP_Lec_3.html
+
 
 Cherno_Cpp:
   - title:      Learning C++ with Cherno
