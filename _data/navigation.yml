@@ -257,8 +257,11 @@ Algorithm_Design_and_Analysis:
         url:    /2023/08/21/ADA_Lec_1.html
       - title:  Lec 2 Dynamic Programming:Knapsack Problem, Fibonacci number
         url:    /2023/08/23/ADA_Lec_2.html
-      - title:  Lec 3 Dynamic Programming:RNA Secondary Problem
+      - title:  Lec 3 Dynamic Programming:RNA Secondary Problem, Squence Alignment, Mutiple Sequence Alignment
         url:    /2023/08/28/ADA_Lec_3.html
+      - title:  Lec 4 Max Flow and Min Cut
+        url:    /2023/08/30/ADA_Lec_4.html
+
 
 Linear_Programming:
   - title:        Linear Programming
