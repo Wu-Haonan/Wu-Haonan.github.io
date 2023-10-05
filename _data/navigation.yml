@@ -267,8 +267,10 @@ Algorithm_Design_and_Analysis:
         url:    /2023/09/11/ADA_Lec_6.html
       - title:  Lec 7 Applications of Max flow
         url:    /2023/09/13/ADA_Lec_7.html
-      - title:  Lec 8 Hardness of Probelms
+      - title:  Lec 8 Polynomial Reduction
         url:    /2023/09/18/ADA_Lec_8.html
+      - title:  Lec 9 NP, NP-Complete Problems
+        url:    /2023/09/20/ADA_Lec_9.html
 
 
 Linear_Programming:
