@@ -44,7 +44,7 @@ Keep record each PRF state (used or not)
 
 * Update the free list 
 
-<details><summary>Example</summary>
+Example:
 
 lw \$t0, 0 (\$s1)
 
@@ -80,7 +80,6 @@ Update p5 whcih is not available.
 
 Note: reg in [] is over-written reg.
 
-</details>
 
 ### When can we make Reg free again
 
