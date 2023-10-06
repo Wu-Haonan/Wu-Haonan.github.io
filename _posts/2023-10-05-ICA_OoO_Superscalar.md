@@ -27,7 +27,7 @@ registers (PhysicalRegFile, PRF).
 
 ### Map Table
 
-For each architected register, we record the physical register that curretly represent this ARF. (In this class, we assume the initial map table have already assign each ARF \$si with a PRF \$pi.)
+For each architected register, we record the physical register that curretly represent this ARF. (In this class, we assume the initial map table have already assign each ARF \\$si with a PRF \\$pi.)
 
 ### Free List
 
@@ -46,9 +46,9 @@ Keep record each PRF state (used or not)
 
 Example:
 
-lw \$t0, 0 (\$s1)
+lw \\$t0, 0 (\\$s1)
 
-addu \$t0, \$t0, \$s2
+addu \\$t0, \\$t0, \\$s2
 
 mapping table 
 
@@ -58,7 +58,7 @@ mapping table
 
 Let's rename above instrs one by one.
 
-Inst 1: lw \$t0, 0 (\$s1) --> lw p4, 0(p1) [p3]
+Inst 1: lw \\$t0, 0 (\\$s1) --> lw p4, 0(p1) [p3]
 
 mapping table 
 
@@ -68,7 +68,7 @@ mapping table
 
 Update p4 whcih is not available.
 
-Inst 2: addu \$t0, \$t0, \$s2 --> addu p5, p4, p2 [p4]
+Inst 2: addu \\$t0, \\$t0, \\$s2 --> addu p5, p4, p2 [p4]
 
 mapping table 
 
