@@ -124,10 +124,16 @@ Here we introduce a new list called <b>"Ready Table"</b> to record whether a PRF
 Holds all instructions (in order) until Commit time. Recived dispatch the instrs,
 
 |PC|Instr| PReg | AReg | Over-written | Complete| Store/Brach |
-
 XXX0| lw |p4|t0|p3|y| |
-
 XXX1| addu |p5|t0|p4|y| |
+
+### Load-Store Queue (LSQ)
+
+We store lw/sw instr in LSQ as follow
+
+|Instr | Src | R | Address Reg | R | Dst |
+|lw| | y |p1| n | p4 |
+|sw| p5 | n | p1 | n||
 
 # Issue (Out of Order)
 
@@ -154,11 +160,15 @@ update PRF ready status
 
 # Execution (Out of Order)
 
-Just excute the instrs issued.
+Just excute the instrs issued. 
+
+update LSQ for src and address ready status.
 
 # Writeback (Out of Order)
 
 Writeback (Out Of Order - OoO): When the dst value has been computed it is written back to the PRF, the IQ, ROB and LSQ are updated – the instr <b>completes</b> execution. 
+
+update ROB for completed Instrs.
 
 Note: Stores DO NOT write to cache at this stage, and the ARF is NOT updated
 
@@ -168,8 +178,14 @@ Commit the instr in order, that means the oldest completed instr in ROB can be c
 
 In Commit stage, we update ARF and store value to memory.
 
-### Re-Order buffer (ROB)
+1. Release the first instr in <b>ROB</b> , if it <b>completed</b>.
 
+2. Copy physical dst reg to archi dst reg.
 
+3. Free list update over-written Reg as free
 
 ### Load-Store Queue (LSQ)
+
+4. Stores are committed to the DM from the LSQ in program order at commit time (when they are at the head of the ROB);
+
+5. Oldest load is “issued” for execution out of the LSQ to the DM
