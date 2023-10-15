@@ -298,6 +298,14 @@ Linear_Programming:
         url:    /2023/09/18/LP_Lec_10.html
       - title:  Review of Midterm 1
         url:    /2023/09/28/LP_mid_1.html
+      - title:  Lec 11:Degeneracy
+        url:    /2023/09/25/LP_Lec_11.html
+      - title:  Lec 12:Existence of extreme points
+        url:    /2023/10/02/LP_Lec_12.html
+      - title:  Lec 13:Lecture 13:Optimality and extreme points
+        url:    /2023/10/09/LP_Lec_13.html
+      - title:  Lec 14:The simplex algorithm
+        url:    /2023/10/13/LP_Lec_14.html
 
 
 Cherno_Cpp:
