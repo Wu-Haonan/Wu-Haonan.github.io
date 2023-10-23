@@ -271,6 +271,12 @@ Algorithm_Design_and_Analysis:
         url:    /2023/09/18/ADA_Lec_8.html
       - title:  Lec 9 NP, NP-Complete Problems
         url:    /2023/09/20/ADA_Lec_9.html
+      - title:  Lec 10 Linear Programming and Its Dual Problem
+        url:    /2023/09/25/ADA_Lec_10.html
+      - title:  Lec 11 Introduction to Approximate algorithm
+        children:
+          - title:  Approximaion Algorithm
+            url:    /2023/09/27/ADA_Lec_11.html
 
 
 Linear_Programming:
