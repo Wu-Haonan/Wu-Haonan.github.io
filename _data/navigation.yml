@@ -275,16 +275,14 @@ Algorithm_Design_and_Analysis:
         url:    /2023/09/25/ADA_Lec_10.html
       - title:  Lec 11 Intro Appro Alg:Definition and LP techniques
         url:    /2023/09/27/ADA_Lec_11.html
-      - title:  Lec 12 Intro Appro Alg:Deterministic Rounding Alg
+      - title:  Lec 12 Intro Appro Alg:Rounding and Dual Rounding
         url:    /2023/10/02/ADA_Lec_12.html
-      - title:  Lec 13 Intro Appro Alg:Rounding a dual solution
+      - title:  Lec 13 Intro Appro Alg:The primal-dual method
         url:    /2023/10/04/ADA_Lec_13.html
-      - title:  Lec 14 Intro Appro Alg:The primal-dual method
-        url:    /2023/10/09/ADA_Lec_14.html
       - title:  Lec 14 Intro Appro Alg:A gready algorithm
-        url:    /2023/10/11/ADA_Lec_15.html
+        url:    /2023/10/19/ADA_Lec_14.html
       - title:  Lec 15 Intro Appro Alg:A randomized rounding Alg
-        url:    /2023/10/16/ADA_Lec_16.html
+        url:    /2023/10/11/ADA_Lec_15.html
 
 Linear_Programming:
   - title:        Linear Programming
