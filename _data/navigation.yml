@@ -283,6 +283,18 @@ Algorithm_Design_and_Analysis:
         url:    /2023/10/09/ADA_Lec_14.html
       - title:  Lec 15 Intro Appro Alg:A randomized rounding Alg
         url:    /2023/10/11/ADA_Lec_15.html
+      - title:  Lec 16 Gready Alg and Local Search:Single Macine Job Scheduling
+        url:    /2023/10/16/ADA_Lec_16.html
+      - title:  Lec 17 Gready Alg and Local Search:The k-center problem
+        url:    /2023/10/18/ADA_Lec_17.html
+      - title:  Lec 18 Gready Alg and Local Search:Parallel Macines Job Scheduling
+        url:    /2023/10/23/ADA_Lec_18.html
+      - title:  Lec 19 Gready Alg and Local Search:Min-degree Spanning Tree
+        url:    /2023/10/25/ADA_Lec_19.html
+      - title:  Lec 20 Rounding and Dynamic Programming:Parallel Macines Job Scheduling
+        url:    /2023/10/30/ADA_Lec_20.html
+      - title:  Lec 21 Rounding and Dynamic Programming:The Bin-Packing problem
+        url:    /2023/11/01/ADA_Lec_21.html
 
 Linear_Programming:
   - title:        Linear Programming
