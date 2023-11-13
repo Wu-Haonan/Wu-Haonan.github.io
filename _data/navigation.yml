@@ -327,8 +327,12 @@ Linear_Programming:
         url:    /2023/10/02/LP_Lec_12.html
       - title:  Lec 13:Optimality and extreme points
         url:    /2023/10/09/LP_Lec_13.html
-      - title:  Lec 14:The simplex algorithm
+      - title:  Lec 14:Optimality of a basic feasible solution
         url:    /2023/10/13/LP_Lec_14.html
+      - title:  Lec 15:Develo of simplex algorithm
+        url:    /2023/10/20/LP_Lec_15.html
+      - title:  Lec 16:implementation of simplex algorithm
+        url:    /2023/10/27/LP_Lec_16.html
 
 
 Cherno_Cpp:
