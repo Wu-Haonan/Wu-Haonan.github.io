@@ -297,13 +297,13 @@ Algorithm_Design_and_Analysis:
         url:    /2023/11/01/ADA_Lec_21.html
       - title:  Lec 22 Randomized Algs:Randomized QuickSort
         url:    /2023/11/06/ADA_Lec_22.html
-      - title:  Lec 22 Randomized Algs:Randomized Min-Cut
+      - title:  Lec 23 Randomized Algs:Randomized Min-Cut
         url:    /2023/11/08/ADA_Lec_23.html
-      - title:  Lec 22 Randomized Algs:Occupancy Problems & Markov's and Chebyshev's inequalities
+      - title:  Lec 24 Randomized Algs:Occupancy Problems & Markov's and Chebyshev's inequalities
         url:    /2023/11/13/ADA_Lec_24.html
-      - title:  Lec 22 Randomized Algs:Randomized Selection
+      - title:  Lec 25 Randomized Algs:Randomized Selection
         url:    /2023/11/15/ADA_Lec_25.html
-      - title:  Lec 22 Randomized Algs:Chernoff Bound
+      - title:  Lec 26 Randomized Algs:Chernoff Bound
         url:    /2023/11/20/ADA_Lec_26.html
 
 Linear_Programming:
