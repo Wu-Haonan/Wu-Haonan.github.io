@@ -1,3 +1,4 @@
+---
 layout: article
 titles:
   # @start locale config
