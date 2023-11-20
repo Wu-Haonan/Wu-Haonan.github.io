@@ -1,5 +1,4 @@
----
-layout: article
+Scholarlayout: article
 titles:
   # @start locale config
   en      : &EN       Related Link
@@ -14,6 +13,8 @@ titles:
   # @end locale config
 key: page-Related Link
 ---
+
+Google Scholar: [Google Scholar page](https://scholar.google.com/citations?user=5I_-Lb0AAAAJ&hl=zh-CN)
 
 My CSDN Blog: [CSDN link](https://blog.csdn.net/weixin_42472706/)
 
