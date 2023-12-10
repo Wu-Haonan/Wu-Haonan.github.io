@@ -9,7 +9,7 @@ sidebar:
 
 ---
 
-This blog, I will post my proof about the expectation of absolute distance in Random walk is ${\theta(\sqrt{i})}$ at ${i}$th step. 
+This blog, I will post my proof about the expectation of absolute distance in Random walk is ${\Theta(\sqrt{i})}$ at ${i}$th step. 
 
 <!--more-->
 
