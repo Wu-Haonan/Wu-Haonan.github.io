@@ -149,7 +149,7 @@ $$
 \end{equation} 
 $$
 
-# **Theorem 1**: $\mathbb{E}[H_i] = \theta(\sqrt{i})$.
+# **Theorem 1**: $\mathbb{E}[H_i] = \Theta(\sqrt{i})$.
 
 **Proof.** 
 
