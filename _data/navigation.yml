@@ -305,6 +305,10 @@ Algorithm_Design_and_Analysis:
         url:    /2023/11/15/ADA_Lec_25.html
       - title:  Lec 26 Randomized Algs:Chernoff Bound
         url:    /2023/11/20/ADA_Lec_26.html
+      - title:  Lec 27 Randomized Algs:Permutation Routing Problem
+        url:    /2023/11/22/ADA_Lec_27.html
+      - title:  Lec 28 Randomized Algs:Derandomization
+        url:    /2023/11/27/ADA_Lec_28.html
 
 Linear_Programming:
   - title:        Linear Programming
