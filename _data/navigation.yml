@@ -343,6 +343,16 @@ Linear_Programming:
         url:    /2023/10/20/LP_Lec_15.html
       - title:  Lec 16:Implementation of simplex algorithm
         url:    /2023/10/27/LP_Lec_16.html
+      - title:  Lec 17:Anticycling
+        url:    /2023/10/30/LP_Lec_17.html
+      - title:  Lec 18:Initial basic feasible solution
+        url:    /2023/11/01/LP_Lec_18.html
+      - title:  Lec 19:Duality--Dual Problem
+        url:    /2023/11/03/LP_Lec_19.html
+      - title:  Lec 20:Duality--Duality Theory
+        url:    /2023/11/06/LP_Lec_20.html
+      - title:  Lec 21:Farkas' Lemma
+        url:    /2023/11/08/LP_Lec_21.html
 
 
 Cherno_Cpp:
