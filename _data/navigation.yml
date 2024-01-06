@@ -251,7 +251,7 @@ Linear_Algebra:
         url:    /2023/03/27/LA_Lec_1_ex.html
 
 Algorithm_Design_and_Analysis:
-  - title:        Algorithm Design and Analysis
+  - title:      Algorithm Design and Analysis
     children:
       - title:  Lec 1 Dynamic Programming:Weighted Work Scheduling
         url:    /2023/08/21/ADA_Lec_1.html
@@ -309,7 +309,7 @@ Algorithm_Design_and_Analysis:
         url:    /2023/11/22/ADA_Lec_27.html
 
 Linear_Programming:
-  - title:        Linear Programming
+  - title:      Linear Programming
     children:
       - title:  Lec 1:Introuction to Linear Programming
         url:    /2023/08/21/LP_Lec_1.html
@@ -354,6 +354,12 @@ Linear_Programming:
       - title:  Lec 21:Farkas' Lemma
         url:    /2023/11/08/LP_Lec_21.html
 
+
+Fundamental_Algorithm:
+  - title:      Fundamental ALgorithm
+    children:
+      - title:  Prerequisite:Logic and Number Theory
+        url:    /2024/01/06/FA_01.html
 
 Cherno_Cpp:
   - title:      Learning C++ with Cherno
