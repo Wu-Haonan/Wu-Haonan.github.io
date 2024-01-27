@@ -361,6 +361,17 @@ Fundamental_Algorithm:
       - title:  Prerequisite:Logic and Number Theory
         url:    /2024/01/06/FA_01.html
 
+Bioinformatic_Algorithm:
+  - title:      Bioinformatic Algorithm
+    children:
+      - title:  Lecture 1. Knuth-Morris-Pratt (KMP) algorithm
+        url:    /2024/01/08/BA_Lec_01.html
+      - title:  Lecture 2. Aho–Corasick algorithm
+        url:    /2024/01/15/BA_Lec_02.html
+        
+
+
+
 Cherno_Cpp:
   - title:      Learning C++ with Cherno
     children:
