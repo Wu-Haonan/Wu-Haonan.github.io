@@ -366,8 +366,12 @@ Bioinformatic_Algorithm:
     children:
       - title:  Lecture 1. Knuth-Morris-Pratt (KMP) algorithm
         url:    /2024/01/08/BA_Lec_01.html
-      - title:  Lecture 2. Aho–Corasick algorithm
+      - title:  Extra topic 1. Palindrome and Manacher algorithm
+        url:    /2024/01/10/BA_Ext_01.html
+      - title:  Lecture 2. Trie and Aho–Corasick algorithm
         url:    /2024/01/15/BA_Lec_02.html
+      - title:  Lecture 3. Suffix Trie and Suffix Tree
+        url:    /2024/01/22/BA_Lec_03.html
         
 
 
