@@ -1,6 +1,6 @@
 ---
 layout: article
-title: The Backpack Quotient Filter: a dynamic and space-efficient data structure for querying k-mers with abundance
+title: The Backpack Quotient Filter： a dynamic and space-efficient data structure for querying k-mers with abundance
 tags: papers
 
 ---
@@ -44,7 +44,7 @@ Before diving into the Backpack Quotient Filter (BQF) proposed in this paper, le
 <p align="center">
     <img src="/post_image/BQF/QF.png" width="60%">
 </p>
-
+Basically, the idea is if we have an element, say a $k$-mer, 
 
 # Method
 
