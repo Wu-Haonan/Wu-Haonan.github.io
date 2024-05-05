@@ -42,7 +42,7 @@ Before diving into the Backpack Quotient Filter (BQF) proposed in this paper, le
 
 
 <p align="center">
-    <img src="/post_image/BQF/QF.png" width="60%">
+    <img src="/post_image/BQF/QF.jpg" width="60%">
 </p>
 Basically, the idea is if we have an element, say a $k$-mer, 
 
