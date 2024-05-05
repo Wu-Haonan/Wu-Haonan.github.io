@@ -78,8 +78,9 @@ The above two metadata bits of all the slots form two binary vector called *occu
 Thus, we can get the end of runs with quotient $i$, $\textbf{Select}(runends, \textbf{Rank}(occupied,i))$. To do it efficiently, we can define this shifting distance as *Offset* and store the information. To pursue a better trade-off between space and speed, QF are divided into blocks of 64 slots. QF uses 64 bits integer to store the offset of the first slot in block as checkpoint. 
 
 <p align="center">
-    <img src="/post_image/BQF/QF_offset.jpg" width="100%">
+    <img src="/post_image/BQF/QF_offset.png" width="100%">
 </p>
+
 
 __Fig. 2 rank and select.__
 
@@ -95,14 +96,14 @@ t &= \textbf{Select}(runends[i+Offset(i)+1,2^q-1],d) \\
 \end{equation}
 $$
 
-The above calculation can be virtualized as below
+The above calculation can be virtualized as below Fig. 3
 
 <p align="center">
-    <img src="/post_image/BQF/Block_offset.jpg" width="80%">
+    <img src="/post_image/BQF/Block_offset.PNG" width="80%">
 </p>
 
 
-__Fig. 2 Procedure for computing offset $O_j$ given $O_i$[^1].__
+__Fig. 3 Procedure for computing offset $O_j$ given $O_i$[^1].__
 
 
 
