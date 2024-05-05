@@ -1,6 +1,6 @@
 ---
 layout: article
-title: Locality-preserving minimal perfect hashing of k-mers
+title: The Backpack Quotient Filter: a dynamic and space-efficient data structure for querying k-mers with abundance
 tags: papers
 
 ---
@@ -40,6 +40,10 @@ Before diving into the Backpack Quotient Filter (BQF) proposed in this paper, le
 1. $h_0(x)$, quotient of fingerprint (hash value): it maps to an address in the table, and the corresponding slot called "**canonical slot**". 
 2. $h_1(x)$, remainder of fingerprint: we try to store $h_1(x)$ in some slot of table. 
 
+
+<p align="center">
+    <img src="/post_image/BQF/QF.png" width="60%">
+</p>
 
 
 # Method
