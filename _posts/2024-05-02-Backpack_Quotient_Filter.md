@@ -5,7 +5,7 @@ tags: papers
 
 ---
 
-This paper proposes a novel data structure, Backpack Quotient Filter (BQF), to index $k$-mer. which support querying with efficient space and negligible false positive rate. 
+This paper proposes a novel data structure, Backpack Quotient Filter (BQF), to index $k$-mer. which support querying with efficient space and negligible false positive rate. Additionally, this blog will introduce Counting Quotient Filter (CQF)[^1] at first, to lead a better understanding of this work. 
 
 <!--more-->
 
@@ -33,7 +33,7 @@ Data structures covered in these tools.
 
 3. Quotient Filter: dynamicity; Counting Quotient Filter (CQF) can retrieve the absence and abundance. But requiring a lot of space. 
 
-# Quotient Filter (QF) and Counting QF (CQF)
+# Quotient Filter (QF) and Counting QF
 
 ## Preliminaries
 
@@ -46,16 +46,16 @@ Before diving into the Backpack Quotient Filter (BQF) proposed in this paper, le
     <img src="/post_image/BQF/QF.jpg" width="100%">
 </p>
 
-__Fig.1 Quotient Filter[^1].__
+__Fig.1 Quotient Filter[^2].__
 
 Basically, the idea is if we have an element, say a $k$-mer $x$, we calculate $h_0(x)$, i.e. the canonical slot and try to  store $h_1(x)$. If the slot is empty, we are fine. But in most cases, it's occupied. How does this happen? 
 
 1. hard collision: two distinct elements have the same hash value. We avoid this by using a prefect hash function. 
 2. soft collision: It is inherent to quotient filters. A soft collision occurs when two distinct elements x and y have different hashes but the same quotient: $h_0(x) = h_0(y)$.
 
-## Insert and Run
+## Rank-Select Scheme
 
-To address this collision, we have to shift the reminder into next slots. In other words, elements with same quotient are stored consecutively in the table, which form a "**run**" (showed in a same color in above figure). Inside a run, the QF guarantee the remainders are stored in ascending order. 
+To address this collision, we have to shift the reminder into next slots. In other words, elements with same quotient are stored consecutively in the table, which form a "**run**" (shown in a same color in above figure). Inside a run, the QF guarantee the remainders are stored in ascending order. 
 
 ### Metadata bits
 
@@ -75,7 +75,7 @@ The above two metadata bits of all the slots form two binary vector called *occu
 1. $\textbf{Rank}(occupieds,i)$: counting the number $d$ of runs that present before $i$, i.e. counting the number of $1$ in vector *occupieds* before $i$.  
 2. $\textbf{Select}(runends, d)$: find the position of $d^\text{th}$ $1$ in vector *runends*. 
 
-Thus, we can get the end of runs with quotient $i$, $\textbf{Select}(runends, \textbf{Rank}(occupied,i))$. To do it efficiently, we can define this shifting distance as *Offset* and store the information. To pursue a better trade-off between space and speed, QF are divided into blocks of 64 slots. QF uses 64 bits integer to store the offset of the first slot in block as checkpoint. 
+Thus, we can get the end of runs with quotient $i$, $\textbf{Select}(runends, \textbf{Rank}(occupied,i))$. To do it efficiently, we can define this shifting distance as *Offset* and store the information. To pursue a better trade-off between space and speed, QF are divided into blocks of 64 slots. QF uses 64 bits integer to store the offset of the first slot in block as checkpoint. (The metadata will be $3$ bits per slot. In origin CQF paper, they set 8 bits integer for *Offset*.)
 
 <p align="center">
     <img src="/post_image/BQF/QF_offset.png" width="100%">
@@ -99,13 +99,27 @@ $$
 The above calculation can be virtualized as below Fig. 3
 
 <p align="center">
-    <img src="/post_image/BQF/Block_offset.PNG" width="80%">
+    <img src="/post_image/BQF/Block_offset.PNG" width="60%">
 </p>
 
 
 __Fig. 3 Procedure for computing offset $O_j$ given $O_i$[^1].__
 
+## Lookup and Insertion
 
+If we want look up a query element if it's in the QF, we first call above rank-select scheme to get the position of the end of the run. Then, trace back to look at if we have same reminder in the table (shown in Fig. 2). 
+
+For insertion, basically, we use the same logic to do. But, we may need to jump several times to find an empty slot and shift remainders  to make a room for new one. 
+
+The details of above two algorithms can be found in CQF paper[^1].
+
+## Counting Quotient Filter
+
+If we hope to support the abundance query for $k$-mers, we modify above QF to Counting Quotient Filter (CQF). In general, CQF can store abundance information or remainder for each slot. The encoding way is shown in below table.
+
+<p align="center">
+    <img src="/post_image/BQF/AB_encode.PNG" width="60%">
+</p>
 
 # Method
 
@@ -118,3 +132,4 @@ The number of $k$-mers existing in two sequences provides a metric to measure th
 
 
 [^1]: [Prashant Pandey, Michael A. Bender, Rob Johnson, and Rob Patro. A General-Purpose Counting Filter: Making Every Bit Count. *In Proceedings of the 2017 ACM International Conference on Management of Data, SIGMOD ’***17**, pages 775–787, New York, NY, USA, 2017. Association for Computing Machinery.](https://dl.acm.org/doi/abs/10.1145/3035918.3035963).
+[^2]: [The Backpack Quotient Filter: a dynamic and space-efficient data structure for querying *k*-mers with abundance](https://www.biorxiv.org/content/10.1101/2024.02.15.580441v1.full)
