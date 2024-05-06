@@ -11,19 +11,19 @@ This paper proposes a novel data structure, Backpack Quotient Filter (BQF), to i
 
 # Motivation
 
-**Problem Definition: if a sequence is present or absent and, even better their abundance.** 
+**Problem Definition: if a sequence is present or absent in a database, even better their abundance.** 
 
 But it's hard to achieve for a huge database. 
 
-$\Rightarrow$ So we have to do pseudo-alignment (only reporting present or not without coordinates on genome). Like, Kallisto.
+$\Rightarrow$ So we have to do **pseudo-alignment** (only reporting present or not without coordinates on genome). Like, Kallisto.
 
-$\Rightarrow$ "Threshold" pseudo-alignment: at least a fixed fraction $\tau$ of the $k$-mers are found in that genome. Like, Bifrost.  In other words, these tools break down queried seqs into $k$-mers; and compare them against datasets (organized as colored Bruijn graph). 
+$\Rightarrow$ **"Threshold" pseudo-alignment**: at least a fixed fraction $\tau$ of the $k$-mers are found in that genome. Like, Bifrost. In other words, these tools break down queried seqs into $k$-mers; and compare them against datasets (organized as colored Bruijn graph). 
 
 But the graph construction is limitation. 
 
 $\Rightarrow$ If allow false-positive, some tools use Approximate Membership Queries (AMQ) data structure. Trade off between size and false-positive rate. 
 
-**Problem Definition: if a $k$-mer is present or absent and, even better their abundance.** 
+**Problem Definition: if a $k$-mer is present or absent in a database, even better their abundance.** 
 
 Data structures covered in these tools. 
 
@@ -37,7 +37,7 @@ Data structures covered in these tools.
 
 ## Preliminaries
 
-Before diving into the Backpack Quotient Filter (BQF) proposed in this paper, let's first take a look of Quotient filter (QF) and Count Quotient Filter (CQF) [^1]. A QF is a table with $2^q$ slots, each of fixed size $r$, where $q,r$ are defined by user. Given a hash function $h$ that hashes each element to a integer of $q+r$ bits, we can split $h(x)$ to two functions, i.e. $h_0(x)$ of $q$ bits, called "**quotient**"  and $h_1(x)$ of $r$ bits, called "**remainder**". 
+Before diving into the Backpack Quotient Filter (BQF) proposed in this paper, let's first take a look at Quotient filter (QF) and Count Quotient Filter (CQF) [^1]. A QF is a table with $2^q$ slots, each of fixed size $r$, where $q,r$ are defined by user. Given a hash function $h$ that hashes each element to a integer of $q+r$ bits, we can split $h(x)$ into two functions, i.e. $h_0(x)$ of $q$ bits, called "**quotient**"  and $h_1(x)$ of $r$ bits, called "**remainder**". 
 
 1. $h_0(x)$, quotient of fingerprint (hash value): it maps to an address in the table, and the corresponding slot called "**canonical slot**". 
 2. $h_1(x)$, remainder of fingerprint: we try to store $h_1(x)$ in some slot of table. 
@@ -50,8 +50,8 @@ __Fig.1 Quotient Filter[^2].__
 
 Basically, the idea is if we have an element, say a $k$-mer $x$, we calculate $h_0(x)$, i.e. the canonical slot and try to  store $h_1(x)$. If the slot is empty, we are fine. But in most cases, it's occupied. How does this happen? 
 
-1. hard collision: two distinct elements have the same hash value. We avoid this by using a prefect hash function. 
-2. soft collision: It is inherent to quotient filters. A soft collision occurs when two distinct elements x and y have different hashes but the same quotient: $h_0(x) = h_0(y)$.
+1. **Hard collision**: two distinct elements have the same hash value. We avoid this by using a prefect hash function. 
+2. **Soft collision**: It is inherent to quotient filters. A soft collision occurs when two distinct elements x and y have different hashes but the same quotient: $h_0(x) = h_0(y)$.
 
 ## Rank-Select Scheme
 
@@ -59,7 +59,7 @@ To address this collision, we have to shift the reminder into next slots. In oth
 
 ### Metadata bits
 
-Thus, above operations lead to another problem, that is even the first element of a run $x_\text{first}$ maybe not locate in $h_0(x_\text{first})$, because upstream runs could occupy this canonical slot. To keep track of the shifting   distance, we assign two bits metadata. 
+Thus, above operations lead to another problem, that is even the first element of a run $x_\text{first}$ maybe not locate in $h_0(x_\text{first})$, because upstream runs could occupy this canonical slot. To keep track of the **shifting   distance**, we assign two bits metadata. 
 
 - The *occupied* bit determines whether a slot is a canonical slot for some inserted element, whose remainder could be shifted and located elsewhere. 
 - The *runend* bit indicates whether a slot stores a remainder that is at the end of a run. In this
@@ -154,7 +154,7 @@ By doing so, the size of hash integer is $2s$ instead of $2k$. If we keep $q$ as
 ## Compared Performance
 
 <p align="center">
-    <img src="/post_image/BQF/benchmark.PNG" width="60%">
+    <img src="/post_image/BQF/benchmark.PNG" width="90%">
 </p>
 
 Notice:
@@ -178,7 +178,7 @@ To guarantee acceptable false positive rate,  we need $s \geq 17$. We will find 
 ## Effect of the number of elements
 
 <p align="center">
-    <img src="/post_image/BQF/effect_of_number.PNG" width="60%">
+    <img src="/post_image/BQF/effect_of_number.PNG" width="90%">
 </p>
 
 __Fig. 5: Effect of the number of elements on the size and space efficiency[^1].__
