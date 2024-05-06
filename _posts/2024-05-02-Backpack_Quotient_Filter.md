@@ -107,27 +107,96 @@ __Fig. 3 Procedure for computing offset $O_j$ given $O_i$[^1].__
 
 ## Lookup and Insertion
 
-If we want look up a query element if it's in the QF, we first call above rank-select scheme to get the position of the end of the run. Then, trace back to look at if we have same reminder in the table (shown in Fig. 2). 
+If we want look up a query element if it's in the QF, we first call above rank-select scheme to get the position of the end of the run. Then, trace back to look at if we have same reminder in the table (shown in Fig. 2). If $occupieds[h_0(x)]=0$, we can directly return false.
 
 For insertion, basically, we use the same logic to do. But, we may need to jump several times to find an empty slot and shift remainders  to make a room for new one. 
 
-The details of above two algorithms can be found in CQF paper[^1].
+The details of above two algorithms can be found in CQF paper[^1]. The above data structure is called  **rank-and-select-based quotient filter (RSQF)**. We should noticed that RSQF supports enumerating all the hash values in the filter, and hence can be resized by building a new table with $2^{q+\delta}$ slots, each with a remainder of size $r-\delta$ bits, and then inserting all the hashes from the old filter into the new one.
 
 ## Counting Quotient Filter
 
-If we hope to support the abundance query for $k$-mers, we modify above QF to Counting Quotient Filter (CQF). In general, CQF can store abundance information or remainder for each slot. The encoding way is shown in below table.
+If we hope to support the abundance query for $k$-mers, we modify above QF to Counting Quotient Filter (CQF). In general, CQF can store abundance information or remainder for each slot. The encoding rules are shown in below table.
 
 <p align="center">
     <img src="/post_image/BQF/AB_encode.PNG" width="60%">
 </p>
 
-# Method
+Basically, we use use two remainders as boundary and encode count use middle slots. We should notice that, we cannot use $0$ and remainder $x$ in each slot to eliminate ambiguity. In other word, we use $1,2,\cdots,x-1,x+1,\cdots,2^r-1$ to encode base $2^r-2$ for each middle slot and pad $0$ before significant bit $c_{\ell-1}$ (that is because the logic of CQF checking abundance information is judge if the remainder is increasing, otherwise we know the following slot will be encoding of count.)
 
-## Preliminaries 
+Here are three examples to help understanding. 
 
-### pseudo-alignment
+1. Remainder $0$ has 5 copies. Then, we encode $5-3=2$ as abundance information, i.e. $\underline{0,2,0}$.
+2. Remainder $9$ has 8 copies. Then, we encode $9-2=7$ as abundance information, i.e. $\underline{9,7,9}$.
+3. Remainder $3$ has 7 copies. Then, we encode $7-2=5$ as abundance information, but $5>3$, so in fact here we use $6$ to encode $5$, and we need to pad $0$ i.e. $\underline{3,0,6,3}$.
 
-The number of $k$-mers existing in two sequences provides a metric to measure the similarity between them, leading to the so called pseudo-alignment
+# Method of BQF
+
+BQF uses a xorshift hash function, producing numbers between $0$ and $2^{2k}$ for every $k$-mer, which is a Perfect Hash Function and reversible.
+
+## Storing abundance
+
+Instead of using above complicated encoding in CQF. BQF just add extra $c$ bits for each slot to store abundance, which adding $c\times 2^q$ bits. 
+
+## Reducing the space usage
+
+If we use PHF to store $k$-mers, the QF can have exact quires. To make better space usage, BQF will sacrifice performance. Specifically, we store all the $s$-mer rather than $k$-mer, and report present when all the $s$-mers of a given $k$-mer are exists in filter. 
+
+Correspondingly, we store the abundance of $s$-mer in $c$ bits mentioned before. We know the abundance of a $k$-mer is at most the minimum abundance of the $s$-mers. BQF will report this value as the abundance of the query $k$-mer. 
+
+By doing so, the size of hash integer is $2s$ instead of $2k$. If we keep $q$ as same, then each slot will decrease $2(k-s)$ bits.  This modification will **lost the feature of enumerating $k$-mers, but still support resizing filter**, comparing to CQF mentioned in last chapter.  The influence of decreasing $s$ are 
+
+1. Increase False positive rate
+2. Increase the number of indexed element. We will add $k-s$ additional elements per sequence. 
+3. Decreasing $2^q \times 2(k-s)$ bits. 
+
+# Results
+
+## Compared Performance
+
+<p align="center">
+    <img src="/post_image/BQF/benchmark.PNG" width="60%">
+</p>
+
+Notice:
+
+1. pre-processing time: the time used to obtain the correct input file from the raw compressed fastq file. 
+2. $k=32,s=19,c=5$ set for Counting Bloom Filter, CQF, BQF.
+3. **Positive queries** in a dataset $D$ are $k$-mers from $D$ itself. **Negative queries** are $k$-mers from
+   randomly generated sequences. 
+4. CBF size was set to be the same as BQF’s,
+
+## Impact of $s$
+
+<p align="center">
+    <img src="/post_image/BQF/impact_of_s.PNG" width="60%">
+</p>
+
+__Fig. 4 Impact of $s$ in an Illumina sequencing dataset (seawater34M)[^1].__
+
+To guarantee acceptable false positive rate,  we need $s \geq 17$. We will find the number of $s$-mer is decrease. In theoretical, we know the conflict effect of decreasing $s$ mentioned before. But we observe the decreasing of "bits per element" empirically. The red curve and orange curve correspond to half-fill BQF and 95%-full BQF, respectively. 
+
+## Effect of the number of elements
+
+<p align="center">
+    <img src="/post_image/BQF/effect_of_number.PNG" width="60%">
+</p>
+
+__Fig. 5: Effect of the number of elements on the size and space efficiency[^1].__
+
+We should noticed that the peaks in Fig. 5(B) get lower while the data structure size doubles. Because the slots are one bit shorter after each resize. 
+
+# Thoughts
+
+Main contribution is use $s$-mer rather than $k$-mer. It's a trade-off between space and false positive rate and also sacrifice the accuracy of abundance. 
+
+What could be better?
+
+1. Choosing $c$ bits to encoding abundance, if we could employ the properties to have better space usage. Because, the remainder in a run is increase, if we can have better encoding? 
+2. If we have some "locality-preserving" hash function (not MPHF), the neighbors of $k$-mer will store together, if we can compress the abundance, because neighbors could have similar count. 
+
+
+
+
 
 
 
