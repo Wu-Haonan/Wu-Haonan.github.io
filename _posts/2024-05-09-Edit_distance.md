@@ -177,8 +177,29 @@ $$
 
 
 <p align="center">
-    <img src="/post_image/Edit_distance/Corallary_22.png" width="100%">
+    <img src="/post_image/Edit_distance/Corollary_22.png" width="100%">
 </p>
+
+**Corollary 22.** Consider the following random process, which we denote $\mathcal{P}$: we choose $i_1 < n - k \ln n$, sample $(s_1, s_2, \epsilon) \sim ID(n)$, and then choose an arbitrary $i_2$ such that $|i_2 - f_{\ast}(i_1)| \leq k \ln n$ and $i_2$ is at least $k \ln n$ less than the length of $s_2$. Let $s_1'$ denote the string consisting of bits $i_1$ to $i_1 + k \ln n - 1$ of $s_1$ and $s_2'$ the string consisting of bits $i_2$ to $i_2 + k \ln n - 1$ of $s_2$. Then for any $i_2$ we choose satisfying the above conditions,
+$$
+\Pr_{\mathcal{P}} \left[ED(s_1', s_2') \leq \left(1 + \frac{3}{2} (\rho_s + 2k\eta)\right)k \ln n \right] \geq 1 - 2n^{-\rho_k/12} - 4n^{-\rho_k/60} - 6n^{-\rho_k/60}.
+$$
+**Proof.** 
+
+Here, we have three bitstings will be covered in this proof. 
+
+1. $s_1'$: from $i_1$ to $i+k\ln +1$
+2. $s_2^*$: a substring of $s_2$, from $f_{A^\*}(i_1)$ to $f_{A^\*}(i_1+k\ln n)-1$.
+3. $s_2'$: from $i_2$ to $i_2 + k \ln n -1$. The start position will be $f_{A^\*}(i_1) - k\ln n$ to $f_{A^\*}(i_1) + k\ln n$
+
+Our goal is to given the upper bound of $ED(s_1',s_2')$, which will be bound by triangle  inequality i.e. $ED(s_1',s_2^*) + ED(s_2^*,s_2')$.
+
+1. $ED(s_1',s_2^*)$ can be bounded with high probability by Lemma 19. 
+2. $ED(s_2^*,s_2')$: here the difference between the start position will be bounded by $k \ln n$. And the difference between the length of two strings is bounded by Lemma 21. 
+
+Add the two upper bounds and the union probability, proof done. $\square$
+
+
 
 
 
