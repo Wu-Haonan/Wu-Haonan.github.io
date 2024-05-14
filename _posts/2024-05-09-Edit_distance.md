@@ -105,7 +105,7 @@ We should notice that the optimal alignment could not be canonical alignment. Fo
 
 
 
-**Definition 11.** Fix a canonical alignment $A^*$, and let $A$ be any alignment. A **break** of $A$ (from $A^*$) is any subpath ${\\{(i_1,j_1),(i_2,j_2)\cdots(i_L,j_L)\\}}$ of $A$ such that $(i_1,j_1),(i_L,j_L)$ are in $A^*$ but none of $(i_2,j_2)$ to $(i_{L-1},j_{L-1})$ are in $A^*$. The length of break is the value $i_L-i_1$. 
+**Definition 11.** Fix a canonical alignment $A^*$, and let $A$ be any alignment. A **break** of $A$ (from $A^\*$) is any subpath ${\\{(i_1,j_1),(i_2,j_2)\cdots(i_L,j_L)\\}}$ of $A$ such that $(i_1,j_1),(i_L,j_L)$ are in $A^\*$ but none of $(i_2,j_2)$ to $(i_{L-1},j_{L-1})$ are in $A^*$. The length of break is the value $i_L-i_1$. 
 
 ​        For $(s_1,s_2,\mathcal{E}) \sim ID(n)$, a break is **long** if its length is at least $k \ln n$ and **short** otherwise. An alignment is **good** if it has no long breaks and **bad** if it has at least one long break**.**
 
@@ -169,12 +169,16 @@ $$
 **Lemma 21.** For constant $k>0, i \leq n - k\ln n$,]$
 
 $$
-\Pr_{(s_1,s_2,\mathcal{E})\sim ID(n)} \left[ \vert  f_{A^*}(i+k \ln n) - f_{A^*}(i) - k \ln n \vert \leq \frac{3}{2} \kappa_n \cdot k \ln n\right] \geq 1- 2n^{-\rho_i k /60} - 3n^{-\rho_d k /60}
+\Pr_{(s_1,s_2,\mathcal{E})\sim ID(n)} \left[ \vert  f_{A^\*}(i+k \ln n) - f_{A^\*}(i) - k \ln n \vert \leq \frac{3}{2} \kappa_n \cdot k \ln n\right] \geq 1- 2n^{-\rho_i k /60} - 3n^{-\rho_d k /60}
 $$
 
 **Proof.** $\vert  f_{A^*}(i+k \ln n) - f_{A^*}(i) - k \ln n \vert$ is the difference between the number of insertions and deletions in the range of $[i, i+ k\ln n -1]$ of $s_1$. So the upper bound is the union of the upper bound of insertion and deletion argued in Lemma 19. $\square$
 
 
+
+<p align="center">
+    <img src="/post_image/Edit/QF.jpg" width="100%">
+</p>
 
 
 
