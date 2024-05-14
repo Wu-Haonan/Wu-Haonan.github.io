@@ -177,7 +177,7 @@ $$
 
 
 <p align="center">
-    <img src="/post_image/Edit_distance/QF.jpg" width="100%">
+    <img src="/post_image/Edit_distance/Corallary_22.png" width="100%">
 </p>
 
 
