@@ -1,13 +1,13 @@
 ---
 layout: article
-title: Non-Linear Time Edit Distance for Indel Channels
+title: Near-Linear Time Edit Distance for Indel Channels
 tags: papers
 
 ---
 
 In this blog, we will check out a theoretical paper about edit distance. In fact edit distance is a kernel idea for sequence alignment in bioinformatics. There are many available tools developed to solve various kinds of alignment scenario. While there exists a gap between theoretical algorithms and practical tools. In practice, we also embed some heuristic part to the tools to facilitate alignment. As theoreticians, they need to figure out some techniques to get a theoretical analysis of these tools that is more close to the practical performance. Further, a good theoretical analysis will light the direction of improvement. 
 
-This paper proposed a framework based on the classic NW algorithm with running time $\mathcal{O}(n\lg n)$ in average, which is also adapted by many classic implements, like BLAST. Hence, the analysis of the algorithm mentioned in this paper is also a theoretical justification of these heuristic-based alignment tools. 
+This paper proposed a framework based on the classic NW algorithm with running time $\mathcal{O}(n\lg n)$ and get edit distance with high probability, which is also adapted by many classic implements, like BLAST. Hence, the analysis of the algorithm mentioned in this paper is also a theoretical justification of these heuristic-based alignment tools. 
 
 <!--more-->
 
