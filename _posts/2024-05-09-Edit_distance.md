@@ -11,10 +11,6 @@ This paper proposed a framework based on the classic NW algorithm with running t
 
 <!--more-->
 
-# Motivation and Background
-
-# Sketch of algorithm
-
 # Preliminaries and Definitions
 
 ## Problem Setup
@@ -42,10 +38,6 @@ are hold for some small constants ${\\{\rho\\}:=\\{\rho_s,\rho_d,\rho_d',\rho_i,
 **Theorem 2.** Assuming $(1)$ holds for certain constants ${\\{\rho\\}}$, there exists a (deterministic) algorithm running in time $\mathcal{O}(n \ln n)$ that computes $ED(s_1,s_2)$ for $(s_1,s_2,\mathcal{E}) \sim ID(n)$ with probability $1-n^{-\Omega(1)}$. 
 
 ## Preparation and Lemma
-
-We denote the number of ways to split $a+b+c$ into three groups of size $a,b,c$ i.e. trinomial by $\binom{a+b+c}{a,b,c} = \binom{a+b+c}{a} \binom{b+c}{b}= \frac{(a+b+c)!}{a!(b+c)!} \cdot \frac{(b+c)!}{b!c!} = \frac{a+b+c}{a!b!c!}$.
-
-
 
 **Fact 4** (Chernoff Bound). Let $X_1 \cdots X_n$ be independent Bernoulli random variables and $X=\sum_{i=1}^n X_i, \mu = \mathbb{E}[X]$. Then for $0 < \epsilon <1$:
 $$
@@ -122,8 +114,16 @@ First, let's consider the simplest case, we only consider substitution here and 
 **Proof sketch:** 
 
 1. **Algorithm:** Call canonical DP on the dependency graph, which is deleted each entry $(i,j)$ s.t. $\vert i-j\vert > k \ln n$. 
+
 2. "**Off-diagonal**" alignment $A$ (sharing no edge with $A^*$)  is greater than $A^*$ with high probability (shown in Lemma 14).
-3. **Lemma 17** (proved through Lemma 14) tells us with high probability, all the alignments in the range of $\mathcal{SBR}$ satisfy $A \geq A^*$. Then, if this condition holds, the lowest-cost good alignment is also the best alignment in whole DP. So, even we only consider the best alignment on trimmer dependency graph, we can still get best alignment on global one.     $\square$
+
+3. **Lemma 17** (proved through Lemma 14) tells us with high probability, all the alignments in the range of $\mathcal{SBR}$ satisfy $A \geq A^*$. Then, if this condition holds, the lowest-cost good alignment is also the best alignment in whole DP (Corollary 16). $\mathcal{LBR}(A)$ is a good alignment and satisfies
+
+$$
+\forall A, \mathcal{LBR}(A) - A = \mathcal{LBR}(\mathcal{SBR}(A)) - \mathcal{SBR}(A) = A^* - \mathcal{SBR}(A) \leq 0
+$$
+
+   So, even we only consider the best alignment on trimmed dependency graph, we can still get best alignment on global one.     $\square$
 
 
 
@@ -177,12 +177,12 @@ $$
 
 
 <p align="center">
-    <img src="/post_image/Edit_distance/Corollary_22.png" width="100%">
+    <img src="/post_image/Edit_distance/Corollary_22.png" width="80%">
 </p>
 
 **Corollary 22.** Consider the following random process, which we denote $\mathcal{P}$: we choose $i_1 < n - k \ln n$, sample $(s_1, s_2, \epsilon) \sim ID(n)$, and then choose an arbitrary $i_2$ such that $|i_2 - f_{\ast}(i_1)| \leq k \ln n$ and $i_2$ is at least $k \ln n$ less than the length of $s_2$. Let $s_1'$ denote the string consisting of bits $i_1$ to $i_1 + k \ln n - 1$ of $s_1$ and $s_2'$ the string consisting of bits $i_2$ to $i_2 + k \ln n - 1$ of $s_2$. Then for any $i_2$ we choose satisfying the above conditions,
 $$
-\Pr_{\mathcal{P}} \left[ED(s_1', s_2') \leq \left(1 + \frac{3}{2} (\rho_s + 2k\eta)\right)k \ln n \right] \geq 1 - 2n^{-\rho_k/12} - 4n^{-\rho_k/60} - 6n^{-\rho_k/60}.
+\Pr_{\mathcal{P}} \left[ED(s_1', s_2') \leq \left(1 + \frac{3}{2} (\rho_s + 2 \kappa_n)\right)k \ln n \right] \geq 1 - 2n^{-\rho_k/12} - 4n^{-\rho_k/60} - 6n^{-\rho_k/60}.
 $$
 **Proof.** 
 
@@ -192,7 +192,7 @@ Here, we have three bitstings will be covered in this proof.
 2. $s_2^*$: a substring of $s_2$, from $f_{A^\*}(i_1)$ to $f_{A^\*}(i_1+k\ln n)-1$.
 3. $s_2'$: from $i_2$ to $i_2 + k \ln n -1$. The start position will be $f_{A^\*}(i_1) - k\ln n$ to $f_{A^\*}(i_1) + k\ln n$
 
-Our goal is to given the upper bound of $ED(s_1',s_2')$, which will be bound by triangle  inequality i.e. $ED(s_1',s_2^*) + ED(s_2^*,s_2')$.
+Our goal is to given the upper bound of $ED(s_1',s_2')$, which will be bound by triangle  inequality i.e. $ED(s_1',s_2^\*) + ED(s_2^\*,s_2')$.
 
 1. $ED(s_1',s_2^*)$ can be bounded with high probability by Lemma 19. 
 2. $ED(s_2^*,s_2')$: here the difference between the start position will be bounded by $k \ln n$. And the difference between the length of two strings is bounded by Lemma 21. 
@@ -201,31 +201,68 @@ Add the two upper bounds and the union probability, proof done. $\square$
 
 
 
+**Corollary 23.** Consider the following random process, which we denote $\mathcal{P}$: we choose $i_1 < n - k \ln n$, sample $(s_1, s_2, \epsilon) \sim ID(n)$, and then choose an arbitrary $i_2$ such that
+
+$$
+\vert i_2 - f_{A^*}(i_1) \vert > \left(\frac{3}{2} \kappa_n + 1\right) k \ln n,
+$$
+
+and $i_2$ is at least $k \ln n$ less than the length of $s_2$. Let $s_1'$ denote the string consisting of bits $i_1$ to $i_1 + k \ln n - 1$ of $s_1$ and $s_2'$ the string consisting of bits $i_2$ to $i_2 + k \ln n - 1$ of $s_2$. Then for $0 < r < 1$,
+
+$$
+\Pr_{\mathcal{P}}\left[ED(s_1', s_2') > kr \ln n\right] \geq 1 - \left[\frac{(\frac{4e}{r}+5e+\frac{4e}{k r \ln n})^r}{2}\right]^{k \ln n} - 2n^{-\rho_k/60} - 3n^{-\rho_k/60}.
+$$
+
+**Proof.** Basically, this proof tell us if start position $i_2$ goes too far from $f_{A^*}(i_1)$, $ED(s_1',s_2')$ will be controlled by Lemma 20. First, by Lemma 21, we know the end position of $s_2^\*$ will be not far away. So, with high probability $s_2$ goes beyond the range of $s_2^\*$. 
+
+In detail, if $i_2 > f_{\ast}(i_1) + \left(\frac{3}{2} \kappa_n + 1\right) k \ln n$, then by Lemma 21 we have with probability $1 - 2n^{-\rho_k/60} - 3n^{-\rho_k/60}$,
+$$
+i_2 - f_{\ast}(i_1 + k \ln n) = [i_2 - f_{\ast}(i_1) - k \ln n] + [f_{\ast}(i_1 + k \ln n) - f_{\ast}(i_1 + k \ln n)] \geq \frac{3}{2} \kappa_n \cdot k \ln n - \frac{3}{2} \kappa_n \cdot k \ln n = 0.
+$$
+
+Then $s_1'$ and $s_2'$ become two random string. Then we can call Lemma 20 with $D=r k \ln n$. $\square$
 
 
 
+## Algorithm for Approximate Alignment
 
-## Algorithm for Quickly Finding an Approximate Alignment
+<p align="center">
+    <img src="/post_image/Edit_distance/Approx_align.PNG" width="80%">
+</p>
 
-
-
-
-
-
-
+The algorithm is shown in above figure. Basically, we try to decide some anchors of the approximate alignment $f'$. We start from $f'(1)=1$. We split $s_1$ into $\frac{n}{k \ln n}$ fragments with length $k \ln n$. For each fragment $s_1'$, we try to find the corresponding $s_2'$ to decide the position of first index $i k \ln n +1$ of $s_1'$ i.e. $f'(i k \ln n +1)$. It's clear the running time will be $\mathcal{O}(\frac{n}{\ln n} \cdot \ln n^2) = \mathcal{n \ln n}$.
 
 
 
+Now, how to find $s_2'$ and then decide $f'(i k \ln n +1)$ is important. So, we have to search where the $s_2$ located. By Corollary 22, we know if the start position is near $f_{A^*}(i k \ln n +1)$ the edit distance will be small, and otherwise by Corollary 23, the edit distance will be large. So, we know the range $\frac{3}{2} (\rho_s + \kappa_n) k \ln n$ mentioned in Corollary 23 is sufficient. But the thing is we don't know where the $f_{A^*}(i k \ln n +1)$ is. But by lemma 19, we know $f_{A^*}(i k \ln n +1)$ is around $i k \ln n +1$ with radius $\left(\frac{3}{2} \kappa_n + 1\right) k \ln n$. That's the reason why $J$ is doubled $\left(\frac{3}{2} \kappa_n + 1\right) k \ln n$ .
 
 
 
+Then we can get following Lemma 24 intuitively. 
+
+**Lemma 24.** For $(s_1, s_2, \epsilon) \sim ID(n)$, APPROXALIGN$(s_1, s_2)$ computes in time $O(n \ln n)$ a function $f'$ such that with probability at least $1 - n^{-\Omega(1)}$, for all $i$ where $f'(i)$ is defined, $|f'(i) - f_{A^*}(i)| \leq \left(\frac{3}{2} \kappa_n + 1\right) k \ln n$.
+
+The above Lemma 24 restrict the range of standard DP. In detail, we conduct DP on the entries that are within the distance $k_2 \ln n$ from $(i,f'(i))$ for some $i$, here we can set a sufficiently large $k_2$. 
 
 
 
+## Error Analysis
+
+**Lemma 25.** For any realization of $(s_1, s_2, \epsilon) \sim ID(n)$, let $s_1'$ be the restriction of $s_1$ to any fixed subset of indices $B$ of total size $\ell \geq k \ln n$, $s_2'$ be the substring of $s_2$ that $A^\ast$ aligns with $s_1$, and let $(A^\ast)_B$ denote the restriction of the alignment $A^\ast$ to indices in $s_1', s_2'$. Then with probability $1 - e^{-\Omega(\ell)}$, for all alignments $A$ of $s_1', s_2'$ such that $A$ and $(A^\ast)_B$ do not share any edges.
 
 
 
-  
+Basically, Lemma 25 told us, if $(A)_B$ share no edge with $(A^\*)N$, then $A \geq A^\*$. Similar with Lemma 19, we know $(A^\*)_B$ is bounded by $\frac{3}{2} (\rho_s + \kappa_n) \ell$ with high probability. So, we can show if $(A)_B$ share no edge with $(A^\*)N$, $(A)_B$ will exceed this bound with high probability, then we know $(A)_B \geq (A^\*)_B$. The main work in Lemma 25 is doing some counting under the condition. 
+
+
+
+**Lemma 26.** For $(s_1, s_2) \sim \text{ID}(n)$, with probability $1 - n^{-\Omega(1)}$ for all alignments $A$ in the range of $\mathcal{SBR}, A \geq A^*$. 
+
+
+
+This is a generalized version of Lemma 17. Then we can apply same procedure in Substitution case. By Lemma 24, we know $f'(i)$ is bounded, and call standard DP within a sufficient large range, which can guarantee that with high probability the range of DP cover the range of $\mathcal{LBR}$, i.e. all the good alignment. So, the locality-optimal in this range with high probability is the optimal in global (Lemma 26).
+
+
 
 
 
