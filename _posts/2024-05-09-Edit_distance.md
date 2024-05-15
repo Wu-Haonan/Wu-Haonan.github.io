@@ -40,19 +40,22 @@ are hold for some small constants ${\\{\rho\\}:=\\{\rho_s,\rho_d,\rho_d',\rho_i,
 ## Preparation and Lemma
 
 **Fact 4** (Chernoff Bound). Let $X_1 \cdots X_n$ be independent Bernoulli random variables and $X=\sum_{i=1}^n X_i, \mu = \mathbb{E}[X]$. Then for $0 < \epsilon <1$:
+
 $$
 \Pr[X\geq (1+\epsilon)\mu] \leq e^{-\frac{\epsilon^2\mu}{3}},\quad \Pr[X\leq (1-\epsilon)\mu] \leq e^{-\frac{\epsilon^2\mu}{2}},
 $$
 
 
-Consider the insertion process, the number of times $m$ for insertion for whole bitstring is a Binomial distribution with probability $p_i$, and the number of insertion bits is a negative binomial distribution with $m$ and probability $q_i$. (This process like that fliping an unfair coin and getting $m$ heads). So, we bound the process in following lemmas.
+Consider the insertion process, the number of times $m$ for insertion for whole bitstring is a Binomial distribution with probability $p_i$, and the number of insertion bits is a negative binomial distribution with $m$ and probability $q_i$. (This process like that flipping an unfair coin and getting $m$ heads). So, we bound the process in following lemmas.
 
 
 
 **Fact 5** (Negative binomial tail bound). Let $X\sim NBinom(m,q)$, then
+
 $$
 \Pr[X \geq k n /p] \leq e^{-\frac{kn(1-1/k)^2}{2}}
 $$
+
 **Proof.** If we need more than $kn/p$ times to get $n$ success events, that means when we flip $kn/p$ times, the total number $Y$ of success events is less than $n$, i.e.
 
 $$
@@ -137,8 +140,7 @@ We know consider the case where insertions and deletions are all present.
 
 To simplify presentation, let $\kappa_n = \rho_i \rho_i' + (\rho_d + 1/k \ln n)(\rho_d' +1)$.
 
-**Lemma 19.** For $(s_1,s_2,\mathcal{E}) \sim ID(n)$, let $s_1'$ be the substring formed by bits $i$ to $i+k\ln n -1$ of string $s_1$, and $s_2$ be the substring formed by bits $f_{A^*}(i)$ to $f_{A^*}(i+k \ln n)-1$ of $s_2$. Then:
-
+**Lemma 19.** For $(s_1,s_2,\mathcal{E}) \sim ID(n)$, let $s_1'$ be the substring formed by bits $i$ to $i+k\ln n -1$ of string $s_1$, and $s_2$ be the substring formed by bits $f_{A^\*}(i)$ to $f_{A^\*}(i+k \ln n)-1$ of $s_2$. Then:
 $$
 \Pr_{(s_1,s-2,\mathcal{E})\sim ID(n)} \left[ED(s_1',s_2') \geq \frac{3}{2} (\rho_s + \kappa_n) k \ln n \right] \leq n^{-\rho_s k /12} + 2n^{-\rho_i k /60} + 3n^{-\rho_d k /60}
 $$
@@ -166,8 +168,7 @@ $$
 
 
 
-**Lemma 21.** For constant $k>0, i \leq n - k\ln n$,]$
-
+**Lemma 21.** For constant $k>0, i \leq n - k\ln n$,
 $$
 \Pr_{(s_1,s_2,\mathcal{E})\sim ID(n)} \left[ \vert  f_{A^*}(i+k \ln n) - f_{A^*}(i) - k \ln n \vert \leq \frac{3}{2} \kappa_n \cdot k \ln n\right] \geq 1- 2n^{-\rho_i k /60} - 3n^{-\rho_d k /60}
 $$
@@ -184,6 +185,7 @@ $$
 $$
 \Pr_{\mathcal{P}} \left[ED(s_1', s_2') \leq \left(1 + \frac{3}{2} (\rho_s + 2 \kappa_n)\right)k \ln n \right] \geq 1 - 2n^{-\rho_k/12} - 4n^{-\rho_k/60} - 6n^{-\rho_k/60}.
 $$
+
 **Proof.** 
 
 Here, we have three bitstings will be covered in this proof. 
@@ -227,20 +229,20 @@ Then $s_1'$ and $s_2'$ become two random string. Then we can call Lemma 20 with 
 ## Algorithm for Approximate Alignment
 
 <p align="center">
-    <img src="/post_image/Edit_distance/Approx_align.PNG" width="80%">
+    <img src="/post_image/Edit_distance/Approx_align.PNG" width="60%">
 </p>
 
 The algorithm is shown in above figure. Basically, we try to decide some anchors of the approximate alignment $f'$. We start from $f'(1)=1$. We split $s_1$ into $\frac{n}{k \ln n}$ fragments with length $k \ln n$. For each fragment $s_1'$, we try to find the corresponding $s_2'$ to decide the position of first index $i k \ln n +1$ of $s_1'$ i.e. $f'(i k \ln n +1)$. It's clear the running time will be $\mathcal{O}(\frac{n}{\ln n} \cdot \ln n^2) = \mathcal{n \ln n}$.
 
 
 
-Now, how to find $s_2'$ and then decide $f'(i k \ln n +1)$ is important. So, we have to search where the $s_2$ located. By Corollary 22, we know if the start position is near $f_{A^*}(i k \ln n +1)$ the edit distance will be small, and otherwise by Corollary 23, the edit distance will be large. So, we know the range $\frac{3}{2} (\rho_s + \kappa_n) k \ln n$ mentioned in Corollary 23 is sufficient. But the thing is we don't know where the $f_{A^*}(i k \ln n +1)$ is. But by lemma 19, we know $f_{A^*}(i k \ln n +1)$ is around $i k \ln n +1$ with radius $\left(\frac{3}{2} \kappa_n + 1\right) k \ln n$. That's the reason why $J$ is doubled $\left(\frac{3}{2} \kappa_n + 1\right) k \ln n$ .
+Now, how to find $s_2'$ and then decide $f'(i k \ln n +1)$ is important. So, we have to search where the $s_2$ located. By Corollary 22, we know if the start position is near $f_{A^\*}(i k \ln n +1)$ the edit distance will be small, and otherwise by Corollary 23, the edit distance will be large. So, we know the range $\frac{3}{2} (\rho_s + \kappa_n) k \ln n$ mentioned in Corollary 23 is sufficient. But the thing is we don't know where the $f_{A^\*}(i k \ln n +1)$ is. But by lemma 19, we know $f_{A^\*}(i k \ln n +1)$ is around $i k \ln n +1$ with radius $\left(\frac{3}{2} \kappa_n + 1\right) k \ln n$. That's the reason why $J$ is doubled $\left(\frac{3}{2} \kappa_n + 1\right) k \ln n$ .
 
 
 
 Then we can get following Lemma 24 intuitively. 
 
-**Lemma 24.** For $(s_1, s_2, \epsilon) \sim ID(n)$, APPROXALIGN$(s_1, s_2)$ computes in time $O(n \ln n)$ a function $f'$ such that with probability at least $1 - n^{-\Omega(1)}$, for all $i$ where $f'(i)$ is defined, $|f'(i) - f_{A^*}(i)| \leq \left(\frac{3}{2} \kappa_n + 1\right) k \ln n$.
+**Lemma 24.** For $(s_1, s_2, \epsilon) \sim ID(n)$, APPROXALIGN$(s_1, s_2)$ computes in time $O(n \ln n)$ a function $f'$ such that with probability at least $1 - n^{-\Omega(1)}$, for all $i$ where $f'(i)$ is defined, $\vert f'(i) - f_{A^*}(i) \vert \leq \left(\frac{3}{2} \kappa_n + 1\right) k \ln n$.
 
 The above Lemma 24 restrict the range of standard DP. In detail, we conduct DP on the entries that are within the distance $k_2 \ln n$ from $(i,f'(i))$ for some $i$, here we can set a sufficiently large $k_2$. 
 
