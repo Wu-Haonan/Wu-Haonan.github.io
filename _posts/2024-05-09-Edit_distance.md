@@ -130,6 +130,130 @@ $$
 
 
 
+**Lemma 14.** For $(s_1, s_2, \mathcal{E}) \sim ID(n)$, with probability $1 - e^{-\Omega(n)}$, $A > A^\*$ for all alignments $A$ such that $A$ and $A^\*$ do not share any edges.
+
+**Proof.** The cost of $A^*$ can be upper bounded using a Chernoff bound: The expected number of substitutions is at most $\rho_s n$, so Fact 4 gives
+$$
+\Pr\left[ A^* \leq \frac{3}{2} \rho_s n \right] \leq 1 - e^{-\frac{\rho_s n}{12}}.
+$$
+Now our goal is following:
+
+1. If $A$ shares no edge with $A^\*$, $A> cn$, (where $c = \frac{3}{2} \rho_s$) with high probability. 
+2. $\Rightarrow$: If $A$ shares no edge with $A^\*$, $A < cn$, with very low probability. 
+
+We achieve this using a union bound over alignments, grouping alignments by their number of deletions $d$ (notice that in substitution-only case, $d$ is also the number of insertions, because we need go back to the right-bottom element). We can ignore alignments with more than $cn/2$ deletions, as they will of course have cost more than $cn$ (we also have $cn/2$ insertions).
+
+$$
+\begin{equation}
+\begin{aligned}
+\Pr[\exists A, A \leq cn] &\leq \sum_{d=1}^{cn/2} \sum_{A \text{ with } d \text{ deletions}} \Pr[A \leq cn] \\
+&\leq \sum_{d=1}^{cn/2} \binom{n+d}{d, d, n-d} \Pr\left[ \text{Binom}(n-d, \frac{1}{2}) \leq cn - 2d \right] \\
+&\leq \frac{cn}{2} \binom{(1 + \frac{c}{2})n}{\frac{c}{2}n, \frac{c}{2}n, (1 - \frac{c}{2})n} \Pr\left[ \text{Binom}((1 - \frac{c}{2})n, \frac{1}{2}) \leq cn \right].
+\end{aligned}
+\end{equation}
+$$
+
+Second line: Given $d$ deletions, we know the total number of edge covered by alignment is $n+d$, we need assign $d$ deletions, $d$ insertions a and $n-d$ diagonal edges (substitutions/matches). Obviously, $d$ deletions and $d$ insertions will cause $2d$ in $A$. Then, we can only have at most $cn-2d$ substitutions. Because, we don't have any information about these edges, so the weight of each edge can be treat as a Bernoulli process with probability as $1/2$, which is distributed uniformly at random. So the total cost of these edges is given by $\text{Binom}((1 - \frac{c}{2})n, \frac{1}{2})$. 
+
+Third line: An upper bound for simplicity. Each item are bound by following two formulea
+$$
+\begin{equation}
+\begin{aligned}
+\Pr\left[ \text{Binom}\left((1 - \frac{c}{2})n, \frac{1}{2}\right) \leq cn \right] &= \Pr\left[ \text{Binom}\left((1 - \frac{c}{2})n, \frac{1}{2}\right) \leq \left(1 - \frac{2 - 5c}{2 - c} \right) \frac{1}{2}(1 - \frac{c}{2})n \right] \\
+&\leq \left[\exp\left( \frac{-(2 - 5c)^2}{8(2 - c)}  \right)\right]^n.
+\end{aligned}
+\end{equation}
+$$
+
+Next we upper bound the trinomial using Stirling's approximation:
+
+$$
+\begin{equation}
+\begin{aligned}
+\binom{(1 + \frac{c}{2})n}{\frac{c}{2}n, \frac{c}{2}n, (1 - \frac{c}{2})n} &\leq \frac{e}{(2\pi)^{3/2}} \frac{((1 + \frac{c}{2})n)^{(1 + \frac{c}{2})n + \frac{1}{2}}}{(\frac{c}{2}n)^{cn + 1}((1 - \frac{c}{2})n)^{(1 - \frac{c}{2})n + \frac{1}{2}}} \\
+&\leq \frac{e}{(2\pi)^{3/2}} \frac{1}{n} \left[ \frac{(1+\frac{c}{2})^{(1+\frac{c}{2})n} \cdot (1+\frac{c}{2})^{\frac{1}{2}} } {\frac{c}{2}^{cn} \cdot \frac{c}{2} \cdot (1-\frac{c}{2})^{(1-\frac{c}{2})n} \cdot (1-\frac{c}{2})^{\frac{1}{2}}}  \right]\\
+&\leq \frac{e}{(2\pi)^{3/2}} \frac{2}{cn} \sqrt{\frac{1 + \frac{c}{2}}{1-\frac{c}{2}}} \left[ \frac{(1+\frac{c}{2})^{(1+\frac{c}{2})n} } {\frac{c}{2}^{cn} \cdot (1-\frac{c}{2})^{(1-\frac{c}{2})n}}  \right]\\
+&\leq \frac{e}{(2\pi)^{3/2}} \frac{2}{cn} \sqrt{\frac{2 + c}{2-c}} \left[ \frac{(1+\frac{c}{2})^{(1+\frac{c}{2})n} } {\frac{c}{2}^{cn} \cdot (1-\frac{c}{2})^{(1-\frac{c}{2})n}}  \right]\\
+\end{aligned}
+\end{equation}
+$$
+
+For the above bound to be exponentially decaying in $n$, we need that:
+
+$$
+\frac{(1 + \frac{c}{2})^{(1 + \frac{c}{2})}}{(\frac{c}{2})^c (1 - \frac{c}{2})^{(1 - \frac{c}{2})}} \exp\left( \frac{-(2 - 5c)^2}{8(2 - c)} \right) < 1, \tag{4}
+$$
+which holds as long as $c \leq 0.042$, i.e. $\rho_s \leq .028$. For these values of $c$, with high probability $A^* < cn$ and $A > cn$ for any $A$ which does not share any edges with $A^*$. $\square$
+
+
+
+**Fact 15.** Fix any $s_1, s_2, \mathcal{E}$ in the support of $ID(n)$, and let $A, A'$ be any two alignments with the same set of long breaks. Then $\mathcal{LBR}(A) - A = \mathcal{LBR}(A') - A'$.
+
+**Proof.** Applying $\mathcal{LBR}$ to $A, A'$, then we just change the long break in each alignment. Because their long break is same, so their difference on these long breaks will be equal. $\square$ 
+
+**Corollary 16.** Fix any $(s_1, s_2, \mathcal{E})$ in the support of $ID(n)$. If for all alignments $A$ in the range of $\mathcal{SBR}$, $A \geq A^*$, then any lowest-cost good alignment is also a lowest-cost alignment.
+
+**Proof.** $\forall$ alignment $A$, $\mathcal{LBR}(A)$ (a good alignment) satisfies $\mathcal{LBR}(A) \leq A$, shown as follow:
+$$
+\mathcal{LBR}(A) - A \stackrel{\text{Fact 15}}{=} \mathcal{LBR}(\mathcal{SBR}(A)) - \mathcal{SBR}(A) = A^* - \mathcal{SBR}(A) \leq 0.
+$$
+
+So the lowest-cost good alignment is also the lowest cost alignment.  $\square$ 
+
+
+
+**Lemma 17.** For $(s_1, s_2, \mathcal{E}) \sim ID(n)$, with probability $1 - n^{\Omega(1)}$ for all alignments $A$ in the range of $\mathcal{SBR}$, $A \geq A^*$.
+
+**Proof.** 
+
+1. Define the set $A_i$ contained in the range of $\mathcal{SBR}$, which contains all alignments $A$ for which the sum of the lengths of breaks of $A$ from $A^\*$ is in $[ik \ln n, (i + 1)k \ln n]$. Then the sets $\{A_i : 0 \leq i \leq \frac{n}{k \ln n} \}$ forms a disjoint cover of the range $\mathcal{SBR}(A)$. Note that elements of $A_i$ have at most $i$ breaks from $A^\*$, each of length at least $k \ln n$. Also note that $A_0$ is a singleton set containing only $A^\*$.
+
+2. Define **breakpoint configuration** of $A$: the set of starting and ending indices of all breaks of $A$  (to simplify future analysis, we index with respect to $s_1$). 
+3. Furthermore, we continue split $A_i$. Let $B_i$ be the set of all possible breakpoint configurations of alignments in $A_i$. Here, $B \in B_i$ is a binary assignment of each edge in $A^*$ to either agree or disagree with $A \in A_i$. For a fixed set of breakpoint $B \in B_i$, let $A_B$ be the set of all alignments having the breakpoints corresponding to $B$ (i.e. every alignment in $A_B$ has the same breaks from $A^*$). Note that the set $\{A_B : B \in B_i\}$ forms a disjoint cover of $A_i$.
+
+We want to show with high probability $\forall A$ in the range of $\mathcal{SBR}$, $A \geq A^\*$. 
+
+- To achieve this, we first are going to show the probability for existing an alignment in $\mathcal{A}_B$ lower than $A^\*$ is quite low. We know that $A < A^\*$ iff $(A)_B < (A^*)_B$ where $(A)_B$ denote the restriction of an alignment $A$ to indices $B$. Then, we can bound this probability by applying Lemma 14. For $(A)_B$ and $(A^\*)_B$, they don't share any edge. (Note the proof of Lemma 14 doesn't assume continuity of alignment.)
+
+$$
+\Pr[\exists A \in \mathcal{A}_B, A < A^\*] = \Pr[\exists A \in \mathcal{A}_B, (A)_B < (A^\*)_B] \leq n^{-\Omega(ik)}
+$$
+
+- Then, we will given the bound of probability of existing an alignment in $\mathcal{A}_B$ lower than $A^\*$
+
+$$
+\begin{equation}
+\begin{aligned}
+\Pr[\exists A \in \mathcal{SBR}(A), A < A^*] &= \sum_{i=1}^{\frac{n}{k \ln n}} \Pr[\exists A \in A_i, A < A^*] \\
+&= \sum_{i=1}^{\frac{n}{k \ln n}} \sum_{B \in B_i} \Pr[\exists A \in A_B, A < A^*] \\
+&\leq \sum_{i=1}^{\frac{n}{k \ln n}} \sum_{B \in \mathcal{B}_i} n^{-\Omega(ik)} = \sum_{i=1}^{\frac{n}{k \ln n}} |B_i| n^{-\Omega(ik)}.
+\end{aligned}
+\end{equation}
+$$
+
+Now we must bound the size of $B_i$. We claim that each $B \in B_i$ can be uniquely mapped to $i$ or less contiguous subsets of $[n]$, each of a size in $[k \ln n, 2k \ln n)$ or size $0$ (if the break is longer than $2k \ln n$, we map to a series of consecutive subsets). There are $n$ different possible start positions, and $k \ln n$ different possible end position, so
+
+$$
+\begin{equation}
+|B_i| \leq (nk \ln n + 1)^i.
+\end{equation}
+$$
+
+Then, the final upper bound is, $s = (nk \ln n + 1)n^{-\Omega(k)} < 1$
+
+$$
+\begin{equation}
+\begin{aligned}
+\Pr[\exists A \in \mathcal{SBR}(A), A < A^*] &\leq \sum_{i=1}^{\frac{n}{k \ln n}} (nk \ln n + 1)^in^{-\Omega(ik)} \\
+&= \sum_{i=1}^{\frac{n}{k \ln n}} ((nk \ln n + 1)n^{-\Omega(k)})^i \\
+& = \frac{s (1-s^{\frac{n}{k \ln n}})}{1 -s} \\
+& \leq c n^{-\Omega(k)} = n^\Omega(k)
+\end{aligned}
+\end{equation}
+$$
+
+Proof done! $\square$
+
 # Finding an Approximate Alignment
 
 We know consider the case where insertions and deletions are all present. 
@@ -180,8 +304,7 @@ $$
 <p align="center">
     <img src="/post_image/Edit_distance/Corollary_22.png" width="80%">
 </p>
-
-**Corollary 22.** Consider the following random process, which we denote $\mathcal{P}$: we choose $i_1 < n - k \ln n$, sample $(s_1, s_2, \epsilon) \sim ID(n)$, and then choose an arbitrary $i_2$ such that $|i_2 - f_{\ast}(i_1)| \leq k \ln n$ and $i_2$ is at least $k \ln n$ less than the length of $s_2$. Let $s_1'$ denote the string consisting of bits $i_1$ to $i_1 + k \ln n - 1$ of $s_1$ and $s_2'$ the string consisting of bits $i_2$ to $i_2 + k \ln n - 1$ of $s_2$. Then for any $i_2$ we choose satisfying the above conditions,
+**Corollary 22.** Consider the following random process, which we denote $\mathcal{P}$: we choose $i_1 < n - k \ln n$, sample $(s_1, s_2, \epsilon) \sim ID(n)$, and then choose an arbitrary $i_2$ such that $|i_2 - f_{A^*}(i_1)| \leq k \ln n$ and $i_2$ is at least $k \ln n$ less than the length of $s_2$. Let $s_1'$ denote the string consisting of bits $i_1$ to $i_1 + k \ln n - 1$ of $s_1$ and $s_2'$ the string consisting of bits $i_2$ to $i_2 + k \ln n - 1$ of $s_2$. Then for any $i_2$ we choose satisfying the above conditions,
 $$
 \Pr_{\mathcal{P}} \left[ED(s_1', s_2') \leq \left(1 + \frac{3}{2} (\rho_s + 2 \kappa_n)\right)k \ln n \right] \geq 1 - 2n^{-\rho_k/12} - 4n^{-\rho_k/60} - 6n^{-\rho_k/60}.
 $$
@@ -244,6 +367,41 @@ Then we can get following Lemma 24 intuitively.
 
 **Lemma 24.** For $(s_1, s_2, \epsilon) \sim ID(n)$, APPROXALIGN$(s_1, s_2)$ computes in time $O(n \ln n)$ a function $f'$ such that with probability at least $1 - n^{-\Omega(1)}$, for all $i$ where $f'(i)$ is defined, $\vert f'(i) - f_{A^*}(i) \vert \leq \left(\frac{3}{2} \kappa_n + 1\right) k \ln n$.
 
+**Proof.** We will show by induction. 
+
+**Base case:** $ \vert f'(1)-f_{A^*}(1) \vert = \vert 1 -1 \vert \leq \lceil (\frac{3}{2} \kappa_n + 1) \cdot k \ln n \rceil$. 
+
+**Induction Hypothesis:** $ \vert f'((i-1)k \ln n))-f_{A^*}((i-1)k \ln n) \vert  \leq \lceil (\frac{3}{2} \kappa_n + 1) \cdot k \ln n \rceil$
+
+Let's check $i$. By Lemma 21, with probability $1 - n^{-\Omega(1)}$, $\vert  f_{A^*}((i-1)k \ln n +1) - f_{A^*}(i k \ln n  +1) - k \ln n \vert \leq \frac{3}{2} \kappa_n \cdot k \ln n$. Then, we have:
+$$
+\begin{equation}
+\begin{aligned}
+&\left\vert \left[ f'((i-1)k \ln n + 1) + k \ln n \right] - f_{A^*}(ik \ln n + 1) \right\vert  \\
+&\leq\left\vert f'((i-1)k \ln n + 1) + k \ln n - \left[ f_{A^*}((i-1)k \ln n + 1) + k \ln n \right] \right\vert + \\
+&\left\vert f_{A^*}((i-1)k \ln n + 1) + k \ln n - f_{A^*}(ik \ln n + 1) \right\vert  \\
+&=\left\vert f'((i-1)k \ln n + 1) - f_{A^*}((i-1)k \ln n + 1) \right\vert + \\
+&\left\vert f_{A^*}((i-1)k \ln n + 1) + k \ln n - f_{A^*}(ik \ln n + 1) \right\vert\\
+& \leq  \lceil \frac{3}{2} \kappa_n + 1 \rceil \cdot k \ln n + \frac{3}{2} \kappa_n \cdot k \ln n \leq J.
+\end{aligned}
+\end{equation}
+$$
+So for some $j$ in the range iterated over by the algorithm, $\left\vert f'((i-1)k \ln n + 1) + (j + k) \ln n - f_{A^\*}(ik \ln n + 1) \right\vert \leq k \ln n$ could happen. Thus, by Corollary 22, the minimum edit distance $minED$ found by the algorithm in iterating over the $j$ values is at most 
+$(1 + \frac{3}{2}k(\rho_s + 2\kappa_n)) \ln n < k r \ln n$ with probability at least $1 - n^{-\Omega(1)}$. 
+
+By Corollary 23, with probability at least $1 - n^{-\Omega(1)}$ the final value of $f' (ik \ln n + 1)$ cannot differ from  $f_{A^\*} (ik \ln n + 1)$ by more than $\left\lceil \left( \frac{3}{2} \kappa_n + 1 \right) \cdot k \ln n \right\rceil$, otherwise, by the corollary 23 with high probability $minED$ would be larger than $k r \ln n$.
+
+To sum up, we have following deduction:
+
+* For some $j$, we can meet the condition of Corollary 22 i.e. the start position $s_2$ is not far from $f_{A^*}(i)$. 
+* $\Rightarrow$: The $minED$ for some $j$, i.e. $ED(s_1',s_2')$ is bounded with high probability. Then we have apply Corollary 23.
+* $\Rightarrow$: $\vert f'(ik \ln n))-f_{A^*}(ik \ln n) \vert $ is bounded. Otherwise, with high probability, $minED$ will out of bound. 
+
+Then we finish the induction. $\square$
+
+
+
+
 The above Lemma 24 restrict the range of standard DP. In detail, we conduct DP on the entries that are within the distance $k_2 \ln n$ from $(i,f'(i))$ for some $i$, here we can set a sufficiently large $k_2$. 
 
 
@@ -254,7 +412,7 @@ The above Lemma 24 restrict the range of standard DP. In detail, we conduct DP o
 
 
 
-Basically, Lemma 25 told us, if $(A)_B$ share no edge with $(A^\*)N$, then $A \geq A^\*$. Similar with Lemma 19, we know $(A^\*)_B$ is bounded by $\frac{3}{2} (\rho_s + \kappa_n) \ell$ with high probability. So, we can show if $(A)_B$ share no edge with $(A^\*)N$, $(A)_B$ will exceed this bound with high probability, then we know $(A)_B \geq (A^\*)_B$. The main work in Lemma 25 is doing some counting under the condition. 
+Basically, Lemma 25 told us, if $(A)_B$ share no edge with $(A^\*)_B$, then $A \geq A^\*$. Similar with Lemma 19, we know $(A^\*)_B$ is bounded by $\frac{3}{2} (\rho_s + \kappa_n) \ell$ with high probability. So, we can show if $(A)_B$ share no edge with $(A^\*)N$, $(A)_B$ will exceed this bound with high probability, then we know $(A)_B \geq (A^\*)_B$. The main work in Lemma 25 is doing some counting under the condition. 
 
 
 
