@@ -373,7 +373,7 @@ Then we can get following Lemma 24 intuitively.
 
 **Induction Hypothesis:** $ \vert f'((i-1)k \ln n))-f_{A^*}((i-1)k \ln n) \vert  \leq \lceil (\frac{3}{2} \kappa_n + 1) \cdot k \ln n \rceil$
 
-Let's check $i$. By Lemma 21, with probability $1 - n^{-\Omega(1)}$, $\vert  f_{A^*}((i-1)k \ln n +1) - f_{A^*}(i k \ln n  +1) - k \ln n \vert \leq \frac{3}{2} \kappa_n \cdot k \ln n$. Then, we have:
+Let's check $i$. By Lemma 21, with probability $1 - n^{-\Omega(1)}$, $\vert  f_{A^\*}((i-1)k \ln n +1) - f_{A^\*}(i k \ln n  +1) - k \ln n \vert \leq \frac{3}{2} \kappa_n \cdot k \ln n$. Then, we have:
 $$
 \begin{equation}
 \begin{aligned}
@@ -480,7 +480,6 @@ $$
 \end{equation}
 $$
 $\epsilon > 0$ here, so we cannot bound it by Chernoff formula. 
-
 
 
 
