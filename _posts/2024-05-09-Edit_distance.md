@@ -483,3 +483,28 @@ $\epsilon > 0$ here, so we cannot bound it by Chernoff formula.
 
 
 
+## Repeat case
+
+Suppose the length of repeat is $\tau n$. We consider substitution-only first.
+$$
+\cdots \Pr\left[ \text{Binom}\left((1 -  \frac{1}{2} - \tau)n, \rho_s \right) \leq cn \right] \leq\frac{\left(1 + \frac{c}{2}\right)^{\left(1 + \frac{c}{2}\right)}}{\left(\frac{c}{2}\right)^c (1 - \frac{c}{2})^{\left(1 - \frac{c}{2}\right)}} \exp \left( \frac{-(2 - 3c - 2\tau)^2}{8(2 - c - 2\tau)} \right) < 1,
+$$
+
+
+$\tau = c$: $c \leq 0.042$
+
+<p align="center">
+    <img src="/post_image/Edit_distance/t_c.PNG" width="60%">
+</p>
+
+$\tau = 10 c$: $c \leq 0.026$
+
+<p align="center">
+    <img src="/post_image/Edit_distance/t_10c.PNG" width="60%">
+</p>
+
+$\tau = 100$: $c \leq 0.0061$
+
+<p align="center">
+    <img src="/post_image/Edit_distance/t_100c.PNG" width="60%">
+</p>
