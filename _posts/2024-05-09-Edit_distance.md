@@ -214,7 +214,7 @@ So the lowest-cost good alignment is also the lowest cost alignment.  $\square$
 1. Define the set $A_i$ contained in the range of $\mathcal{SBR}$, which contains all alignments $A$ for which the sum of the lengths of breaks of $A$ from $A^\*$ is in $[ik \ln n, (i + 1)k \ln n]$. Then the sets $\{A_i : 0 \leq i \leq \frac{n}{k \ln n} \}$ forms a disjoint cover of the range $\mathcal{SBR}(A)$. Note that elements of $A_i$ have at most $i$ breaks from $A^\*$, each of length at least $k \ln n$. Also note that $A_0$ is a singleton set containing only $A^\*$.
 
 2. Define **breakpoint configuration** of $A$: the set of starting and ending indices of all breaks of $A$  (to simplify future analysis, we index with respect to $s_1$). 
-3. Furthermore, we continue split $A_i$. Let $B_i$ be the set of all possible breakpoint configurations of alignments in $A_i$. Here, $B \in B_i$ is a binary assignment of each edge in $A^*$ to either agree or disagree with $A \in A_i$. For a fixed set of breakpoint $B \in B_i$, let $A_B$ be the set of all alignments having the breakpoints corresponding to $B$ (i.e. every alignment in $A_B$ has the same breaks from $A^*$). Note that the set $\{A_B : B \in B_i\}$ forms a disjoint cover of $A_i$.
+3. Furthermore, we continue split $A_i$. Let $B_i$ be the set of all possible breakpoint configurations of alignments in $A_i$. Here, $B \in B_i$ is a binary assignment of each edge in $A^\*$ to either agree or disagree with $A \in A_i$. For a fixed set of breakpoint $B \in B_i$, let $A_B$ be the set of all alignments having the breakpoints corresponding to $B$ (i.e. every alignment in $A_B$ has the same breaks from $A^\*$). Note that the set ${\\{A_B : B \in B_i\\}}$ forms a disjoint cover of $A_i$.
 
 We want to show with high probability $\forall A$ in the range of $\mathcal{SBR}$, $A \geq A^\*$. 
 
@@ -311,7 +311,7 @@ $$
     <img src="/post_image/Edit_distance/Corollary_22.png" width="80%">
 </p>
 
-**Corollary 22.** Consider the following random process, which we denote $\mathcal{P}$: we choose $i_1 < n - k \ln n$, sample $(s_1, s_2, \epsilon) \sim ID(n)$, and then choose an arbitrary $i_2$ such that $\vert i_2 - f_{A^*}(i_1)\vert \leq k \ln n$ and $i_2$ is at least $k \ln n$ less than the length of $s_2$. Let $s_1'$ denote the string consisting of bits $i_1$ to $i_1 + k \ln n - 1$ of $s_1$ and $s_2'$ the string consisting of bits $i_2$ to $i_2 + k \ln n - 1$ of $s_2$. Then for any $i_2$ we choose satisfying the above conditions,
+**Corollary 22.** Consider the following random process, which we denote $\mathcal{P}$: we choose $i_1 < n - k \ln n$, sample $(s_1, s_2, \epsilon) \sim ID(n)$, and then choose an arbitrary $i_2$ such that $\vert i_2 - f_{A^*}(i_1) \vert \leq k \ln n$ and $i_2$ is at least $k \ln n$ less than the length of $s_2$. Let $s_1'$ denote the string consisting of bits $i_1$ to $i_1 + k \ln n - 1$ of $s_1$ and $s_2'$ the string consisting of bits $i_2$ to $i_2 + k \ln n - 1$ of $s_2$. Then for any $i_2$ we choose satisfying the above conditions,
 
 $$
 \Pr_{\mathcal{P}} \left[ED(s_1', s_2') \leq \left(1 + \frac{3}{2} (\rho_s + 2 \kappa_n)\right)k \ln n \right] \geq 1 - 2n^{-\rho_k/12} - 4n^{-\rho_k/60} - 6n^{-\rho_k/60}.
